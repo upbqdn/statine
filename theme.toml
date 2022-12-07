@@ -1,21 +1,21 @@
-name = "Astatine"
+name = "Statine"
 license = "MIT"
-licenselink = "https://github.com/hugcis/natrium-custom/blob/master/LICENSE.md"
-description = "Another Hugo minimal theme - for academics"
+licenselink = "https://gitlab.com/upbqdn/statine/-/blob/main/LICENSE.md"
+description = "Yet another Hugo minimal theme"
 
-homepage = "https://github.com/hugcis/hugo-astatine-theme"
+homepage = "https://gitlab.com/upbqdn/statine"
 
-demosite = "https://hugcis.github.io/hugo-astatine-theme/"
+demosite = "https://marek.onl/"
 
 tags = ["blog", "minimal", "personal", "responsive", "dark"]
 features = ["blog", "taxonomies", "privacy", "dark"]
 min_version = 0.25
 
 [author]
-  name = "Hugo Cisneros"
-  homepage = "https://hugocisneros.com"
+  name = "Marek"
+  homepage = "https://marek.onl"
 
 [original]
-  name = "Tim Krieger"
-  homepage = "https://blog.mobybit.de"
-  repo = "https://github.com/mobybit/hugo-natrium-theme"
+  name = "Hugo Cisneros"
+  homepage = "https://hugocisneros.com/"
+  repo = "https://github.com/hugcis/hugo-astatine-theme"

@@ -1,4 +1,4 @@
-<div class="mb-12 lg:mx-8">
+<div class="lg:mx-8">
     <a href="{{ .Permalink }}" itemprop="url"
        class="grid grid-cols-list-item items-center pb-2 border-b-2
              text-black dark:text-zinc-300 hover:text-neutral-500
@@ -32,10 +32,10 @@
         {{ else }}
             <h3 itemprop="name" class="border-none pb-0 my-6 col-span-2">{{ .Title }}</h3>
         {{ end }}
-        <div class="list-item-date col-start-4 text-right text-neutral-600 dark:text-neutral-400" itemprop="datePublished"
-            content="{{ .PublishDate.Format "2006-01-02T15:04:05Z0700" }}">
-            {{ .PublishDate.Format "2006.01.02" }}
-        </div>
+            <!-- <div class="list-item-date col-start-4 text-right text-neutral-600 dark:text-neutral-400" itemprop="datePublished"
+                 content="{{ .PublishDate.Format "2006-01-02T15:04:05Z0700" }}">
+                 {{ .PublishDate.Format "02.01.2006" }}
+                 </div> -->
     </a>
     {{ if .Params.Headline }}
     <div class="mt-1">

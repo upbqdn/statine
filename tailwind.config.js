@@ -2,8 +2,6 @@ module.exports = {
   content: [
     "content/**/*.md",
     "layouts/**/*.html",
-    "../personal-website/layouts/**/*.html",
-    "../personal-website/content/**/*.md"
   ],
   theme: {
     container: {
@@ -31,9 +29,10 @@ module.exports = {
       },
       colors: {
         'tp-black': 'rgba(0,0,0,.8)',
+        'dark': '#1d1f21',
       },
       fontFamily: {
-        sans: ["-apple-system", "BlinkMacSystemFont", "avenir next", "avenir",
+        sans: ["ComputerModernSerif", "BlinkMacSystemFont", "avenir next", "avenir",
                "segoe ui", "helvetica neue", "helvetica",
                "Cantarell", "Ubuntu", "roboto", "noto", "arial", "sans-serif"],
       },

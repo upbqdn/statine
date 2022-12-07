@@ -1,11 +1,112 @@
+@import url(./../../computer-modern-web-font/font/Serif/cmun-serif.css);
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 @layer base {
+  .dark body {
+    --pagefind-ui-text: white;
+    --pagefind-ui-background: bg-dark;
+    --pagefind-ui-border: grey;
+    --pagefind-ui-primary: aqua;
+  }
+  body {
+    --pagefind-ui-scale: .8;
+    --pagefind-ui-primary: grey;
+    --pagefind-ui-text: #393939;
+    --pagefind-ui-background: #ffffff;
+    --pagefind-ui-border: turquoise;
+    --pagefind-ui-tag: #eeeeee;
+    --pagefind-ui-border-width: 2px;
+    --pagefind-ui-border-radius: 8px;
+    --pagefind-ui-image-border-radius: 8px;
+    --pagefind-ui-image-box-ratio: 3 / 2;
+    --pagefind-ui-font: ComputerModernSerif;
+  }
+
+  /* * Table of Contents on side */
+  .toc {
+    @apply my-10;
+    display: none;
+    position: fixed;
+    left: 50%;
+    top: 120px;
+    width: 260px;
+    margin-left: 450px;
+    overflow-y: hidden;
+    max-height: 85%;
+    padding: 0;
+  }
+  .toc li {
+    list-style: none;
+  }
+  .toc ul>li {
+    margin-bottom: 0.4rem;
+  }
+  .toc ul>li>ul>li {
+    font-size: 0.9rem;
+    margin-bottom: 0.4rem;
+  }
+  .toc ul>li>ul>li>ul>li {
+    font-size: 0.8rem;
+    margin-bottom: 0.3rem;
+  }
+  .toc ul {              /* Add left padding for headings in TOC */
+    padding-left: 1rem;
+    margin: 0;
+  }
+  .toc nav>ul {           /* The highest level heading in a blog post is level-2 */
+    padding-left: 0;    /* The level-1 heading is reserved for the blog title. */
+    /* So do not add any padding for level-1 heading, as that will never show*/
+    /* up in the TOC. */
+  }
+  .toc a {
+    text-decoration: none;
+    @apply text-dark;
+    @apply dark:text-zinc-300;
+  }
+  /* .toc a:hover { */
+  /*   color: gray; */
+  /* } */
+  .toc a.current {
+    @apply font-extrabold;
+    @apply dark:text-zinc-100;
+  }
+  /* Override the bullets customization done above, just for list items*/
+  /* in .toc class */
+  .toc ul:not(.catlist):not(.navbar):not(.post-list) li:before {
+    content: '';
+  }
+  .toc .back-to-top {             /* Back to top link */
+    /* font-size: 0.7rem; */
+    /* padding-left: 1rem; */
+  }
+
+  @media screen and (min-width: 1200px) {
+    .toc {
+      display: block;
+    }
+  }
+
+  /* Hide bullets in TOC when headings are numbered. */
+  .toc.has-section-numbers ul {
+    list-style: none;
+  }
+
+  .headline-hash {
+    @apply text-dark;
+    @apply dark:text-zinc-300;
+  }
+
+  section p strong a {
+    @apply text-dark;
+    @apply dark:text-zinc-300;
+  }
+
   body {
     @apply tracking-wide;
-    @apply dark:bg-zinc-800;
+    @apply dark:bg-dark;
     @apply dark:text-zinc-300;
+    @apply text-lg;
   }
   h1 {
     @apply text-3xl;
@@ -14,13 +115,9 @@
     @apply text-2xl;
   }
   h1, h2 {
-    @apply font-bold;
-    @apply pb-4;
     @apply my-4;
-    @apply border-b;
   }
   h3 {
-    @apply font-bold;
     @apply text-xl;
     @apply my-2
   }
@@ -68,10 +165,6 @@
       @apply pl-10;
   }
   hr {
-      @apply w-8/12;
-      @apply mx-auto;
-      @apply my-10;
-      @apply h-0.5;
       @apply dark:border-zinc-500
   }
   dt {
@@ -124,17 +217,5 @@
   }
   blockquote p {
     @apply inline;
-  }
-  .isso-comment-footer {
-    display: inline-flex;
-  }
-}
-
-@layer base {
-  #isso-thread h4 {
-    @apply dark:text-zinc-400;
-  }
-  #isso-thread input, #isso-thread .textarea {
-    @apply dark:bg-zinc-700;
   }
 }

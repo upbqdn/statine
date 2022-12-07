@@ -5,10 +5,10 @@
   "author": "Hugo Cisneros <hmj.cisneros@gmail.com>",
   "license": "MIT",
   "main": "",
-"scripts": {
+  "scripts": {
     "build-tw": "npx tailwindcss -i ./assets/css/main.css -o ./assets/css/style.css"
   },
-
-  "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "postcss-import": "^15.0.0"
+  }
 }

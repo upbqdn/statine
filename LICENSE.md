@@ -1,5 +1,6 @@
 MIT License
 
+Copyright (c) 2022 Marek
 Copyright (c) 2019 Hugo Cisneros
 Copyright (c) 2018 Tim Krieger
 Copyright (c) 2016 Jonathan Rutheiser (original theme)

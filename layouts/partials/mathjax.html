@@ -1,17 +1,10 @@
-<link rel="stylesheet" href="/js/katex/katex.min.css">
-<script src="/js/katex/katex.min.js"></script>
-<script src="/js/katex/contrib/auto-render.min.js"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-    renderMathInElement(document.body, {
-        delimiters: [
-            {left: "\\[", right: "\\]", display: true},
-            {left: "\\begin{align}", right: "\\end{align}", display: true},
-            {left: "$$", right: "$$", display: true},
-            {left: "\\begin{equation}", right: "\\end{equation}", display: true},
-            {left: "$", right: "$", display: false},
-            {left: "\\(", right: "\\)", display: false},
-        ]
-    })
-    });
-</script>
+<!-- https://github.com/mathjax/MathJax/issues/1988#issuecomment-384978927
+     Use plain Javascript to prevent the use of window.eval(). Then
+     'unsafe-eval' won't be needed to be added to script-src CSP.
+     Also move the mathjax config to a separate file from the inline script so
+     that 'unsafe-inline can also be removed from script-src CSP.
+-->
+<script src="{{ "js/mathjax-config.js" | absURL }}"></script>
+
+<!-- Use MathJax 3 for faster loading -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>

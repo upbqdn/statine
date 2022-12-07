@@ -1,0 +1,66 @@
+<script src="{{ "js/libs/jquery/3.3.1/jquery.slim.min.js" | absURL }}"></script>
+<!-- SHA256 for below inline script:
+     https://report-uri.com/home/hash/
+     'sha256-O+U/ptNNoUqEhNU1BSkb7izMavM1GxrvRrabNX8WTKE='
+-->
+<script>
+ function isVisible (el) {
+
+     // Special bonus for those using jQuery
+     if (typeof jQuery === "function" && el instanceof jQuery) {
+         el = el[0];
+     }
+
+     var rect = el.getBoundingClientRect();
+
+     return (rect.bottom >= 0 &&
+        rect.right >= 0 &&
+        rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.left <= (window.innerWidth || document.documentElement.clientWidth));
+ }
+
+ (function() {
+     var $toc = $('#TableOfContents');
+     if ($toc.length > 0) {
+         var $window = $(window);
+
+         function onScroll(){
+             var currentScroll = $window.scrollTop();
+             var h = $('.body h1, .body h2, .body h3, .body h4, .body h5, .body h6');
+             var id = "";
+             h.each(function (i, e) {
+                 e = $(e);
+                 if (e.offset().top - 10 <= currentScroll) {
+                     id = e.attr('id');
+                 }
+             });
+             var current = $toc.find('a.current');
+
+             if (!(isVisible(document.getElementById("article-content")))) {
+                 current.each(function (i, e) {
+                     $(e).removeClass('current').siblings('ul').hide();
+                 });
+                 return true;
+             }
+
+             if (current.length == 1 && current.eq(0).attr('href') == '#' + id) return true;
+
+             current.each(function (i, e) {
+                 $(e).removeClass('current').siblings('ul').hide();
+             });
+             console.log(id);
+
+             $toc.find('a[href="#' + id + '"]').parentsUntil('#TableOfContents').each(function (i, e) {
+                 $(e).children('a').addClass('current').siblings('ul').show();
+             });
+         }
+
+         $window.on('scroll', onScroll);
+         $(document).ready(function() {
+             $toc.find('a').parent('li').find('ul').hide();
+             onScroll();
+             document.getElementsByClassName('toc')[0].style.display = '';
+         });
+     }
+ })();
+</script>

@@ -3,16 +3,21 @@
   <head>
     {{ partial "head.html" . }}
   </head>
-  <body>
+  <body class="flex flex-col h-screen justify-between">
     <header class="md:px-0 px-2">
-        {{ partial "header.html" . }}
+      {{ partial "nav.html" . }}
     </header>
     <main class="content h-card container mt-2 m-auto
                  leading-loose md:px-0 px-2 z-0"
           role="main">
-    {{ block "main" . }}
-    {{/* Main content of the page */}}
-    {{ end }}
+      <div id="search"></div>
+      <script>
+       window.addEventListener('DOMContentLoaded', (event) => {
+         new PagefindUI({ element: "#search" });
+       });
+      </script>
+      {{ block "main" . }}
+      {{ end }}
     </main>
     {{ partial "footer.html" . }}
   </body>

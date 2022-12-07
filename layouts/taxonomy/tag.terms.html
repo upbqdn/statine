@@ -1,8 +1,7 @@
 {{ define "main" }}
-    <p>All the tags in the website, weighted by their frequency.</p>
-  <hr>
-  <div>
-    <h2>{{ i18n "tags" }}</h2>
+<!-- <hr> -->
+<br>
+<div>
     {{ if not (eq (len $.Site.Taxonomies.tags) 0) }}
     {{ $fontUnit := "rem" }}
     {{ $largestFontSize := 2.8 }}
@@ -14,11 +13,11 @@
     {{ $fontStep := div $fontSpread $spread }}
     <ul class="leading-6 text-center">
         {{ range $name, $taxonomy := $.Site.Taxonomies.tags }}
-            {{ $currentTagCount := len $taxonomy.Pages }}
-            {{ $currentFontSize := (add $smallestFontSize (mul (sub $currentTagCount $min) $fontStep) ) }}
-            {{ $count := len $taxonomy.Pages }}
-            {{ $weigth := div (sub (math.Log $count) (math.Log $min)) (sub (math.Log $max) (math.Log $min)) }}
-            {{ $currentFontSize := (add $smallestFontSize (mul (sub $largestFontSize $smallestFontSize) $weigth) ) }}
+        {{ $currentTagCount := len $taxonomy.Pages }}
+        {{ $currentFontSize := (add $smallestFontSize (mul (sub $currentTagCount $min) $fontStep) ) }}
+        {{ $count := len $taxonomy.Pages }}
+        {{ $weigth := div (sub (math.Log $count) (math.Log $min)) (sub (math.Log $max) (math.Log $min)) }}
+        {{ $currentFontSize := (add $smallestFontSize (mul (sub $largestFontSize $smallestFontSize) $weigth) ) }}
         <li class="list-none inline-block pr-2 pb-2">
             <a href="{{ "./tags/" | absURL }}{{ $name | urlize }}"
                class="font-bold text-neutral-800 dark:text-neutral-200"
@@ -28,5 +27,5 @@
         {{ end }}
     </ul>
     {{ end }}
-  </div>
+</div>
 {{ end }}
