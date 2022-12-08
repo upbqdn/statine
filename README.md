@@ -1,2 +1,0 @@
-This Hugo theme is a fork of https://github.com/hugcis/hugo-astatine-theme. You
-can visit https://marek.onl to see what it's like.
