@@ -4,7 +4,7 @@
   <br>
   <div class="list">
       <h1 class="list-title font-bold">{{ .Title }}</h1>
-      <hr class="border-white">
+      <hr>
       {{ range .RegularPages.GroupBy "Section" }}
       <!-- <h2>{{ .Key |humanize }}</h2> -->
       {{ range .Pages }}

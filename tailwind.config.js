@@ -1,31 +1,21 @@
 module.exports = {
   content: [
-    "content/**/*.md",
-    "layouts/**/*.html",
+    "./layouts/*/*.{html,js}",
   ],
   theme: {
     container: {
       center: true,
       screens: {
-        sm: '40rem',
-        md: '40rem',
-        lg: '40rem',
+        sm: '45rem',
+        md: '45rem',
+        lg: '45rem',
         xl: '45rem',
-        '2xl': '50rem',
+        '2xl': '45rem',
       },
-    },
-    letterSpacing: {
-      wide: ".03em"
     },
     extend: {
       lineHeight: {
         'loose': '1.7',
-      },
-      flexGrow: {
-        '2': 2
-      },
-            flexShrink: {
-        '2': 2
       },
       colors: {
         'tp-black': 'rgba(0,0,0,.8)',

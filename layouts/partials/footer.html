@@ -1,45 +1,42 @@
-<footer class="footer container text-center">
-  <ul class="pl-0" style="margin-top: 2.5rem;">
-    <li class="first:before:content-none inline-block list-none">
-      <a class="text-neutral-800 dark:text-neutral-400 border-none"
-          href="{{ .Site.BaseURL }}{{ "/about" }}">About</a>
-    </li>
-    <li class="ml-3 first:before:content-none inline-block list-none">
-      <a class="text-neutral-800 dark:text-neutral-400 border-none"
-         rel="me" href="https://mathstodon.xyz/@marek">
-        <i class="fa-brands fa-mastodon" style="font-size:22px"></i>
-      </a>
-    </li>
-    <li class="ml-3 first:before:content-none inline-block list-none">
-      <a class="text-neutral-800 dark:text-neutral-400 border-none"
-         href="https://twitter.com/upbqdn">
-        <i class="fa-brands fa-twitter" style="font-size:22px"></i>
-      </a>
-    </li>
-    <li class="ml-3 first:before:content-none inline-block list-none">
-      <a class="text-neutral-800 dark:text-neutral-400 border-none"
-         href="https://github.com/upbqdn">
-        <i class="fa-brands fa-github" style="font-size:22px"></i>
-      </a>
-    </li>
-    <li class="ml-3 first:before:content-none inline-block list-none">
-      <a class="text-neutral-800 dark:text-neutral-400 border-none"
-         href="https://gitlab.com/upbqdn">
-        <i class="fa-brands fa-gitlab" style="font-size:22px"></i>
-      </a>
-    </li>
-    <!-- <li class="ml-3 first:before:content-none inline-block list-none">
-         <a class="rss-link inline-block text-neutral-800 dark:text-neutral-400 border-none"
-         href="{{ .Site.BaseURL }}{{ "index.xml" }}"
-         type="application/rss+xml"
-         target="_blank">
-         {{ i18n "footerRSS" }}
-         </a>
-         </li> -->
-    <!-- <li class="ml-2 first:before:content-none
-         text-neutral-800 dark:text-neutral-400 inline-block list-none">
-         <span class="ml-2">© {{ .Site.Params.authorName}} {{ now.Format "2006" }}</span>
-         </li> -->
-  </ul>
-</footer>
-{{ partial "extra_js.html" . }}
+<ul class="pl-0" style="margin-top: 2.5rem;">
+  <li class="first:before:content-none inline-block list-none">
+    <a class="text-neutral-800 dark:text-neutral-400"
+       href="{{ .Site.BaseURL }}{{ "/about/" }}">About</a>
+  </li>
+  <li class="ml-3 first:before:content-none inline-block list-none">
+    <a class="text-neutral-800 dark:text-neutral-400"
+       rel="me" href="https://mathstodon.xyz/@marek">
+      <i class="fa-brands fa-mastodon" style="font-size:22px"></i>
+    </a>
+  </li>
+  <li class="ml-3 first:before:content-none inline-block list-none">
+    <a class="text-neutral-800 dark:text-neutral-400"
+       href="https://twitter.com/upbqdn">
+      <i class="fa-brands fa-twitter" style="font-size:22px"></i>
+    </a>
+  </li>
+  <li class="ml-3 first:before:content-none inline-block list-none">
+    <a class="text-neutral-800 dark:text-neutral-400"
+       href="https://github.com/upbqdn">
+      <i class="fa-brands fa-github" style="font-size:22px"></i>
+    </a>
+  </li>
+  <li class="ml-3 first:before:content-none inline-block list-none">
+    <a class="text-neutral-800 dark:text-neutral-400"
+       href="https://gitlab.com/upbqdn">
+      <i class="fa-brands fa-gitlab" style="font-size:22px"></i>
+    </a>
+  </li>
+  <!-- <li class="ml-3 first:before:content-none inline-block list-none">
+       <a class="rss-link inline-block text-neutral-800 dark:text-neutral-400 border-none"
+       href="{{ .Site.BaseURL }}{{ "index.xml" }}"
+       type="application/rss+xml"
+       target="_blank">
+       {{ i18n "footerRSS" }}
+       </a>
+       </li> -->
+  <!-- <li class="ml-2 first:before:content-none
+       text-neutral-800 dark:text-neutral-400 inline-block list-none">
+       <span class="ml-2">© {{ .Site.Params.authorName}} {{ now.Format "2006" }}</span>
+       </li> -->
+</ul>

@@ -3,12 +3,13 @@
   <head>
     {{ partial "head.html" . }}
   </head>
-  <body class="flex flex-col h-screen justify-between">
-    <header class="md:px-0 px-2">
-      {{ partial "nav.html" . }}
+  <body class="flex flex-col h-screen justify-between px-2">
+    <header class="container">
+      <nav class="flex flex-wrap justify-between items-center">
+        {{ partial "nav.html" . }}
+      </nav>
     </header>
-    <main class="content h-card container mt-2 m-auto
-                 leading-loose md:px-0 px-2 z-0"
+    <main class="container content mt-2 m-auto leading-loose z-0"
           role="main">
       <div id="search"></div>
       <script>
@@ -19,6 +20,9 @@
       {{ block "main" . }}
       {{ end }}
     </main>
-    {{ partial "footer.html" . }}
+    <footer class="container footer text-center">
+      {{ partial "footer.html" . }}
+    </footer>
+    {{ partial "extra_js.html" . }}
   </body>
 </html>

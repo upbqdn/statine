@@ -31,7 +31,7 @@
     left: 50%;
     top: 120px;
     width: 260px;
-    margin-left: 450px;
+    margin-left: 430px;
     overflow-y: hidden;
     max-height: 85%;
     padding: 0;
@@ -81,7 +81,7 @@
     /* padding-left: 1rem; */
   }
 
-  @media screen and (min-width: 1200px) {
+  @media screen and (min-width: 1400px) {
     .toc {
       display: block;
     }
@@ -165,7 +165,8 @@
       @apply pl-10;
   }
   hr {
-      @apply dark:border-zinc-500
+    @apply dark:border-zinc-500;
+    @apply border-t-2;
   }
   dt {
     font-variant-caps: all-small-caps;

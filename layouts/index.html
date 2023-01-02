@@ -1,15 +1,4 @@
 {{ define "main" }}
-<!-- {{ partial "info.html" . }}
-     {{ .Content }}
-     {{ with .Params.Publications }}
-     <h2 id="publications">Publications</h2>
-     {{ end }}
-     {{ range .Params.Publications }}
-     {{ partial "publication.html" . }}
-     {{ end }}
-     {{ range .Params.Publications }}
-     {{ partial "modal_publication.html" . }}
-     {{ end }} -->
 <br>
 <br>
 <div>
@@ -22,17 +11,21 @@
     {{ $min := len (index $.Site.Taxonomies.tags.ByCount.Reverse 0).Pages }}
     {{ $spread := sub $max $min }}
     {{ $fontStep := div $fontSpread $spread }}
-    <ul class="leading-6 text-center">
+    <ul class="text-center pl-0">
         {{ range $name, $taxonomy := $.Site.Taxonomies.tags }}
         {{ $currentTagCount := len $taxonomy.Pages }}
         {{ $currentFontSize := (add $smallestFontSize (mul (sub $currentTagCount $min) $fontStep) ) }}
         {{ $count := len $taxonomy.Pages }}
         {{ $weigth := div (sub (math.Log $count) (math.Log $min)) (sub (math.Log $max) (math.Log $min)) }}
         {{ $currentFontSize := (add $smallestFontSize (mul (sub $largestFontSize $smallestFontSize) $weigth) ) }}
-        <li class="list-none inline-block pr-2 pb-2">
-            <a href="{{ "./tags/" | absURL }}{{ $name | urlize }}"
-               class="text-neutral-800 dark:text-neutral-200"
-               style="font-size:{{$currentFontSize}}{{$fontUnit}}">{{ $name }}
+        <li class="list-none inline-block">
+            <a class="inline-block mt-2 mr-2 border-none text-neutral-800 dark:text-neutral-200"
+               href="{{ "tags/" | absURL }}{{ $name | urlize }}">
+                <span class="dark:bg-zinc-900 dark:hover:bg-zinc-700 hover:bg-zinc-200 bg-zinc-100
+                             dark:border-zinc-600 px-1 rounded border-zinc-300 hover:border-zinc-500"
+                      style="font-size: 1.4rem;">
+                    {{ $name }}<sup style="font-size: 0.9rem;">{{ $count }}</sup>
+                </span>
             </a>
         </li>
         {{ end }}
