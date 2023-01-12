@@ -137,12 +137,12 @@
     @apply border-slate-200;
   }
   code {
-      @apply text-base;
-      @apply rounded-sm;
-      @apply px-1;
-      @apply py-1;
-      @apply bg-slate-100;
-      @apply dark:bg-slate-800;
+    @apply text-base;
+    @apply rounded-sm;
+    @apply px-1;
+    @apply py-1;
+    @apply bg-slate-100;
+    @apply dark:bg-slate-800;
   }
   pre {
     overflow: auto;
@@ -156,13 +156,13 @@
     @apply text-sm;
   }
   p, ul, ol {
-      @apply my-4;
+    @apply my-4;
   }
   li {
-      @apply list-disc;
+    @apply list-disc;
   }
   ul, ol {
-      @apply pl-10;
+    @apply pl-10;
   }
   hr {
     @apply dark:border-zinc-500;
