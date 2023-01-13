@@ -155,9 +155,6 @@
     @apply bg-transparent;
     @apply text-sm;
   }
-  p, ul, ol {
-    @apply my-4;
-  }
   li {
     @apply list-disc;
   }

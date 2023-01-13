@@ -1,43 +1,51 @@
-{{ if (or (.Params.categories) (.Params.tags)) }}
-<ul class="list-none pl-0 my-10 font-sm align-left">
-    <!-- {{ if .Params.categories }}
-         <li class="list-none">
-         Categories:
-         {{ range $index, $category := .Params.categories }}
-         <a class="inline-block mt-2 mr-2 border-none text-neutral-800 dark:text-neutral-200"
-         href="{{ "categories/" | relURL }}{{ . | urlize }}">
-         <span class="tag-item dark:bg-zinc-900 dark:hover:bg-zinc-700
-         hover:bg-zinc-200 bg-zinc-100
-         dark:border-zinc-600 py-0.5
-         px-1 rounded-t border-b-2 border-zinc-300
-         hover:border-zinc-500">
-         {{ . }}
-         </span>
-         </a>
-         {{ end }}
-         </li >
-         {{ end }} -->
-    {{ if .Params.tags }}
-    <li class="list-none">
-        <i class="fa-solid fa-tags"></i>
-        <!-- {{ $logo := resources.Get "images/tag_logo.svg" }}
-             <img class="h-7 mr-2 inline" src="{{ $logo.Permalink }}"
-             alt="Logo of a tag: indicates that tag items follow."> -->
-        {{ range $index, $tag := .Params.tags }}
-        <a class="inline-block mt-2 mr-2 border-none text-neutral-800 dark:text-neutral-200"
-           href="{{ "tags/" | relURL }}{{ . | urlize }}">
-            <span class="flex flex-row justify-start items-center
-                         dark:bg-zinc-900 dark:hover:bg-zinc-700
-                         hover:bg-zinc-200 bg-zinc-100
-                         dark:border-zinc-600 py-0.5
-                         px-1 rounded border-zinc-300
-                         hover:border-zinc-500"
-                  data-pagefind-filter="tags">
-                {{ . }}
-            </span>
-        </a>
+<div class="flex flex-wrap justify-between items-center mt-9 mb-6 mx-1.5">
+    {{ if (or (.Params.categories) (.Params.tags)) }}
+    <ul class="list-none pl-0 font-sm">
+        <!-- {{ if .Params.categories }}
+             <li class="list-none">
+             Categories:
+             {{ range $index, $category := .Params.categories }}
+             <a class="inline-block mt-2 mr-2 border-none text-neutral-800 dark:text-neutral-200"
+             href="{{ "categories/" | relURL }}{{ . | urlize }}">
+             <span class="tag-item dark:bg-zinc-900 dark:hover:bg-zinc-700
+             hover:bg-zinc-200 bg-zinc-100
+             dark:border-zinc-600 py-0.5
+             px-1 rounded-t border-b-2 border-zinc-300
+             hover:border-zinc-500">
+             {{ . }}
+             </span>
+             </a>
+             {{ end }}
+             </li >
+             {{ end }} -->
+        {{ if .Params.tags }}
+        <li class="list-none">
+            <i class="fa-solid fa-tags"></i>
+            <!-- {{ $logo := resources.Get "images/tag_logo.svg" }}
+                 <img class="h-7 mr-2 inline" src="{{ $logo.Permalink }}"
+                 alt="Logo of a tag: indicates that tag items follow."> -->
+            {{ range $index, $tag := .Params.tags }}
+            <a class="inline-block mr-2 border-none text-neutral-800 dark:text-neutral-200"
+               href="{{ "tags/" | relURL }}{{ . | urlize }}">
+                <span class="flex flex-row justify-start items-center
+                             dark:bg-zinc-900 dark:hover:bg-zinc-700
+                             hover:bg-zinc-200 bg-zinc-100
+                             dark:border-zinc-600 py-0.5
+                             px-1 rounded border-zinc-300
+                             hover:border-zinc-500"
+                      data-pagefind-filter="tags">
+                    {{ . }}
+                </span>
+            </a>
+            {{ end }}
+        </li>
         {{ end }}
-    </li>
+    </ul>
     {{ end }}
-</ul>
-{{ end }}
+    {{ if .Params.Lastmod }}
+    <div class="list-item-date col-start-4 text-right text-neutral-600 dark:text-neutral-400" itemprop="dateModified"
+         content="{{ .Lastmod.Format "2006-01-02T15:04:05Z0700" }}">
+        {{ .Lastmod.Format "02.01.2006" }}
+    </div>
+    {{ end }}
+</div>

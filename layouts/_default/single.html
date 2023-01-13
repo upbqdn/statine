@@ -44,7 +44,7 @@
          id="article-content">
         {{ partial "headline-hash.html" .Content }}
     </div>
-    <hr class="my-10 w-full">
+    <hr class="my-9 w-full">
     {{ partial "taxonomy.html" . }}
     {{ if .Params.references }}
     <hr>
@@ -57,16 +57,6 @@
                 {{ end }}
             </ol>
         </div>
-    </div>
-    {{ end }}
-    {{ if .Params.Lastmod }}
-    <div class="text-neutral-500 mb-4">
-        Last modified
-        <span itemprop="dateModified"
-              datetime="{{ .Lastmod.Format  "2006-01-02T15:04:05Z0700" }}"
-              content="{{ .Lastmod.Format  "2006-01-02T15:04:05Z0700" }}">
-            {{ .Lastmod.Format "02.01.2006" }}.
-        </span>
     </div>
     {{ end }}
     <div>
