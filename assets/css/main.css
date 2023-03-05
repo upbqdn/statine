@@ -10,7 +10,7 @@
     --pagefind-ui-primary: aqua;
   }
   body {
-    --pagefind-ui-scale: .8;
+    --pagefind-ui-scale: 0.8;
     --pagefind-ui-primary: grey;
     --pagefind-ui-text: #393939;
     --pagefind-ui-background: #ffffff;
@@ -39,23 +39,25 @@
   .toc li {
     list-style: none;
   }
-  .toc ul>li {
+  .toc ul > li {
     margin-bottom: 0.4rem;
   }
-  .toc ul>li>ul>li {
+  .toc ul > li > ul > li {
     font-size: 0.9rem;
     margin-bottom: 0.4rem;
   }
-  .toc ul>li>ul>li>ul>li {
+  .toc ul > li > ul > li > ul > li {
     font-size: 0.8rem;
     margin-bottom: 0.3rem;
   }
-  .toc ul {              /* Add left padding for headings in TOC */
+  .toc ul {
+    /* Add left padding for headings in TOC */
     padding-left: 1rem;
     margin: 0;
   }
-  .toc nav>ul {           /* The highest level heading in a blog post is level-2 */
-    padding-left: 0;    /* The level-1 heading is reserved for the blog title. */
+  .toc nav > ul {
+    /* The highest level heading in a blog post is level-2 */
+    padding-left: 0; /* The level-1 heading is reserved for the blog title. */
     /* So do not add any padding for level-1 heading, as that will never show*/
     /* up in the TOC. */
   }
@@ -74,9 +76,10 @@
   /* Override the bullets customization done above, just for list items*/
   /* in .toc class */
   .toc ul:not(.catlist):not(.navbar):not(.post-list) li:before {
-    content: '';
+    content: "";
   }
-  .toc .back-to-top {             /* Back to top link */
+  .toc .back-to-top {
+    /* Back to top link */
     /* font-size: 0.7rem; */
     /* padding-left: 1rem; */
   }
@@ -105,7 +108,7 @@
   body {
     @apply tracking-wide;
     @apply dark:bg-dark;
-    @apply dark:text-zinc-300;
+    @apply dark:text-zinc-100;
     @apply text-lg;
   }
   h1 {
@@ -114,17 +117,18 @@
   h2 {
     @apply text-2xl;
   }
-  h1, h2 {
+  h1,
+  h2 {
     @apply my-4;
   }
   h3 {
     @apply text-xl;
-    @apply my-2
+    @apply my-2;
   }
   h4 {
     @apply font-bold;
     @apply text-lg;
-    @apply my-1
+    @apply my-1;
   }
   a {
     @apply text-blue-800;
@@ -158,7 +162,8 @@
   li {
     @apply list-disc;
   }
-  ul, ol {
+  ul,
+  ol {
     @apply pl-10;
   }
   hr {
