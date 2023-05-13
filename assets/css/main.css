@@ -83,10 +83,6 @@
     #toc-btn {
       display: inline;
     }
-
-    .toc {
-      display: none;
-    }
   }
 
   @media screen and (min-width: 1400px) {
