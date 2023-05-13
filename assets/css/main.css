@@ -23,7 +23,25 @@
     --pagefind-ui-font: ComputerModernSerif;
   }
 
-  /* * Table of Contents on side */
+  /* Table of Contents */
+  @media (min-width: 1400px) {
+    .toc-button {
+      display: none;
+    }
+  }
+
+  @media (max-width: 1399px) {
+    .toc-button {
+      display: inline;
+    }
+  }
+
+  .search-bar {
+    background-color: white;
+    @apply dark:bg-dark;
+  }
+
+  /* Table of Contents on side */
   .toc {
     @apply my-10;
     display: none;
