@@ -23,19 +23,6 @@
     --pagefind-ui-font: ComputerModernSerif;
   }
 
-  /* Table of Contents */
-  @media (min-width: 1400px) {
-    .toc-button {
-      display: none;
-    }
-  }
-
-  @media (max-width: 1399px) {
-    .toc-button {
-      display: inline;
-    }
-  }
-
   .search-bar {
     background-color: white;
     @apply dark:bg-dark;
@@ -43,16 +30,6 @@
 
   /* Table of Contents on side */
   .toc {
-    @apply my-10;
-    display: none;
-    position: fixed;
-    left: 50%;
-    top: 120px;
-    width: 260px;
-    margin-left: 430px;
-    overflow-y: hidden;
-    max-height: 85%;
-    padding: 0;
   }
   .toc li {
     list-style: none;
@@ -102,9 +79,32 @@
     /* padding-left: 1rem; */
   }
 
+  @media (max-width: 1399px) {
+    #toc-btn {
+      display: inline;
+    }
+
+    .toc {
+      display: none;
+    }
+  }
+
   @media screen and (min-width: 1400px) {
+    #toc-btn {
+      display: none;
+    }
+
     .toc {
       display: block;
+      @apply my-10;
+      position: fixed;
+      left: 50%;
+      top: 120px;
+      width: 260px;
+      margin-left: 430px;
+      overflow-y: hidden;
+      max-height: 85%;
+      padding: 0;
     }
   }
 

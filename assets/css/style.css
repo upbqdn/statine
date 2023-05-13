@@ -500,22 +500,18 @@ body {
   --pagefind-ui-font: ComputerModernSerif;
 }
 
-/* Table of Contents */
+.search-bar {
+  background-color: white;
+}
+
+.dark .search-bar {
+  --tw-bg-opacity: 1;
+  background-color: rgb(29 31 33 / var(--tw-bg-opacity));
+}
 
 /* Table of Contents on side */
 
 .toc {
-  margin-top: 2.5rem;
-  margin-bottom: 2.5rem;
-  display: none;
-  position: fixed;
-  left: 50%;
-  top: 120px;
-  width: 260px;
-  margin-left: 430px;
-  overflow-y: hidden;
-  max-height: 85%;
-  padding: 0;
 }
 
 .toc li {
@@ -590,9 +586,33 @@ body {
   /* padding-left: 1rem; */
 }
 
+@media (max-width: 1399px) {
+  #toc-btn {
+    display: inline;
+  }
+
+  .toc {
+    display: none;
+  }
+}
+
 @media screen and (min-width: 1400px) {
+  #toc-btn {
+    display: none;
+  }
+
   .toc {
     display: block;
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+    position: fixed;
+    left: 50%;
+    top: 120px;
+    width: 260px;
+    margin-left: 430px;
+    overflow-y: hidden;
+    max-height: 85%;
+    padding: 0;
   }
 }
 
@@ -1134,6 +1154,10 @@ blockquote p {
   margin-bottom: 0.375rem;
 }
 
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
 .mb-5 {
   margin-bottom: 1.25rem;
 }
@@ -1292,6 +1316,10 @@ blockquote p {
 
 .grow-0 {
   flex-grow: 0;
+}
+
+.basis-10\/12 {
+  flex-basis: 83.333333%;
 }
 
 .basis-20 {
