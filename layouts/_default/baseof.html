@@ -1,28 +1,30 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}">
-  <head>
+
+<head>
     {{ partial "head.html" . }}
-  </head>
-  <body class="flex flex-col h-screen justify-between px-2">
+</head>
+
+<body class="flex flex-col h-screen justify-between px-2">
     <header class="container">
-      <nav class="flex flex-wrap justify-between items-center">
-        {{ partial "nav.html" . }}
-      </nav>
+        <nav class="flex flex-wrap justify-between items-center">
+            {{ partial "nav.html" . }}
+        </nav>
     </header>
-    <main class="container content mt-2 m-auto leading-loose z-0"
-          role="main">
-      <div id="search"></div>
-      <script>
-       window.addEventListener('DOMContentLoaded', (event) => {
-         new PagefindUI({ element: "#search" });
-       });
-      </script>
-      {{ block "main" . }}
-      {{ end }}
+    <main class="container content mt-2 m-auto leading-loose z-0" role="main">
+        <div id="search"></div>
+        <script>
+            window.addEventListener('DOMContentLoaded', (event) => {
+                new PagefindUI({ element: "#search" });
+            });
+        </script>
+        {{ block "main" . }}
+        {{ end }}
     </main>
     <footer class="container footer text-center mt-10">
-      {{ partial "footer.html" . }}
+        {{ partial "footer.html" . }}
     </footer>
     {{ partial "extra_js.html" . }}
-  </body>
+</body>
+
 </html>
