@@ -1,24 +1,23 @@
 {{ define "main" }}
 <br>
-<article class="article h-entry body" itemprop="mainEntity" itemscope
-         itemtype="http://schema.org/BlogPosting">
+<article class="article h-entry body" itemprop="mainEntity" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="title-container">
+        {{ if .Title}}
+        <h1 class="article-title p-name" itemprop="name">{{ .Title }}</h1>
+        {{ end }}
         {{ if not .Params.notoc }}
         {{ with .TableOfContents }}
-        <div class="toc">
+        <div class="toc mb-4">
             {{ . }}
             <!-- <a href="#" class="back-to-top">Back to top</a> -->
         </div>
         {{ end }}
         {{ partial "toc_on_side.html" . }}
         {{ end }}
-    <div class="title-container">
-        {{ if .Title}}
-        <h1 class="article-title p-name" itemprop="name">{{ .Title }}</h1>
-        {{ end }}
         {{ if .Params.Headline }}
         <b><i itemprop="headline" class="article-headline text-lg p-summary">
-            {{ .Params.Headline }}
-        </i></b>
+                {{ .Params.Headline }}
+            </i></b>
         {{ end }}
         <!-- <div class="flex justify-between items-center">
              {{ if not .Params.HideDate}}
@@ -40,17 +39,16 @@
         </div>
         {{ end }}
     </div>
-    <div class="article-content e-content" itemprop="articleBody"
-         id="article-content">
+    <div class="article-content e-content" itemprop="articleBody" id="article-content">
         {{ partial "headline-hash.html" .Content }}
     </div>
     <hr class="my-9 w-full">
     {{ partial "taxonomy.html" . }}
     {{ if .Params.references }}
     <hr>
-    <div class="mb-8" >
+    <div class="mb-8">
         <h3>References</h3>
-        <div class="references-list" >
+        <div class="references-list">
             <ol>
                 {{ range $elem_index, $elem_val := .Params.references }}
                 <li id="{{ $elem_val.id }}"><b>{{$elem_val.authors}}</b>. {{$elem_val.text}}</li>
@@ -61,20 +59,20 @@
     {{ end }}
     <div>
         <script>
-         var remark_config = {
-             host: 'https://remark42.marek.onl',
-             site_id: 'marek.onl',
-             theme: localStorage.remark42_theme,
-             show_email_subscription: true,
-             simple_view: false,
-             no_footer: false
-         }
-         !function(e,n){
-             for (var o = 0; o < e.length; o++) {
-                 var r = n.createElement("script"), c = ".js", d=n.head||n.body;
-                 "noModule" in r ? (r.type="module",c=".mjs") : r.async=!0, r.defer=!0, r.src=remark_config.host+"/web/"+e[o]+c, d.appendChild(r)
-             }
-         }(remark_config.components||["embed"], document);
+            var remark_config = {
+                host: 'https://remark42.marek.onl',
+                site_id: 'marek.onl',
+                theme: localStorage.remark42_theme,
+                show_email_subscription: true,
+                simple_view: false,
+                no_footer: false
+            }
+            !function (e, n) {
+                for (var o = 0; o < e.length; o++) {
+                    var r = n.createElement("script"), c = ".js", d = n.head || n.body;
+                    "noModule" in r ? (r.type = "module", c = ".mjs") : r.async = !0, r.defer = !0, r.src = remark_config.host + "/web/" + e[o] + c, d.appendChild(r)
+                }
+            }(remark_config.components || ["embed"], document);
         </script>
         <div id="remark42"></div>
     </div>
