@@ -511,9 +511,6 @@ body {
 
 /* Table of Contents on side */
 
-.toc {
-}
-
 .toc li {
   list-style: none;
 }
@@ -628,12 +625,12 @@ body {
   color: rgb(212 212 216 / var(--tw-text-opacity));
 }
 
-section p strong a {
+p strong a {
   --tw-text-opacity: 1;
   color: rgb(29 31 33 / var(--tw-text-opacity));
 }
 
-.dark section p strong a {
+.dark p strong a {
   --tw-text-opacity: 1;
   color: rgb(212 212 216 / var(--tw-text-opacity));
 }
@@ -711,37 +708,14 @@ a:hover {
   border-color: rgb(226 232 240 / var(--tw-border-opacity));
 }
 
-code {
-  font-size: 1rem;
-  line-height: 1.5rem;
-  border-radius: 0.125rem;
-  padding-left: 0.25rem;
-  padding-right: 0.25rem;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-  --tw-bg-opacity: 1;
-  background-color: rgb(241 245 249 / var(--tw-bg-opacity));
-}
-
-.dark code {
-  --tw-bg-opacity: 1;
-  background-color: rgb(30 41 59 / var(--tw-bg-opacity));
-}
-
 pre {
-  overflow: auto;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
-  max-width: 100%;
-  margin-bottom: 1.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
 }
 
 pre code {
-  background-color: transparent;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+  font-family: "Iosevka Web" !important;
+  font-stretch: expanded;
 }
 
 li {
@@ -893,6 +867,22 @@ blockquote::before {
 
 blockquote p {
   display: inline;
+}
+
+blockquote,
+  dl,
+  dd,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  hr,
+  figure,
+  p,
+  pre {
+  margin: revert;
 }
 
 *, ::before, ::after {

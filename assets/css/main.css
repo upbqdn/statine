@@ -1,7 +1,9 @@
 @import url(./../../computer-modern-web-font/font/Serif/cmun-serif.css);
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @layer base {
   .dark body {
     --pagefind-ui-text: white;
@@ -9,6 +11,7 @@
     --pagefind-ui-border: grey;
     --pagefind-ui-primary: aqua;
   }
+
   body {
     --pagefind-ui-scale: 0.8;
     --pagefind-ui-primary: grey;
@@ -29,8 +32,6 @@
   }
 
   /* Table of Contents on side */
-  .toc {
-  }
   .toc li {
     list-style: none;
   }
