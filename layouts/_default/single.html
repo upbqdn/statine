@@ -1,13 +1,12 @@
 {{ define "main" }}
-<br>
 <article class="article h-entry body" itemprop="mainEntity" itemscope itemtype="http://schema.org/BlogPosting">
     <div class="title-container">
         {{ if .Title}}
-        <h1 class="article-title p-name" itemprop="name">{{ .Title }}</h1>
+        <h1 class="article-title p-name mt-10 mb-8" itemprop="name">{{ .Title }}</h1>
         {{ end }}
         {{ if not .Params.notoc }}
         {{ with .TableOfContents }}
-        <div class="toc mb-4">
+        <div class="toc mb-8">
             {{ . }}
             <!-- <a href="#" class="back-to-top">Back to top</a> -->
         </div>

@@ -131,9 +131,6 @@
   }
   h2 {
     @apply text-2xl;
-  }
-  h1,
-  h2 {
     @apply my-4;
   }
   h3 {
@@ -231,7 +228,6 @@
   blockquote,
   dl,
   dd,
-  h1,
   h2,
   h3,
   h4,
