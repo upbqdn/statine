@@ -6,12 +6,16 @@ function updateMode() {
       window.matchMedia("(prefers-color-scheme: dark)").matches)
   ) {
     document.documentElement.classList.add("dark");
+    document.getElementById("code-syntax-theme").href = "/css/syntax-dark.css";
+
     localStorage.remark42_theme = "dark";
     if (window.REMARK42) {
       window.REMARK42.changeTheme("dark");
     }
   } else {
     document.documentElement.classList.remove("dark");
+    document.getElementById("code-syntax-theme").href = "/css/syntax-light.css";
+
     localStorage.remark42_theme = "light";
     if (window.REMARK42) {
       window.REMARK42.changeTheme("light");

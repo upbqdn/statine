@@ -154,25 +154,16 @@
     @apply border-b-2;
     @apply border-slate-200;
   }
-  code {
-    @apply text-base;
-    @apply rounded-sm;
-    @apply px-1;
-    @apply py-1;
-    @apply bg-slate-100;
-    @apply dark:bg-slate-800;
-  }
+
   pre {
-    overflow: auto;
-    @apply px-2;
-    @apply mx-2;
-    @apply max-w-full;
-    @apply mb-6;
-  }
-  pre code {
-    @apply bg-transparent;
     @apply text-sm;
   }
+
+  pre code {
+    font-family: "Iosevka Web" !important;
+    font-stretch: expanded;
+  }
+
   li {
     @apply list-disc;
   }
