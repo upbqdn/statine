@@ -114,7 +114,7 @@
     @apply dark:text-zinc-300;
   }
 
-  section p strong a {
+  p strong a {
     @apply text-dark;
     @apply dark:text-zinc-300;
   }
