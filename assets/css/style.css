@@ -880,6 +880,11 @@ blockquote,
   margin: revert;
 }
 
+#vid {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
 *, ::before, ::after {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
