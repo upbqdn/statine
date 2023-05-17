@@ -110,7 +110,8 @@
     list-style: none;
   }
 
-  .headline-hash {
+  .headline-hash,
+  .page-title a {
     @apply text-dark;
     @apply dark:text-zinc-300;
   }

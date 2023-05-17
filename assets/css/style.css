@@ -615,12 +615,14 @@ body {
   list-style: none;
 }
 
-.headline-hash {
+.headline-hash,
+  .page-title a {
   --tw-text-opacity: 1;
   color: rgb(29 31 33 / var(--tw-text-opacity));
 }
 
-.dark .headline-hash {
+.dark .headline-hash,.dark 
+  .page-title a {
   --tw-text-opacity: 1;
   color: rgb(212 212 216 / var(--tw-text-opacity));
 }
