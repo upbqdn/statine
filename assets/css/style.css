@@ -1626,6 +1626,10 @@ blockquote,
   transition-duration: 150ms;
 }
 
+.highlight .chroma {
+  overflow: auto;
+}
+
 .first\:before\:content-none:first-child::before {
   --tw-content: none;
   content: var(--tw-content);

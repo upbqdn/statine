@@ -246,3 +246,7 @@
     aspect-ratio: 16 / 9;
   }
 }
+
+.highlight .chroma {
+  overflow: auto;
+}
