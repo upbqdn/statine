@@ -83,6 +83,7 @@
   @media (max-width: 1399px) {
     #toc-btn {
       display: inline;
+      max-height: 52px;
     }
   }
 
