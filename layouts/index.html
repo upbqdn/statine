@@ -20,10 +20,10 @@
         {{ $currentFontSize := (add $smallestFontSize (mul (sub $largestFontSize $smallestFontSize) $weigth) ) }}
         <li class="list-none inline-block">
             <a class="inline-block mt-2 mr-2 border-none text-neutral-800 dark:text-neutral-200"
-               href="{{ "tags/" | absURL }}{{ $name | urlize }}">
+                href='{{ "tags/" | absURL }}{{ $name | urlize }}/'>
                 <span class="dark:bg-zinc-900 dark:hover:bg-zinc-700 hover:bg-zinc-200 bg-zinc-100
                              dark:border-zinc-600 px-1 rounded border-zinc-300 hover:border-zinc-500"
-                      style="font-size: 1.4rem;">
+                    style="font-size: 1.4rem;">
                     {{ $name }}<sup style="font-size: 0.9rem;">{{ $count }}</sup>
                 </span>
             </a>
