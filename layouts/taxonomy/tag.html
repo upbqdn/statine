@@ -1,16 +1,13 @@
 {{ define "main" }}
-  <br>
-  <!-- <a href="/tags/"><b>&#8592; Back</b></a> -->
-  <br>
-  <div class="list">
-      <h1 class="list-title font-bold">{{ .Title }}</h1>
-      <hr>
-      {{ range .RegularPages.GroupBy "Section" }}
-      <!-- <h2>{{ .Key |humanize }}</h2> -->
-      {{ range .Pages }}
-          {{ partial "list-item.html" . }}
-        {{ end }}
-        <!-- <hr> -->
-      {{ end }}
-  </div>
+<div class="list">
+    <h1 class="list-title page-title mt-10"><a href="{{ .Page.Permalink }}">{{ .Title }}</a></h1>
+    <hr>
+    {{ range .RegularPages.GroupBy "Section" }}
+    <!-- <h2>{{ .Key |humanize }}</h2> -->
+    {{ range .Pages }}
+    {{ partial "list-item.html" . }}
+    {{ end }}
+    <!-- <hr> -->
+    {{ end }}
+</div>
 {{ end }}
