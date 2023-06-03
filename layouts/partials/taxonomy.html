@@ -25,8 +25,8 @@
                  <img class="h-7 mr-2 inline" src="{{ $logo.Permalink }}"
                  alt="Logo of a tag: indicates that tag items follow."> -->
             {{ range $index, $tag := .Params.tags }}
-            <a class="inline-block mr-2 border-none text-neutral-800 dark:text-neutral-200" href="{{ " tags/" | relURL
-                }}{{ . | urlize }}">
+            <a class="inline-block mr-2 border-none text-neutral-800 dark:text-neutral-200"
+                href='{{ "tags/" | relURL}}{{ . | urlize }}'>
                 <span class="flex flex-row justify-start items-center
                              dark:bg-zinc-900 dark:hover:bg-zinc-700
                              hover:bg-zinc-200 bg-zinc-100
