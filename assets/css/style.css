@@ -888,6 +888,11 @@ blockquote,
   aspect-ratio: 16 / 9;
 }
 
+.plot {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+}
+
 *, ::before, ::after {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
