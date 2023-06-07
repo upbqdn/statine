@@ -56,10 +56,27 @@
                 });
             }
 
-            $window.on('scroll', onScroll);
-            $(document).ready(function () {
-                $toc.find('a').parent('li').find('ul').hide();
+            function adjustToc() {
+                if (window.innerWidth < 1400) {
+                    var current = $toc.find('a.current');
+
+                    current.each(function (i, e) {
+                        $(e).removeClass('current');
+                    });
+
+                    $toc.find('a').parent('li').find('ul').show();
+                } else {
+                    $toc.find('a').parent('li').find('ul').hide();
+                }
+
                 onScroll();
+            }
+
+            $window.on('scroll', onScroll);
+            $window.on('resize', adjustToc);
+
+            $(document).ready(function () {
+                adjustToc();
                 document.getElementsByClassName('toc')[0].style.display = '';
             });
         }

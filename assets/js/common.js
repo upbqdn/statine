@@ -106,10 +106,5 @@ window.onload = function () {
 };
 
 window.onresize = function () {
-  toc = document.getElementById("TableOfContents");
-  if (toc) {
-    if (window.innerWidth >= 1400) {
-      toc.style.display = "block";
-    }
-  }
+  handleToc();
 };
