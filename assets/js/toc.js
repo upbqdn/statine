@@ -1,0 +1,93 @@
+// ToC-related Functionality
+function toggleToc() {
+  let toc = document.getElementById("TableOfContents");
+  if (window.getComputedStyle(toc, null).display == "none") {
+    toc.style.display = "block";
+  } else {
+    toc.style.display = "none";
+  }
+}
+
+(function () {
+  var $toc = $("#TableOfContents");
+
+  if ($toc.length > 0) {
+    var $window = $(window);
+
+    function onScroll() {
+      if (window.innerWidth < 1400) {
+        return true;
+      }
+      var currentScroll = $window.scrollTop();
+      var h = $(".body h1, .body h2, .body h3, .body h4, .body h5, .body h6");
+      var id = "";
+      h.each(function (i, e) {
+        e = $(e);
+        if (e.offset().top - 10 <= currentScroll) {
+          id = e.attr("id");
+        }
+      });
+      var current = $toc.find("a.current");
+
+      function isVisible(el) {
+        if (typeof jQuery === "function" && el instanceof jQuery) {
+          el = el[0];
+        }
+
+        var rect = el.getBoundingClientRect();
+
+        return (
+          rect.bottom >= 0 &&
+          rect.right >= 0 &&
+          rect.top <=
+            (window.innerHeight || document.documentElement.clientHeight) &&
+          rect.left <=
+            (window.innerWidth || document.documentElement.clientWidth)
+        );
+      }
+
+      if (!isVisible(document.getElementById("article-content"))) {
+        current.each(function (i, e) {
+          $(e).removeClass("current").siblings("ul").hide();
+        });
+        return true;
+      }
+
+      if (current.length == 1 && current.eq(0).attr("href") == "#" + id)
+        return true;
+
+      current.each(function (i, e) {
+        $(e).removeClass("current").siblings("ul").hide();
+      });
+
+      $toc
+        .find('a[href="#' + id + '"]')
+        .parentsUntil("#TableOfContents")
+        .each(function (i, e) {
+          $(e).children("a").addClass("current").siblings("ul").show();
+        });
+    }
+
+    function adjustToc() {
+      if (window.innerWidth < 1400) {
+        $toc.find("a.current").each(function (i, e) {
+          $(e).removeClass("current");
+        });
+
+        $toc.find("a").parent("li").find("ul").show();
+      } else {
+        $toc.find("a").parent("li").find("ul").hide();
+      }
+
+      onScroll();
+    }
+
+    $window.on("scroll", onScroll);
+    $window.on("resize", adjustToc);
+
+    $(document).ready(function () {
+      adjustToc();
+      document.getElementsByClassName("toc")[0].style.display = "";
+    });
+  }
+})();

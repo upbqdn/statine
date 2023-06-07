@@ -1015,10 +1015,6 @@ blockquote,
   pointer-events: none;
 }
 
-.pointer-events-auto {
-  pointer-events: auto;
-}
-
 .invisible {
   visibility: hidden;
 }
@@ -1340,10 +1336,6 @@ blockquote,
 
 .cursor-pointer {
   cursor: pointer;
-}
-
-.resize {
-  resize: both;
 }
 
 .list-none {

@@ -1,5 +1,4 @@
 function updateMode() {
-  // On page load or when changing themes, best to add inline in `head` to avoid FOUC
   if (
     localStorage.theme === "dark" ||
     (!("theme" in localStorage) &&
@@ -51,10 +50,8 @@ function updateMode() {
 function toggleMode() {
   if ("theme" in localStorage) {
     if (localStorage.theme === "dark") {
-      // Whenever the user explicitly chooses light mode
       localStorage.theme = "light";
     } else {
-      // Whenever the user explicitly chooses dark mode
       localStorage.theme = "dark";
     }
   } else {
@@ -65,24 +62,6 @@ function toggleMode() {
     }
   }
   updateMode();
-}
-
-function toggleMenu() {
-  let navbar = document.getElementById("navbar-default");
-  if (navbar.classList.contains("hidden")) {
-    navbar.classList.remove("hidden");
-  } else {
-    navbar.classList.add("hidden");
-  }
-}
-
-function toggleToc() {
-  let toc = document.getElementById("TableOfContents");
-  if (window.getComputedStyle(toc, null).display == "none") {
-    toc.style.display = "block";
-  } else {
-    toc.style.display = "none";
-  }
 }
 
 function handleToc() {
@@ -100,11 +79,39 @@ function handleToc() {
   }
 }
 
-window.onload = function () {
-  updateMode();
-  handleToc();
-};
+// window.addEventListener("load", (event) => {
+// });
 
-window.onresize = function () {
-  handleToc();
-};
+function document_ready(f) {
+  // in case the document is already rendered
+  if (document.readyState != "loading") f();
+  else if (document.addEventListener)
+    document.addEventListener("DOMContentLoaded", f);
+}
+
+(function () {
+  window.addEventListener("hResize", (event) => {
+    handleToc();
+  });
+
+  document_ready(function () {
+    handleToc();
+    updateMode();
+  });
+
+  // Horizontal window resize events.
+  var prev_width = window.innerWidth;
+
+  window.onresize = function () {
+    var curr_width = window.innerWidth;
+
+    if (
+      (curr_width < 1400 && prev_width >= 1400) ||
+      (curr_width >= 1400 && prev_width < 1400)
+    ) {
+      window.dispatchEvent(new Event("hResize"));
+    }
+
+    prev_width = curr_width;
+  };
+})();

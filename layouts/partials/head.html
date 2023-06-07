@@ -4,30 +4,11 @@
 <!-- Title -->
 {{- if eq .RelPermalink "/" -}}
 <title>{{ .Site.Title }}</title>
-<!-- <meta property="og:title" content="{{ .Site.Title }}"> -->
 {{- else if .Title -}}
 <title>{{ .Title }}</title>
-<!-- <meta property="og:title" content="{{ .Title }}"> -->
 {{- else -}}
 <title>{{ .Section | humanize }} - {{ .Site.Title }}</title>
-<!-- <meta property="og:title" content="{{ .Section | humanize  }} - {{ .Site.Title }}"> -->
 {{- end -}}
-
-<!-- {{ if .IsPage }} -->
-<!-- <meta property="og:type" content="article"> -->
-<!-- {{ else }} -->
-<!-- <meta property="og:type" content="website"> -->
-<!-- {{ end }} -->
-<!-- {{ if .Params.Ogname }} -->
-<!-- <meta property="og:image" content="{{ .Params.Ogname }}"> -->
-<!-- {{ else if .Params.Imgname }} -->
-<!-- <meta property="og:image" content="{{ .Params.Imgname.Name }}"> -->
-<!-- {{ else if .Params.Caption }} -->
-<!-- <meta property="og:image" content="{{ .Params.Caption.Name }}"> -->
-<!-- {{ else }} -->
-<!-- <meta property="og:image" content="{{ .Site.Params.imgname.name }}"> -->
-<!-- {{ end }} -->
-<!-- <meta property="og:url" content="{{ .Permalink }}"> -->
 
 <!-- Description -->
 {{- if .Description -}}
@@ -40,52 +21,20 @@
 <meta name="Description" property="description" content="{{ .Site.Title }}">
 {{- end -}}
 
-<!-- {{- if .Description -}}
-<meta property="og:description" content="{{ .Description }}">
-<meta name="Description" property="description" content="{{ .Description }}">
-{{- else if and (eq .Type "notes") (ne .Kind "section") }}
-{{ $description := printf "%s %s" "Notes about " (strings.TrimPrefix "Notes on: " .Title) }}
-<meta property="og:description" content="{{ $description }}">
-<meta name="Description" property="description" content="{{ $description }}">
-{{- else if and (eq .Type "tags") (ne .Kind "taxonomy") }}
-{{ $description := printf "%s %s" "All articles tagged with " .Title }}
-<meta property="og:description" content="{{ $description }}">
-<meta name="Description" property="description" content="{{ $description }}">
-{{- else if and (eq .Type "tags") (eq .Kind "taxonomy") }}
-{{ $description := printf "%s" "A list of all the tags in the site. They are arranged in a word cloud" }}
-<meta property="og:description" content="{{ $description }}">
-<meta name="Description" property="description" content="{{ $description }}">
-{{- else -}}
-<meta property="og:description" content="{{ .Site.Params.description }}">
-<meta name="Description" property="description" content="{{ .Summary }}">
-{{- end -}} -->
-
 <!-- Open Graph -->
 {{ template "_internal/opengraph.html" . }}
 
 <!-- Twitter -->
 {{ if .Site.Params.Twitter.Name }}
 {{ template "_internal/twitter_cards.html" . }}
-<!-- <link rel="me" href="https://twitter.com/{{ .Site.Params.Twitter.Name }}">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:site" content="{{ .Site.Params.Twitter.Name }}">
-<meta name="twitter:creator" content="{{ .Site.Params.Twitter.Name }}"> -->
 {{ end }}
-
-<!-- Mastodon -->
-<!-- {{ if (and .Site.Params.Mastodon.Name .Site.Params.Mastodon.Host) }}
-<link rel="me" href="https://{{ .Site.Params.Mastodon.Host }}/{{ .Site.Params.Mastodon.Name }}">
-{{ end }}
-{{ if .Site.Params.Sameas }}
-<link rel="me" href="{{ .Site.Params.Sameas }}">
-{{ end }} -->
 
 <!-- Keywords -->
 {{- if .Keywords -}}
-<meta property="keywords" content ="{{ delimit .Keywords ", " }}">
+<meta property="keywords" content='{{ delimit .Keywords ", " }}'>
 {{- end -}}
 {{- if .Params.Tags -}}
-<meta property="keywords" content ="{{ delimit (apply .Params.Tags "lower" ".") ", " }}">
+<meta property="keywords" content='{{ delimit (apply .Params.Tags "lower" ".") ", " }}'>
 {{- end -}}
 
 <!-- Webmention -->
@@ -99,19 +48,15 @@
 <link rel="stylesheet" href="{{ $style.Permalink }}">
 <link rel="stylesheet" id="code-syntax-theme" href="/css/syntax-dark.css">
 
-<!-- Icon configuration -->
-<!-- <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-     <link rel="manifest" href="/site.webmanifest"> -->
-
 <link href="{{ .Site.BaseURL }}index.xml" type="application/atom+xml" rel="alternate" title="Sitewide Atom feed" />
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#1d1f21">
 
-<!-- Common JS -->
-{{ $commonJs := resources.Get "js/common.js" | resources.Minify }}
-<script>{{ $commonJs.Content | safeJS }}</script>
+<!-- JQuery -->
+<script src='{{ "js/libs/jquery/3.3.1/jquery.slim.min.js" | absURL }}'></script>
+
+<!--Initial JS -->
+{{ $initialJS := resources.Get "js/initial.js" | resources.Minify }}
+<script>{{ $initialJS.Content | safeJS }}</script>
 
 <!-- Pagefind -->
 <link href="/_pagefind/pagefind-ui.css" rel="stylesheet">
