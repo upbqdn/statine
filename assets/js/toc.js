@@ -85,7 +85,7 @@ function toggleToc() {
     $window.on("scroll", onScroll);
     $window.on("resize", adjustToc);
 
-    $(document).ready(function () {
+    document_ready(function () {
       adjustToc();
       document.getElementsByClassName("toc")[0].style.display = "";
     });
