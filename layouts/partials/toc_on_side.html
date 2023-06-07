@@ -1,11 +1,10 @@
-<script src="{{ "js/libs/jquery/3.3.1/jquery.slim.min.js" | absURL }}"></script>
+<script src='{{ "js/libs/jquery/3.3.1/jquery.slim.min.js" | absURL }}'></script>
 <!-- SHA256 for below inline script:
      https://report-uri.com/home/hash/
      'sha256-O+U/ptNNoUqEhNU1BSkb7izMavM1GxrvRrabNX8WTKE='
 -->
 <script>
     function isVisible(el) {
-
         // Special bonus for those using jQuery
         if (typeof jQuery === "function" && el instanceof jQuery) {
             el = el[0];
@@ -25,6 +24,9 @@
             var $window = $(window);
 
             function onScroll() {
+                if (window.innerWidth < 1400) {
+                    return true;
+                }
                 var currentScroll = $window.scrollTop();
                 var h = $('.body h1, .body h2, .body h3, .body h4, .body h5, .body h6');
                 var id = "";

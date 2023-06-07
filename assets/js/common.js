@@ -86,18 +86,17 @@ function toggleToc() {
 }
 
 function handleToc() {
-  if (window.innerWidth < 1400) {
-    toc = document.getElementById("TableOfContents");
-    if (typeof toc === "undefined") {
-      return;
-    }
-    toc.style.display = "none";
+  toc = document.getElementById("TableOfContents");
+  if (toc) {
+    if (window.innerWidth < 1400) {
+      toc.style.display = "none";
 
-    if (!toc.childNodes.length) {
-      document.getElementById("toc-btn").style.display = "none";
+      if (!toc.childNodes.length) {
+        document.getElementById("toc-btn").style.display = "none";
+      }
+    } else {
+      toc.style.display = "block";
     }
-  } else {
-    toc.style.display = "block";
   }
 }
 
@@ -107,7 +106,10 @@ window.onload = function () {
 };
 
 window.onresize = function () {
-  if (window.innerWidth >= 1400) {
-    toc.style.display = "block";
+  toc = document.getElementById("TableOfContents");
+  if (toc) {
+    if (window.innerWidth >= 1400) {
+      toc.style.display = "block";
+    }
   }
 };
