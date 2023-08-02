@@ -164,12 +164,12 @@
     font-stretch: expanded;
   }
 
-  li {
-    @apply list-disc;
-  }
   ul,
-  ol {
-    @apply pl-10;
+  ol,
+  menu {
+    list-style: revert;
+    margin: revert;
+    padding: revert;
   }
   hr {
     @apply dark:border-zinc-500;
