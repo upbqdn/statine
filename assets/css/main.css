@@ -14,7 +14,7 @@
   }
 
   body {
-    --pagefind-ui-scale: 0.8;
+    /* --pagefind-ui-scale: 0.8; */
     --pagefind-ui-primary: grey;
     --pagefind-ui-text: #393939;
     --pagefind-ui-background: #ffffff;
