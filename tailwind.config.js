@@ -13,7 +13,7 @@ module.exports = {
     },
     extend: {
       lineHeight: {
-        loose: "1.8",
+        loose: "1.9",
       },
       colors: {
         "tp-black": "rgba(0,0,0,.8)",
