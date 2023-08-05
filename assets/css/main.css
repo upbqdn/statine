@@ -115,18 +115,19 @@
   .headline-hash,
   .page-title a {
     @apply text-dark;
-    @apply dark:text-zinc-300;
+    @apply dark:text-slate-200;
   }
 
   p strong a {
     @apply text-dark;
-    @apply dark:text-zinc-300;
+    @apply dark:text-slate-200;
   }
 
   body {
     @apply tracking-wide;
     @apply dark:bg-dark;
-    @apply dark:text-zinc-100;
+    @apply dark:text-slate-200;
+    @apply text-black;
     @apply text-lg;
   }
   h1 {
@@ -147,7 +148,7 @@
   }
   a {
     @apply text-blue-800;
-    @apply dark:text-blue-300;
+    @apply dark:text-blue-200;
   }
   a:hover {
     @apply text-gray-900;
