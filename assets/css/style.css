@@ -1,12 +1,9 @@
+/* @import url(./../../computer-modern-web-font/font/Serif/cmun-serif.css); */
+
 @font-face {
-  font-family: 'ComputerModernSerif';
+  font-family: "KaTex";
 
-  src: url('../font/cmunrm.eot');
-
-  src: url('../font/cmunrm.eot?#iefix') format('embedded-opentype'),
-		 url('../font/cmunrm.woff') format('woff'),
-		 url('../font/cmunrm.ttf') format('truetype'),
-		 url('../font/cmunrm.svg#cmunrm') format('svg');
+  src: url("../fonts/KaTeX_Main-Regular.woff2") format("woff2");
 
   font-weight: normal;
 
@@ -14,14 +11,9 @@
 }
 
 @font-face {
-  font-family: 'ComputerModernSerif';
+  font-family: "KaTex";
 
-  src: url('../font/cmunbx.eot');
-
-  src: url('../font/cmunbx.eot?#iefix') format('embedded-opentype'),
-		 url('../font/cmunbx.woff') format('woff'),
-		 url('../font/cmunbx.ttf') format('truetype'),
-		 url('../font/cmunbx.svg#cmunbx') format('svg');
+  src: url("../fonts/KaTeX_Main-Bold.woff2") format("woff2");
 
   font-weight: bold;
 
@@ -29,14 +21,9 @@
 }
 
 @font-face {
-  font-family: 'ComputerModernSerif';
+  font-family: "KaTex";
 
-  src: url('../font/cmunti.eot');
-
-  src: url('../font/cmunti.eot?#iefix') format('embedded-opentype'),
-		 url('../font/cmunti.woff') format('woff'),
-		 url('../font/cmunti.ttf') format('truetype'),
-		 url('../font/cmunti.svg#cmunti') format('svg');
+  src: url("../fonts/KaTeX_Main-Italic.woff2") format("woff2");
 
   font-weight: normal;
 
@@ -44,23 +31,16 @@
 }
 
 @font-face {
-  font-family: 'ComputerModernSerif';
+  font-family: "KaTex";
 
-  src: url('../font/cmunbi.eot');
-
-  src: url('../font/cmunbi.eot?#iefix') format('embedded-opentype'),
-		 url('../font/cmunbi.woff') format('woff'),
-		 url('../font/cmunbi.ttf') format('truetype'),
-		 url('../font/cmunbi.svg#cmunbi') format('svg');
+  src: url("../fonts/KaTeX_Main-BoldItalic.woff2") format("woff2");
 
   font-weight: bold;
 
   font-style: italic;
 }
 
-/*
-! tailwindcss v3.3.3 | MIT License | https://tailwindcss.com
-*/
+/* ! tailwindcss v3.3.3 | MIT License | https://tailwindcss.com */
 
 /*
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
@@ -104,7 +84,7 @@ html {
   -o-tab-size: 4;
      tab-size: 4;
   /* 3 */
-  font-family: ComputerModernSerif, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif;
+  font-family: KaTex;
   /* 4 */
   font-feature-settings: normal;
   /* 5 */
@@ -502,7 +482,7 @@ video {
 }
 
 body {
-  --pagefind-ui-scale: 0.8;
+  /* --pagefind-ui-scale: 0.8; */
   --pagefind-ui-primary: grey;
   --pagefind-ui-text: #393939;
   --pagefind-ui-background: #ffffff;
@@ -512,7 +492,7 @@ body {
   --pagefind-ui-border-radius: 8px;
   --pagefind-ui-image-border-radius: 8px;
   --pagefind-ui-image-box-ratio: 3 / 2;
-  --pagefind-ui-font: ComputerModernSerif;
+  --pagefind-ui-font: KaTeX;
 }
 
 .search-bar {
@@ -598,14 +578,20 @@ body {
   /* padding-left: 1rem; */
 }
 
-@media (max-width: 1399px) {
+#theme-btn {
+  width: 15px;
+  font-size: 15px;
+}
+
+@media (max-width: 1279px) {
   #toc-btn {
     display: inline;
-    max-height: 52px;
+    width: 15px;
+    font-size: 15px;
   }
 }
 
-@media screen and (min-width: 1400px) {
+@media screen and (min-width: 1280px) {
   #toc-btn {
     display: none;
   }
@@ -618,7 +604,7 @@ body {
     left: 50%;
     top: 120px;
     width: 260px;
-    margin-left: 430px;
+    margin-left: 350px;
     overflow-y: hidden;
     max-height: 85%;
     padding: 0;
@@ -640,7 +626,7 @@ body {
 :is(.dark .headline-hash),:is(.dark 
   .page-title a) {
   --tw-text-opacity: 1;
-  color: rgb(212 212 216 / var(--tw-text-opacity));
+  color: rgb(226 232 240 / var(--tw-text-opacity));
 }
 
 p strong a {
@@ -650,7 +636,7 @@ p strong a {
 
 :is(.dark p strong a) {
   --tw-text-opacity: 1;
-  color: rgb(212 212 216 / var(--tw-text-opacity));
+  color: rgb(226 232 240 / var(--tw-text-opacity));
 }
 
 body {
@@ -661,10 +647,12 @@ body {
   --tw-bg-opacity: 1;
   background-color: rgb(29 31 33 / var(--tw-bg-opacity));
   --tw-text-opacity: 1;
-  color: rgb(244 244 245 / var(--tw-text-opacity));
+  color: rgb(226 232 240 / var(--tw-text-opacity));
 }
 
 body {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
   font-size: 1.125rem;
   line-height: 1.75rem;
 }
@@ -703,7 +691,7 @@ a {
 
 :is(.dark a) {
   --tw-text-opacity: 1;
-  color: rgb(147 197 253 / var(--tw-text-opacity));
+  color: rgb(191 219 254 / var(--tw-text-opacity));
 }
 
 a:hover {
@@ -1013,9 +1001,9 @@ blockquote,
   margin-left: auto;
 }
 
-@media (min-width: 45rem) {
+@media (min-width: 40rem) {
   .container {
-    max-width: 45rem;
+    max-width: 40rem;
   }
 }
 
@@ -1141,31 +1129,14 @@ blockquote,
   margin-bottom: 0.625rem;
 }
 
-.my-5 {
-  margin-top: 1.25rem;
-  margin-bottom: 1.25rem;
-}
-
 .my-6 {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
 }
 
-.my-9 {
-  margin-top: 2.25rem;
-  margin-bottom: 2.25rem;
-}
-
-.mb-1 {
-  margin-bottom: 0.25rem;
-}
-
-.mb-1\.5 {
-  margin-bottom: 0.375rem;
-}
-
-.mb-5 {
-  margin-bottom: 1.25rem;
+.my-8 {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .mb-6 {
@@ -1174,6 +1145,14 @@ blockquote,
 
 .mb-8 {
   margin-bottom: 2rem;
+}
+
+.ml-0 {
+  margin-left: 0px;
+}
+
+.ml-0\.5 {
+  margin-left: 0.125rem;
 }
 
 .ml-2 {
@@ -1188,12 +1167,20 @@ blockquote,
   margin-left: 2rem;
 }
 
+.ml-auto {
+  margin-left: auto;
+}
+
 .mr-1 {
   margin-right: 0.25rem;
 }
 
 .mr-2 {
   margin-right: 0.5rem;
+}
+
+.mt-0 {
+  margin-top: 0px;
 }
 
 .mt-1 {
@@ -1204,16 +1191,8 @@ blockquote,
   margin-top: 0.375rem;
 }
 
-.mt-10 {
-  margin-top: 2.5rem;
-}
-
-.mt-2 {
-  margin-top: 0.5rem;
-}
-
-.mt-9 {
-  margin-top: 2.25rem;
+.mt-7 {
+  margin-top: 1.75rem;
 }
 
 .box-border {
@@ -1264,10 +1243,6 @@ blockquote,
   height: 1.75rem;
 }
 
-.h-full {
-  height: 100%;
-}
-
 .h-screen {
   height: 100vh;
 }
@@ -1276,16 +1251,8 @@ blockquote,
   max-height: 5rem;
 }
 
-.max-h-full {
-  max-height: 100%;
-}
-
 .w-6 {
   width: 1.5rem;
-}
-
-.w-7 {
-  width: 1.75rem;
 }
 
 .w-auto {
@@ -1310,6 +1277,10 @@ blockquote,
 
 .flex-initial {
   flex: 0 1 auto;
+}
+
+.flex-none {
+  flex: none;
 }
 
 .shrink {
@@ -1370,10 +1341,6 @@ blockquote,
   grid-template-columns: .6fr 3fr auto 1fr;
 }
 
-.flex-row {
-  flex-direction: row;
-}
-
 .flex-col {
   flex-direction: column;
 }
@@ -1384,10 +1351,6 @@ blockquote,
 
 .items-center {
   align-items: center;
-}
-
-.justify-start {
-  justify-content: flex-start;
 }
 
 .justify-between {
@@ -1412,11 +1375,6 @@ blockquote,
 
 .rounded-sm {
   border-radius: 0.125rem;
-}
-
-.rounded-t {
-  border-top-left-radius: 0.25rem;
-  border-top-right-radius: 0.25rem;
 }
 
 .border-0 {
@@ -1468,10 +1426,6 @@ blockquote,
   padding: 0.25rem;
 }
 
-.p-1\.5 {
-  padding: 0.375rem;
-}
-
 .p-2 {
   padding: 0.5rem;
 }
@@ -1502,16 +1456,6 @@ blockquote,
 .py-0\.5 {
   padding-top: 0.125rem;
   padding-bottom: 0.125rem;
-}
-
-.py-2 {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
-
-.py-2\.5 {
-  padding-top: 0.625rem;
-  padding-bottom: 0.625rem;
 }
 
 .pb-0 {
@@ -1554,10 +1498,6 @@ blockquote,
   text-align: right;
 }
 
-.align-bottom {
-  vertical-align: bottom;
-}
-
 .text-2xl {
   font-size: 1.5rem;
   line-height: 2rem;
@@ -1592,7 +1532,7 @@ blockquote,
 }
 
 .leading-loose {
-  line-height: 1.8;
+  line-height: 1.9;
 }
 
 .leading-snug {
@@ -1630,6 +1570,11 @@ blockquote,
 .text-neutral-800 {
   --tw-text-opacity: 1;
   color: rgb(38 38 38 / var(--tw-text-opacity));
+}
+
+.text-slate-600 {
+  --tw-text-opacity: 1;
+  color: rgb(71 85 105 / var(--tw-text-opacity));
 }
 
 .text-white {
@@ -1717,8 +1662,8 @@ blockquote,
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-:is(.dark .dark\:inline) {
-  display: inline;
+:is(.dark .dark\:block) {
+  display: block;
 }
 
 :is(.dark .dark\:hidden) {
@@ -1775,9 +1720,9 @@ blockquote,
   color: rgb(163 163 163 / var(--tw-text-opacity));
 }
 
-:is(.dark .dark\:text-zinc-100) {
+:is(.dark .dark\:text-slate-200) {
   --tw-text-opacity: 1;
-  color: rgb(244 244 245 / var(--tw-text-opacity));
+  color: rgb(226 232 240 / var(--tw-text-opacity));
 }
 
 :is(.dark .dark\:text-zinc-200) {
