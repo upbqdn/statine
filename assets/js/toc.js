@@ -15,7 +15,7 @@ function toggleToc() {
     var $window = $(window);
 
     function onScroll() {
-      if (window.innerWidth < 1400) {
+      if (window.innerWidth < 1280) {
         return true;
       }
       var currentScroll = $window.scrollTop();

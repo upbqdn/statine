@@ -67,7 +67,7 @@ function toggleMode() {
 function handleToc() {
   toc = document.getElementById("TableOfContents");
   if (toc) {
-    if (window.innerWidth < 1400) {
+    if (window.innerWidth < 1280) {
       toc.style.display = "none";
 
       if (!toc.childNodes.length) {
@@ -106,8 +106,8 @@ function document_ready(f) {
     var curr_width = window.innerWidth;
 
     if (
-      (curr_width < 1400 && prev_width >= 1400) ||
-      (curr_width >= 1400 && prev_width < 1400)
+      (curr_width < 1280 && prev_width >= 1280) ||
+      (curr_width >= 1280 && prev_width < 1280)
     ) {
       window.dispatchEvent(new Event("hResize"));
     }
