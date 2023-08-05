@@ -81,10 +81,16 @@
     /* padding-left: 1rem; */
   }
 
+  #theme-btn {
+    width: 15px;
+    font-size: 15px;
+  }
+
   @media (max-width: 1279px) {
     #toc-btn {
       display: inline;
-      max-height: 52px;
+      width: 15px;
+      font-size: 15px;
     }
   }
 

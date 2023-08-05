@@ -6,23 +6,23 @@
 </head>
 
 <body class="flex flex-col h-screen justify-between px-2">
-    <header class="container">
-        <nav class="flex flex-wrap justify-between items-center">
-            {{ partial "nav.html" . }}
-        </nav>
-    </header>
-    <main class="container content mt-2 m-auto leading-loose z-0" role="main">
+    {{ partial "nav.html" . }}
+    <main class="container content mt-0 m-auto leading-loose z-0" role="main">
         <div class="flex flex-wrap">
             <div id="search" class="search-bar basis-10/12 grow"></div>
             <script>
-                window.addEventListener('DOMContentLoaded', (event) => {
-                    new PagefindUI({ element: "#search" });
-                });
+             window.addEventListener('DOMContentLoaded', (event) => {
+                 new PagefindUI({ element: "#search" });
+             });
             </script>
             {{ if not .Params.notoc }}
             {{ with .TableOfContents }}
-            <button type="button" class="mx-1.5" id="toc-btn" onclick="toggleToc()"><i
-                    class="fa-solid fa-table"></i></button>
+            <button type="button"
+                    class="mx-1.5"
+                    id="toc-btn"
+                    onclick="toggleToc()">
+                <i class="fa-solid fa-table"></i>
+            </button>
             {{ end }}
             {{ end }}
         </div>

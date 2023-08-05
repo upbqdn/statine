@@ -65,17 +65,29 @@ function toggleMode() {
 }
 
 function handleToc() {
-  toc = document.getElementById("TableOfContents");
+  let theme_btn = document.getElementById("theme-btn");
+  let toc_btn = document.getElementById("toc-btn");
+  let toc = document.getElementById("TableOfContents");
+
   if (toc) {
     if (window.innerWidth < 1280) {
       toc.style.display = "none";
 
       if (!toc.childNodes.length) {
-        document.getElementById("toc-btn").style.display = "none";
+        toc_btn.style.display = "none";
       }
     } else {
       toc.style.display = "block";
     }
+  }
+
+  // Handle the theme button.
+  if (toc_btn && window.getComputedStyle(toc_btn).display == "block") {
+    theme_btn.classList.remove("mr-1");
+    theme_btn.classList.add("mx-1.5");
+  } else {
+    theme_btn.classList.remove("mx-1.5");
+    theme_btn.classList.add("mr-1");
   }
 }
 
