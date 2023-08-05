@@ -2,7 +2,9 @@
 <article class="article h-entry body" itemprop="mainEntity" itemscope itemtype="http://schema.org/BlogPosting">
     <div class="title-container">
         {{ if .Title}}
-        <h1 class="page-title mt-10 mb-8" itemprop="name"><a href="{{ .Page.Permalink }}">{{ .Title }}</a>
+        <h1 class="page-title mt-7"
+            itemprop="name">
+            <a href="{{ .Page.Permalink }}">{{ .Title }}</a>
         </h1>
         {{ end }}
         {{ if not .Params.notoc }}
