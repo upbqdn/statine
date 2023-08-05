@@ -1,4 +1,5 @@
-@import url(./../../computer-modern-web-font/font/Serif/cmun-serif.css);
+/* @import url(./../../computer-modern-web-font/font/Serif/cmun-serif.css); */
+@import url(katex.css);
 
 @tailwind base;
 @tailwind components;
@@ -23,7 +24,7 @@
     --pagefind-ui-border-radius: 8px;
     --pagefind-ui-image-border-radius: 8px;
     --pagefind-ui-image-box-ratio: 3 / 2;
-    --pagefind-ui-font: ComputerModernSerif;
+    --pagefind-ui-font: KaTeX;
   }
 
   .search-bar {

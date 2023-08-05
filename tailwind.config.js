@@ -21,19 +21,7 @@ module.exports = {
       },
       fontFamily: {
         sans: [
-          "ComputerModernSerif",
-          "BlinkMacSystemFont",
-          "avenir next",
-          "avenir",
-          "segoe ui",
-          "helvetica neue",
-          "helvetica",
-          "Cantarell",
-          "Ubuntu",
-          "roboto",
-          "noto",
-          "arial",
-          "sans-serif",
+          "KaTex",
         ],
       },
       gridTemplateColumns: {
