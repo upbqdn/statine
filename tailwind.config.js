@@ -4,11 +4,11 @@ module.exports = {
     container: {
       center: true,
       screens: {
-        sm: "45rem",
-        md: "45rem",
-        lg: "45rem",
-        xl: "45rem",
-        "2xl": "45rem",
+        sm: "40rem",
+        md: "40rem",
+        lg: "40rem",
+        xl: "40rem",
+        "2xl": "40rem",
       },
     },
     extend: {
