@@ -40,7 +40,7 @@
   font-style: italic;
 }
 
-/* ! tailwindcss v3.3.3 | MIT License | https://tailwindcss.com */
+/* ! tailwindcss v3.3.5 | MIT License | https://tailwindcss.com */
 
 /*
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
@@ -637,6 +637,16 @@ p strong a {
 :is(.dark p strong a) {
   --tw-text-opacity: 1;
   color: rgb(226 232 240 / var(--tw-text-opacity));
+}
+
+.article-content p:not(.org-center p) {
+  text-align: justify;
+  text-justify: auto;
+}
+
+.article-content li {
+  text-align: justify;
+  text-justify: auto;
 }
 
 body {
