@@ -725,9 +725,11 @@ pre {
   line-height: 1.25rem;
 }
 
-pre code {
+code {
   font-family: "Iosevka Web" !important;
   font-stretch: expanded;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
 }
 
 ul,

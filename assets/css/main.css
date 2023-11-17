@@ -177,9 +177,10 @@
     @apply text-sm;
   }
 
-  pre code {
+  code {
     font-family: "Iosevka Web" !important;
     font-stretch: expanded;
+    @apply text-sm;
   }
 
   ul,
