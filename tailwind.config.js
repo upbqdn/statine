@@ -13,16 +13,14 @@ module.exports = {
     },
     extend: {
       lineHeight: {
-        loose: "1.9",
+        loose: "1.8",
       },
       colors: {
         "tp-black": "rgba(0,0,0,.8)",
         dark: "#1d1f21",
       },
       fontFamily: {
-        sans: [
-          "KaTex",
-        ],
+        sans: ["KaTex"],
       },
       gridTemplateColumns: {
         nav: "repeat(auto-fill, minmax(80px, 1fr))",
