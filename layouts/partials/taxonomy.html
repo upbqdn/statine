@@ -4,7 +4,7 @@
     <!-- <div class="flex flex-wrap grow"> -->
     {{ range $index, $tag := .Params.tags }}
     <a class="mr-2 border-none text-neutral-800 dark:text-neutral-200"
-       href='{{ "tags/" | relURL}}{{ . | urlize }}'>
+       href='{{ urlize $tag | absURL }}'>
         <span class="dark:bg-zinc-900 dark:hover:bg-zinc-700 dark:border-zinc-600
                      hover:bg-zinc-200 hover:border-zinc-500
                      bg-zinc-100 rounded border-zinc-300
