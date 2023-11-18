@@ -129,14 +129,11 @@
     @apply dark:text-slate-200;
   }
 
-  .article-content p:not(.org-center p) {
-    text-align: justify;
-    text-justify: auto;
-  }
-
+  .article-content p:not(.org-center p),
   .article-content li {
     text-align: justify;
     text-justify: auto;
+    hyphens: auto;
   }
 
   body {
