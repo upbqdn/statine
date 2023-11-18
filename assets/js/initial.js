@@ -91,9 +91,6 @@ function handleToc() {
   }
 }
 
-// window.addEventListener("load", (event) => {
-// });
-
 function document_ready(f) {
   // in case the document is already rendered
   if (document.readyState != "loading") f();
