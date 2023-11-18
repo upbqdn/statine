@@ -272,6 +272,7 @@
   }
 }
 
-.highlight .chroma {
+.highlight .chroma,
+.org-center {
   overflow: auto;
 }
