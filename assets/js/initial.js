@@ -98,6 +98,25 @@ function document_ready(f) {
     document.addEventListener("DOMContentLoaded", f);
 }
 
+function replaceText(node) {
+  // Use a Unicode NON-BREAKING HYPHEN (U+2011) instead of a regular hyphen to
+  // prevent line breaks at hyphens.
+  if (node.nodeType == 3) {
+    node.data = node.data.replace(/-/g, "‑");
+  }
+
+  // Skip scripts and styles.
+  if (
+    node.nodeType == 1 &&
+    node.nodeName != "SCRIPT" &&
+    node.nodeName != "STYLE"
+  ) {
+    for (let child of node.childNodes) {
+      replaceText(child);
+    }
+  }
+}
+
 (function () {
   window.addEventListener("hResize", (event) => {
     handleToc();
@@ -106,6 +125,7 @@ function document_ready(f) {
   document_ready(function () {
     handleToc();
     updateMode();
+    replaceText(document.body);
   });
 
   // Horizontal window resize events.
