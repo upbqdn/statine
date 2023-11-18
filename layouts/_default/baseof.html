@@ -1,39 +1,32 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="{{ .Site.LanguageCode }}" class="dark">
-
-<head>
+  <head>
     {{ partial "head.html" . }}
-</head>
+  </head>
 
-<body class="flex flex-col h-screen justify-between px-2">
+  <body class="flex flex-col h-screen justify-between px-2">
     {{ partial "nav.html" . }}
     <main class="container content mt-0 m-auto leading-loose z-0" role="main">
-        <div class="flex flex-wrap">
-            <div id="search" class="search-bar basis-10/12 grow"></div>
-            <script>
-             window.addEventListener('DOMContentLoaded', (event) => {
-                 new PagefindUI({ element: "#search" });
-             });
-            </script>
-            {{ if not .Params.notoc }}
-            {{ with .TableOfContents }}
-            <button type="button"
-                    class="mx-1.5"
-                    id="toc-btn"
-                    onclick="toggleToc()">
-                <i class="fa-solid fa-table"></i>
-            </button>
-            {{ end }}
-            {{ end }}
-        </div>
-        {{ block "main" . }}
-        {{ end }}
+      <div class="flex flex-wrap">
+        <div id="search" class="search-bar basis-10/12 grow"></div>
+        <script>
+          window.addEventListener("DOMContentLoaded", (event) => {
+            new PagefindUI({ element: "#search" });
+          });
+        </script>
+        {{ if not .Params.notoc }} {{ with .TableOfContents }}
+        <button type="button" class="mx-1.5" id="toc-btn" onclick="toggleToc()">
+          <i class="fa-solid fa-table"></i>
+        </button>
+        {{ end }} {{ end }}
+      </div>
+      {{ block "main" . }} {{ end }}
     </main>
     <footer class="container footer text-center">
-        {{ partial "footer.html" . }}
+      {{ partial "footer.html" . }}
     </footer>
     {{ partial "extra_js.html" . }}
     <div class="plot" hidden></div>
-</body>
-
+    <div class="org-center" hidden></div>
+  </body>
 </html>
