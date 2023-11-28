@@ -109,7 +109,8 @@ function replaceText(node) {
   if (
     node.nodeType == 1 &&
     node.nodeName != "SCRIPT" &&
-    node.nodeName != "STYLE"
+    node.nodeName != "STYLE" &&
+    node.nodeName != "PRE"
   ) {
     for (let child of node.childNodes) {
       replaceText(child);
