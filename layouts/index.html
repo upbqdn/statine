@@ -11,7 +11,7 @@
     {{ $min := len (index $.Site.Taxonomies.tags.ByCount.Reverse 0).Pages }}
     {{ $spread := sub $max $min }}
     {{ $fontStep := div $fontSpread $spread }}
-    <ul class="text-center pl-0">
+    <ul class="text-center pl-0" style="padding-left: 0px;">
         {{ range $name, $taxonomy := $.Site.Taxonomies.tags }}
         {{ $currentTagCount := len $taxonomy.Pages }}
         {{ $currentFontSize := (add $smallestFontSize (mul (sub $currentTagCount $min) $fontStep) ) }}
