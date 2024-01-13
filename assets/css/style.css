@@ -40,7 +40,7 @@
   font-style: italic;
 }
 
-/* ! tailwindcss v3.3.5 | MIT License | https://tailwindcss.com */
+/* ! tailwindcss v3.4.1 | MIT License | https://tailwindcss.com */
 
 /*
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
@@ -72,9 +72,11 @@
 4. Use the user's configured `sans` font-family by default.
 5. Use the user's configured `sans` font-feature-settings by default.
 6. Use the user's configured `sans` font-variation-settings by default.
+7. Disable tap highlights on iOS
 */
 
-html {
+html,
+:host {
   line-height: 1.5;
   /* 1 */
   -webkit-text-size-adjust: 100%;
@@ -90,6 +92,8 @@ html {
   /* 5 */
   font-variation-settings: normal;
   /* 6 */
+  -webkit-tap-highlight-color: transparent;
+  /* 7 */
 }
 
 /*
@@ -161,8 +165,10 @@ strong {
 }
 
 /*
-1. Use the user's configured `mono` font family by default.
-2. Correct the odd `em` font sizing in all browsers.
+1. Use the user's configured `mono` font-family by default.
+2. Use the user's configured `mono` font-feature-settings by default.
+3. Use the user's configured `mono` font-variation-settings by default.
+4. Correct the odd `em` font sizing in all browsers.
 */
 
 code,
@@ -171,8 +177,12 @@ samp,
 pre {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   /* 1 */
-  font-size: 1em;
+  font-feature-settings: normal;
   /* 2 */
+  font-variation-settings: normal;
+  /* 3 */
+  font-size: 1em;
+  /* 4 */
 }
 
 /*
@@ -474,6 +484,29 @@ video {
   display: none;
 }
 
+blockquote,
+  dl,
+  dd,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  hr,
+  figure,
+  p,
+  pre {
+  margin: revert;
+}
+
+ul,
+  ol,
+  menu {
+  list-style: revert;
+  margin: revert;
+  padding: revert;
+}
+
 .dark body {
   --pagefind-ui-text: white;
   --pagefind-ui-background: bg-dark;
@@ -504,33 +537,36 @@ body {
   background-color: rgb(29 31 33 / var(--tw-bg-opacity));
 }
 
-/* Table of Contents on side */
+#TableOfContents {
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+}
 
-.toc li {
+#TableOfContents ul li {
   list-style: none;
 }
 
-.toc ul > li {
+#TableOfContents ul > li {
   margin-bottom: 0.4rem;
 }
 
-.toc ul > li > ul > li {
+#TableOfContents ul > li > ul > li {
   font-size: 0.9rem;
   margin-bottom: 0.4rem;
 }
 
-.toc ul > li > ul > li > ul > li {
+#TableOfContents ul > li > ul > li > ul > li {
   font-size: 0.8rem;
   margin-bottom: 0.3rem;
 }
 
-.toc ul {
+#TableOfContents ul {
   /* Add left padding for headings in TOC */
   padding-left: 1rem;
   margin: 0;
 }
 
-.toc nav > ul {
+#TableOfContents nav > ul {
   /* The highest level heading in a blog post is level-2 */
   padding-left: 0;
   /* The level-1 heading is reserved for the blog title. */
@@ -538,44 +574,38 @@ body {
   /* up in the TOC. */
 }
 
-.toc a {
+#TableOfContents a {
   text-decoration: none;
   --tw-text-opacity: 1;
   color: rgb(29 31 33 / var(--tw-text-opacity));
 }
 
-:is(.dark .toc a) {
+:is(.dark #TableOfContents a) {
   --tw-text-opacity: 1;
   color: rgb(212 212 216 / var(--tw-text-opacity));
 }
 
-/* .toc a:hover { */
+/* #TableOfContents a:hover { */
 
 /*   color: gray; */
 
 /* } */
 
-.toc a.current {
+#TableOfContents a.current {
   font-weight: 800;
 }
 
-:is(.dark .toc a.current) {
+:is(.dark #TableOfContents a.current) {
   --tw-text-opacity: 1;
   color: rgb(244 244 245 / var(--tw-text-opacity));
 }
 
 /* Override the bullets customization done above, just for list items*/
 
-/* in .toc class */
+/* in #TableOfContents class */
 
-.toc ul:not(.catlist):not(.navbar):not(.post-list) li:before {
+#TableOfContents ul:not(.catlist):not(.navbar):not(.post-list) li:before {
   content: "";
-}
-
-.toc .back-to-top {
-  /* Back to top link */
-  /* font-size: 0.7rem; */
-  /* padding-left: 1rem; */
 }
 
 #theme-btn {
@@ -596,7 +626,7 @@ body {
     display: none;
   }
 
-  .toc {
+  #TableOfContents {
     display: block;
     margin-top: 2.5rem;
     margin-bottom: 2.5rem;
@@ -612,10 +642,6 @@ body {
 }
 
 /* Hide bullets in TOC when headings are numbered. */
-
-.toc.has-section-numbers ul {
-  list-style: none;
-}
 
 .headline-hash,
   .page-title a {
@@ -692,30 +718,51 @@ h4 {
   margin-bottom: 0.25rem;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 a {
   --tw-text-opacity: 1;
-  color: rgb(30 64 175 / var(--tw-text-opacity));
+  color: rgb(23 37 84 / var(--tw-text-opacity));
 }
 
 :is(.dark a) {
   --tw-text-opacity: 1;
-  color: rgb(191 219 254 / var(--tw-text-opacity));
+  color: rgb(147 197 253 / var(--tw-text-opacity));
+}
+
+a {
+  border-bottom-width: 1px;
+  border-color: transparent;
 }
 
 a:hover {
   --tw-text-opacity: 1;
-  color: rgb(17 24 39 / var(--tw-text-opacity));
+  color: rgb(23 23 23 / var(--tw-text-opacity));
 }
 
 :is(.dark a:hover) {
   --tw-text-opacity: 1;
-  color: rgb(229 231 235 / var(--tw-text-opacity));
+  color: rgb(229 229 229 / var(--tw-text-opacity));
 }
 
 a:hover {
-  border-bottom-width: 2px;
   --tw-border-opacity: 1;
-  border-color: rgb(226 232 240 / var(--tw-border-opacity));
+  border-color: rgb(23 23 23 / var(--tw-border-opacity));
+}
+
+:is(.dark a:hover) {
+  --tw-border-opacity: 1;
+  border-color: rgb(229 229 229 / var(--tw-border-opacity));
+}
+
+a:hover svg path {
+  fill: #171717;
+}
+
+:is(.dark a:hover svg path) {
+  fill: #e5e5e5;
 }
 
 pre {
@@ -728,14 +775,6 @@ code {
   font-stretch: expanded;
   font-size: 0.875rem;
   line-height: 1.25rem;
-}
-
-ul,
-  ol,
-  menu {
-  list-style: revert;
-  margin: revert;
-  padding: revert;
 }
 
 :is(.dark hr) {
@@ -878,21 +917,6 @@ blockquote::before {
 
 blockquote p {
   display: inline;
-}
-
-blockquote,
-  dl,
-  dd,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  hr,
-  figure,
-  p,
-  pre {
-  margin: revert;
 }
 
 #vid {
@@ -1144,9 +1168,8 @@ blockquote,
   margin-bottom: 1.5rem;
 }
 
-.my-8 {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+.mb-5 {
+  margin-bottom: 1.25rem;
 }
 
 .mb-6 {
@@ -1171,6 +1194,10 @@ blockquote,
 
 .ml-3 {
   margin-left: 0.75rem;
+}
+
+.ml-4 {
+  margin-left: 1rem;
 }
 
 .ml-8 {
@@ -1199,6 +1226,10 @@ blockquote,
 
 .mt-1\.5 {
   margin-top: 0.375rem;
+}
+
+.mt-5 {
+  margin-top: 1.25rem;
 }
 
 .mt-7 {
@@ -1259,6 +1290,10 @@ blockquote,
 
 .max-h-20 {
   max-height: 5rem;
+}
+
+.w-5 {
+  width: 1.25rem;
 }
 
 .w-6 {
@@ -1351,6 +1386,10 @@ blockquote,
   grid-template-columns: .6fr 3fr auto 1fr;
 }
 
+.flex-row {
+  flex-direction: row;
+}
+
 .flex-col {
   flex-direction: column;
 }
@@ -1361,6 +1400,10 @@ blockquote,
 
 .items-center {
   align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
 }
 
 .justify-between {
@@ -1432,6 +1475,10 @@ blockquote,
   background-color: rgb(244 244 245 / var(--tw-bg-opacity));
 }
 
+.fill-neutral-800 {
+  fill: #262626;
+}
+
 .p-1 {
   padding: 0.25rem;
 }
@@ -1468,16 +1515,27 @@ blockquote,
   padding-bottom: 0.125rem;
 }
 
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.py-2\.5 {
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+}
+
 .pb-0 {
   padding-bottom: 0px;
 }
 
 .pb-2 {
   padding-bottom: 0.5rem;
-}
-
-.pl-0 {
-  padding-left: 0px;
 }
 
 .pl-1 {
@@ -1563,11 +1621,6 @@ blockquote,
   color: rgb(107 114 128 / var(--tw-text-opacity));
 }
 
-.text-gray-600 {
-  --tw-text-opacity: 1;
-  color: rgb(75 85 99 / var(--tw-text-opacity));
-}
-
 .text-inherit {
   color: inherit;
 }
@@ -1606,11 +1659,6 @@ blockquote,
 .highlight .chroma,
 .org-center {
   overflow: auto;
-}
-
-.first\:before\:content-none:first-child::before {
-  --tw-content: none;
-  content: var(--tw-content);
 }
 
 .hover\:border-b-0:hover {
@@ -1714,6 +1762,10 @@ blockquote,
 :is(.dark .dark\:bg-zinc-900) {
   --tw-bg-opacity: 1;
   background-color: rgb(24 24 27 / var(--tw-bg-opacity));
+}
+
+:is(.dark .dark\:fill-neutral-400) {
+  fill: #a3a3a3;
 }
 
 :is(.dark .dark\:text-gray-400) {

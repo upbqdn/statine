@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}" class="dark">
   <head>
     {{ partial "head.html" . }}
@@ -22,11 +22,7 @@
       </div>
       {{ block "main" . }} {{ end }}
     </main>
-    <footer class="container footer text-center">
-      {{ partial "footer.html" . }}
-    </footer>
-    {{ partial "extra_js.html" . }}
-    <div class="plot" hidden></div>
-    <div class="org-center" hidden></div>
+    {{ partial "footer.html" . }} {{ partial "extra_js.html" . }}
+    <div class="plot org-center current" hidden></div>
   </body>
 </html>
