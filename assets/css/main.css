@@ -147,9 +147,7 @@
 
   .headline-hash,
   .page-title a,
-  .article-content h2 a,
-  .article-content h3 a,
-  .article-content h4 a {
+  h1 a, h2 a, h3 a, h4 a {
     @apply text-dark dark:text-fg border-none;
   }
   p strong a {

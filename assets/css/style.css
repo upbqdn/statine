@@ -1010,7 +1010,7 @@
     --tw-font-weight: var(--font-weight-bold);
     font-weight: var(--font-weight-bold);
   }
-  .headline-hash, .page-title a, .article-content h2 a, .article-content h3 a, .article-content h4 a {
+  .headline-hash, .page-title a, h1 a, h2 a, h3 a, h4 a {
     --tw-border-style: none;
     border-style: none;
     color: var(--color-dark);
