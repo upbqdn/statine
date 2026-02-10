@@ -30,8 +30,9 @@
   >
     {{ partial "headline-hash.html" .Content }}
   </div>
-  <hr class="my-0 w-full" />
-  {{ partial "taxonomy.html" . }} {{ if .Params.references }}
+  <hr class="my-5 w-full" />
+  {{ if or .Params.tags .Params.Date }}{{ partial "taxonomy.html" . }}{{ end }}
+  {{ if .Params.references }}
   <hr />
   <div class="mb-8">
     <h3>References</h3>
@@ -48,10 +49,12 @@
   {{ end }}
   <div>
     <script>
+      var remark_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      localStorage.remark42_theme = remark_theme;
       var remark_config = {
         host: "https://remark42.marek.onl",
         site_id: "marek.onl",
-        theme: localStorage.remark42_theme,
+        theme: remark_theme,
         show_email_subscription: true,
         simple_view: false,
         no_footer: true,
