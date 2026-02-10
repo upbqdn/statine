@@ -1,10 +1,25 @@
 // ToC-related Functionality
 function toggleToc() {
-  let toc = document.getElementById("TableOfContents");
+  var toc = document.getElementById("TableOfContents");
   if (window.getComputedStyle(toc, null).display == "none") {
     toc.style.display = "block";
   } else {
     toc.style.display = "none";
+  }
+}
+
+function handleTocVisibility() {
+  var toc = document.getElementById("TableOfContents");
+  if (!toc) return;
+
+  if (window.innerWidth < 1280) {
+    toc.style.display = "none";
+    var toc_btn = document.getElementById("toc-btn");
+    if (toc_btn && !toc.childNodes.length) {
+      toc_btn.style.display = "none";
+    }
+  } else {
+    toc.style.display = "block";
   }
 }
 
@@ -33,9 +48,7 @@ function toggleToc() {
         if (typeof jQuery === "function" && el instanceof jQuery) {
           el = el[0];
         }
-
         var rect = el.getBoundingClientRect();
-
         return (
           rect.bottom >= 0 &&
           rect.right >= 0 &&
@@ -69,11 +82,12 @@ function toggleToc() {
     }
 
     function adjustToc() {
+      handleTocVisibility();
+
       if (window.innerWidth < 1400) {
         $toc.find("a.current").each(function (i, e) {
           $(e).removeClass("current");
         });
-
         $toc.find("a").parent("li").find("ul").show();
       } else {
         $toc.find("a").parent("li").find("ul").hide();
@@ -85,9 +99,10 @@ function toggleToc() {
     $window.on("scroll", onScroll);
     $window.on("resize", adjustToc);
 
-    document_ready(function () {
+    if (document.readyState != "loading") {
       adjustToc();
-      document.getElementsByClassName("toc")[0].style.display = "";
-    });
+    } else {
+      document.addEventListener("DOMContentLoaded", adjustToc);
+    }
   }
 })();

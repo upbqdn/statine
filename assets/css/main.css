@@ -8,8 +8,6 @@
   src: url('/fonts/EBGaramond.woff2') format('woff2');
 }
 
-@custom-variant dark (&:is(.dark *));
-
 @theme {
   --color-tp-black: rgba(0, 0, 0, 0.8);
   --color-dark: #161616;
@@ -45,13 +43,6 @@
     padding: revert;
   }
 
-  .dark body {
-    --pagefind-ui-text: #f4f4f4;
-    --pagefind-ui-background: #161616;
-    --pagefind-ui-border: #525252;
-    --pagefind-ui-primary: #78a9ff;
-  }
-
   body {
     --pagefind-ui-primary: #0f62fe;
     --pagefind-ui-text: #161616;
@@ -63,6 +54,15 @@
     --pagefind-ui-image-border-radius: 8px;
     --pagefind-ui-image-box-ratio: 3 / 2;
     --pagefind-ui-font: "EB Garamond";
+  }
+
+  @media (prefers-color-scheme: dark) {
+    body {
+      --pagefind-ui-text: #f4f4f4;
+      --pagefind-ui-background: #161616;
+      --pagefind-ui-border: #525252;
+      --pagefind-ui-primary: #78a9ff;
+    }
   }
 
   .search-bar {
@@ -109,7 +109,7 @@
     list-style: none;
   }
 
-  #theme-btn, #toc-btn {
+  #toc-btn {
     width: 15px;
     font-size: 15px;
   }
@@ -124,7 +124,7 @@
       left: 50%;
       top: 120px;
       width: 260px;
-      margin-left: 350px;
+      margin-left: calc(20rem + 30px);
       overflow-y: hidden;
       max-height: 85%;
       padding: 0;

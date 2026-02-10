@@ -4,16 +4,5 @@
            class="text-2xl my-2.5 ml-0.5 text-dark dark:text-fg border-none">
             {{ .Site.Title }}
         </a>
-        <button type="button"
-                id="theme-btn"
-                onclick="toggleMode()"
-                aria-label="Toggle between dark and light mode">
-            <div class="hidden dark:block">
-                <img src="{{ "img/light_mode.svg" | absURL  }}">
-            </div>
-            <div class="block dark:hidden">
-                <i class="fa-solid fa-moon" alt="Switch to dark theme." ></i>
-            </div>
-        </button>
     </nav>
 </header>
