@@ -1,24 +1,21 @@
-<div class="flex flex-wrap mt-7 mb-6 mx-1.5">
+<div class="flex flex-wrap gap-y-2 mt-5 mb-6 mx-1.5">
     {{ if .Params.tags }}
-    <!-- <i class="fa-solid fa-tags mr-2 flex-none"></i> -->
-    <!-- <div class="flex flex-wrap grow"> -->
     {{ range $index, $tag := .Params.tags }}
-    <a class="mr-2 border-none text-neutral-800 dark:text-neutral-200"
+    <a class="mr-2 border-none text-dark dark:text-fg"
        href='{{ urlize $tag | absURL }}'>
-        <span class="dark:bg-zinc-900 dark:hover:bg-zinc-700 dark:border-zinc-600
-                     hover:bg-zinc-200 hover:border-zinc-500
-                     bg-zinc-100 rounded-sm border-zinc-300
-                     py-0.5 px-1
-                     "
+        <span class="bg-zinc-100 dark:bg-surface
+                     hover:bg-zinc-200 dark:hover:bg-fg-muted/20
+                     border-zinc-300 dark:border-fg-muted/30
+                     hover:border-zinc-500 dark:hover:border-fg-muted/50
+                     rounded-sm py-0.5 px-1"
               data-pagefind-filter="tags">
             {{ . }}
         </span>
     </a>
     {{ end }}
-    <!-- </div> -->
     {{ end }}
     {{ if .Params.Date }}
-    <div class="ml-auto text-neutral-600 dark:text-neutral-400">
+    <div class="ml-auto text-fg-secondary dark:text-fg-muted">
         {{ .Date.Format "Jan 2, 2006" }}
     </div>
     {{ end }}

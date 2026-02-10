@@ -1,19 +1,26 @@
 @import "tailwindcss";
-@import url(./katex.css);
 
 @font-face {
-  font-family: "EB Garamond";
-  src: url("/fonts/EBGaramond.woff2") format("woff2");
+  font-family: 'EB Garamond';
+  font-style: normal;
+  font-weight: 400 800;
   font-display: swap;
-  size-adjust: 108%;
+  src: url('/fonts/EBGaramond.woff2') format('woff2');
 }
 
 @custom-variant dark (&:is(.dark *));
 
 @theme {
   --color-tp-black: rgba(0, 0, 0, 0.8);
-  --color-dark: #1d1f21;
-  --line-height-loose: 1.8;
+  --color-dark: #161616;
+  --color-surface: #262626;
+  --color-fg: #f4f4f4;
+  --color-fg-muted: #c6c6c6;
+  --color-fg-secondary: #525252;
+  --color-link: #0f62fe;
+  --color-link-hover: #0043ce;
+  --color-accent: #78a9ff;
+  --color-accent-hover: #a6c8ff;
   --font-sans: "EB Garamond";
   --grid-cols-nav: repeat(auto-fill, minmax(80px, 1fr));
   --grid-cols-minimal-list-item: 15% 85%;
@@ -28,42 +35,28 @@
 }
 
 @layer base {
-  blockquote,
-  dl,
-  dd,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  hr,
-  figure,
-  p,
-  pre {
+  blockquote, dl, dd, h2, h3, h4, h5, h6, hr, figure, p, pre {
     margin: revert;
   }
 
-  ul,
-  ol,
-  menu {
+  ul, ol, menu {
     list-style: revert;
     margin: revert;
     padding: revert;
   }
 
   .dark body {
-    --pagefind-ui-text: white;
-    --pagefind-ui-background: bg-dark;
-    --pagefind-ui-border: grey;
-    --pagefind-ui-primary: aqua;
+    --pagefind-ui-text: #f4f4f4;
+    --pagefind-ui-background: #161616;
+    --pagefind-ui-border: #525252;
+    --pagefind-ui-primary: #78a9ff;
   }
 
   body {
-    /* --pagefind-ui-scale: 0.8; */
-    --pagefind-ui-primary: grey;
-    --pagefind-ui-text: #393939;
+    --pagefind-ui-primary: #0f62fe;
+    --pagefind-ui-text: #161616;
     --pagefind-ui-background: #ffffff;
-    --pagefind-ui-border: turquoise;
+    --pagefind-ui-border: #e0e0e0;
     --pagefind-ui-tag: #eeeeee;
     --pagefind-ui-border-width: 2px;
     --pagefind-ui-border-radius: 8px;
@@ -77,6 +70,7 @@
     @apply dark:bg-dark;
   }
 
+  /* Table of Contents */
   #TableOfContents {
     @apply my-5;
   }
@@ -95,55 +89,37 @@
     margin-bottom: 0.3rem;
   }
   #TableOfContents ul {
-    /* Add left padding for headings in TOC */
     padding-left: 1rem;
     margin: 0;
   }
   #TableOfContents nav > ul {
-    /* The highest level heading in a blog post is level-2 */
-    padding-left: 0; /* The level-1 heading is reserved for the blog title. */
-    /* So do not add any padding for level-1 heading, as that will never show*/
-    /* up in the TOC. */
+    padding-left: 0;
   }
   #TableOfContents a {
     text-decoration: none;
-    @apply text-dark;
-    @apply dark:text-zinc-300;
+    @apply text-fg-secondary dark:text-fg-muted;
   }
-  /* #TableOfContents a:hover { */
-  /*   color: gray; */
-  /* } */
   #TableOfContents a.current {
-    @apply font-extrabold;
-    @apply dark:text-zinc-100;
+    @apply font-extrabold text-dark dark:text-fg;
   }
-  /* Override the bullets customization done above, just for list items*/
-  /* in #TableOfContents class */
   #TableOfContents ul:not(.catlist):not(.navbar):not(.post-list) li:before {
     content: "";
   }
-
-  #theme-btn {
-    width: 15px;
-    font-size: 15px;
+  #TableOfContents.has-section-numbers ul {
+    list-style: none;
   }
 
-  @media (max-width: 1279px) {
-    #toc-btn {
-      display: inline;
-      width: 15px;
-      font-size: 15px;
-    }
+  #theme-btn, #toc-btn {
+    width: 15px;
+    font-size: 15px;
   }
 
   @media screen and (min-width: 1280px) {
     #toc-btn {
       display: none;
     }
-
     #TableOfContents {
       display: block;
-      @apply my-10;
       position: fixed;
       left: 50%;
       top: 120px;
@@ -152,23 +128,32 @@
       overflow-y: hidden;
       max-height: 85%;
       padding: 0;
+      @apply my-10;
     }
   }
 
-  /* Hide bullets in TOC when headings are numbered. */
-  #TableOfContents.has-section-numbers ul {
-    list-style: none;
+  /* Typography */
+  html {
+    font-size: 15pt;
   }
+  body {
+    line-height: 1.6;
+    @apply dark:bg-dark dark:text-fg text-black;
+  }
+  h1 { @apply text-3xl; }
+  h2 { @apply text-2xl my-4; }
+  h3 { @apply text-xl my-2; }
+  h4 { @apply font-bold text-lg my-1; }
 
   .headline-hash,
-  .page-title a {
-    @apply text-dark;
-    @apply dark:text-slate-200;
+  .page-title a,
+  .article-content h2 a,
+  .article-content h3 a,
+  .article-content h4 a {
+    @apply text-dark dark:text-fg border-none;
   }
-
   p strong a {
-    @apply text-dark;
-    @apply dark:text-slate-200;
+    @apply text-dark dark:text-fg;
   }
 
   .article-content p:not(.org-center p),
@@ -178,125 +163,50 @@
     hyphens: auto;
   }
 
-  body {
-    @apply tracking-wide;
-    @apply dark:bg-dark;
-    @apply dark:text-slate-200;
-    @apply text-black;
-    @apply text-lg;
-  }
-  h1 {
-    @apply text-3xl;
-  }
-  h2 {
-    @apply text-2xl;
-    @apply my-4;
-  }
-  h3 {
-    @apply text-xl;
-    @apply my-2;
-  }
-  h4 {
-    @apply font-bold;
-    @apply text-lg;
-    @apply my-1;
-  }
-  * {
-    box-sizing: border-box;
-  }
+  /* Links */
   a {
-    @apply text-blue-950;
-    @apply dark:text-blue-300;
-    @apply border-b;
-    @apply border-transparent;
+    @apply text-link dark:text-accent border-b border-transparent;
   }
   a:hover {
-    @apply text-neutral-900;
-    @apply dark:text-neutral-200;
-    @apply border-neutral-900;
-    @apply dark:border-neutral-200;
+    @apply text-link-hover dark:text-accent-hover border-link-hover dark:border-accent-hover;
   }
-
   a:hover svg path {
-    @apply fill-neutral-900;
-    @apply dark:fill-neutral-200;
+    @apply fill-link-hover dark:fill-accent-hover;
   }
 
-  pre {
-    @apply text-sm;
-  }
-
+  /* Code */
+  pre { @apply text-sm; }
   code {
     font-family: "Iosevka Web" !important;
     font-stretch: expanded;
     @apply text-sm;
   }
 
-  hr {
-    @apply dark:border-zinc-500;
-    @apply border-t-2;
-  }
-  dt {
-    font-variant-caps: all-small-caps;
-    @apply font-bold;
-  }
-  dd {
-    @apply mb-4;
-    @apply ml-8;
-  }
-  img {
-    @apply mx-auto;
-    @apply dark:brightness-[.8];
-    @apply dark:contrast-125;
-  }
-  figure {
-    @apply sm:mx-6;
-    @apply md:mx-12;
-  }
-  figcaption {
-    @apply text-center;
-  }
+  /* Elements */
+  hr { @apply border-t-2 dark:border-fg-muted/30; }
+  dt { font-variant-caps: all-small-caps; @apply font-bold; }
+  dd { @apply mb-4 ml-8; }
+  img { @apply mx-auto dark:brightness-[.8] dark:contrast-125; }
+  figure { @apply sm:mx-6 md:mx-12; }
+  figcaption { @apply text-center; }
+
   blockquote {
-    @apply bg-slate-200;
-    @apply dark:bg-slate-700;
-    @apply my-8;
-    @apply sm:mx-0;
-    @apply md:mx-4;
-    @apply lg:mx-8;
-    @apply py-2;
-    @apply border-l-4;
-    @apply border-slate-400;
-    @apply pl-4;
-    @apply pr-2;
-    @apply italic;
-    @apply font-serif;
-    @apply text-lg;
-    @apply after:content-[close-quote];
-    @apply after:text-5xl;
-    @apply before:text-5xl;
-    @apply before:text-slate-400;
-    @apply after:text-slate-400;
-    @apply after:leading-[.1em];
-    @apply before:leading-[.1em];
-    @apply before:mr-1;
-    @apply after:mr-1;
-    @apply after:align-[-.4em];
-    @apply before:align-[-.4em];
-    @apply before:content-[open-quote];
+    @apply bg-slate-200 dark:bg-surface;
+    @apply my-8 sm:mx-0 md:mx-4 lg:mx-8 py-2 pl-4 pr-2;
+    @apply border-l-4 border-slate-400 dark:border-fg-muted/30;
+    @apply italic font-serif text-lg;
+    @apply before:content-[open-quote] after:content-[close-quote];
+    @apply before:text-5xl after:text-5xl;
+    @apply before:text-slate-400 dark:before:text-fg-muted/40;
+    @apply after:text-slate-400 dark:after:text-fg-muted/40;
+    @apply before:leading-[.1em] after:leading-[.1em];
+    @apply before:mr-1 after:mr-1;
+    @apply before:align-[-.4em] after:align-[-.4em];
   }
-  blockquote p {
-    @apply inline;
-  }
+  blockquote p { @apply inline; }
 
-  #vid {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-  }
-
-  .plot {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-  }
+  #vid { width: 100%; aspect-ratio: 16 / 9; }
+  .plot { width: 100%; aspect-ratio: 1 / 1; }
 }
 
 .highlight .chroma,

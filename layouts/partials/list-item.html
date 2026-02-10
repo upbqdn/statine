@@ -1,9 +1,9 @@
 <div class="sm:mx-8">
     <a href="{{ .Permalink }}" itemprop="url" class="grid grid-cols-list-item items-center border-b-2
-             text-black dark:text-zinc-300 hover:text-neutral-500
-             dark:border-zinc-600
-             hover:dark:border-zinc-300
-             hover:dark:text-zinc-100">
+             text-dark dark:text-fg-muted hover:text-fg-secondary
+             border-zinc-200 dark:border-surface
+             hover:border-zinc-400 hover:dark:border-fg-muted
+             hover:dark:text-fg">
         {{ if .Params.Caption }}
         <img itemprop="image" alt="{{ .Params.Caption.Alt }}" src="{{ .Params.Caption.Name }}"
             class="flex-initial max-w-[90%] max-h-20 w-auto">
@@ -28,14 +28,14 @@
         <h3 itemprop="name" class="border-none pb-0 my-2 col-span-2">{{ .Title }}</h3>
         {{ end }}
         {{ if .Params.Date }}
-        <div class="list-item-date col-start-4 text-right text-neutral-600 dark:text-neutral-400">
+        <div class="list-item-date col-start-4 text-right text-fg-secondary dark:text-fg-muted">
             {{ .Date.Format "Jan 2, 2006" }}
         </div>
         {{ end }}
     </a>
     {{ if .Params.Headline }}
     <div class="mt-1">
-        <i itemprop="headline" class="article-headline p-summary text-base text-neutral-600 dark:text-neutral-400">
+        <i itemprop="headline" class="article-headline p-summary text-base text-fg-secondary dark:text-fg-muted">
             {{ .Params.Headline }}
         </i>
     </div>

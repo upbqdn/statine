@@ -3,7 +3,7 @@
      class="modal-window bg-tp-black invisible fixed top-0 left-0
             right-0 bottom-0 transition-all pointer-events-none z-50">
     <div class="absolute top-1/2 left-1/2 p-8 bg-white
-                dark:bg-neutral-700
+                dark:bg-surface
 
                 max-w-full
                 rounded-md max-w-4/5 -translate-x-1/2 -translate-y-1/2">
@@ -21,7 +21,7 @@
                        dark:hover:disabled:text-zinc-200
                        dark:disabled:bg-neutral-500
                        dark:hover:bg-sky-500" id="#copy-{{ substr (sha256 .citation) 0 8 }}">Copy to clipboard</button>
-        <pre class="bg-slate-100 dark:bg-slate-800"><code id="{{ substr (sha256 .citation) 0 8 }}">{{ .citation }}</code></pre>
+        <pre class="bg-slate-100 dark:bg-dark"><code id="{{ substr (sha256 .citation) 0 8 }}">{{ .citation }}</code></pre>
     </div>
 </div>
 {{ end }}
