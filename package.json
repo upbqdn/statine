@@ -6,9 +6,10 @@
   "license": "MIT",
   "main": "",
   "scripts": {
-    "build-tw": "npx tailwindcss -i ./assets/css/main.css -o ./assets/css/style.css"
+    "build-tw": "npx @tailwindcss/cli -i ./assets/css/main.css -o ./assets/css/style.css"
   },
   "devDependencies": {
-    "postcss-import": "^15.0.0"
+    "@tailwindcss/cli": "^4.1.18",
+    "tailwindcss": "^4.1.18"
   }
 }

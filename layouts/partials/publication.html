@@ -1,5 +1,5 @@
 <div class="pub-wrapper w-full inline-flex flex-wrap items-center
-            my-1.5 p-2.5 rounded bg-slate-100 dark:bg-slate-700 box-border
+            my-1.5 p-2.5 rounded-sm bg-slate-100 dark:bg-slate-700 box-border
             leading-tight justify-around" id="{{anchorize .title}}"
      itemscope itemtype="http://schema.org/ScholarlyArticle">
     <div class="pub-image basis-40 grow-0 shrink" itemprop="image"
@@ -48,13 +48,13 @@
                          dark:text-zinc-200
                          dark:hover:text-gray-800
                          hover:text-gray-900
-                         rounded-sm p-1 mr-1">
+                         rounded-xs p-1 mr-1">
                 <button class="open-modal text-inherit"
                         data-target="#open-modal-{{- .title | urlize -}}">Cite</button></span>
             {{- end -}}
             {{- range .links -}}
             <span class="publication-link bg-sky-600
-                         dark:bg-sky-700 rounded-sm p-1
+                         dark:bg-sky-700 rounded-xs p-1
                          dark:hover:bg-sky-500
                          hover:bg-sky-800 mr-1"><a class="border-none
                          text-white

@@ -14,11 +14,11 @@
             new PagefindUI({ element: "#search" });
           });
         </script>
-        {{ if not .Params.notoc }} {{ with .TableOfContents }}
+        {{ if and .IsPage (not .Params.notoc) (findRE "<li" .TableOfContents) }}
         <button type="button" class="mx-1.5" id="toc-btn" onclick="toggleToc()">
           <i class="fa-solid fa-table"></i>
         </button>
-        {{ end }} {{ end }}
+        {{ end }}
       </div>
       {{ block "main" . }} {{ end }}
     </main>

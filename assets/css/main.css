@@ -1,9 +1,31 @@
-/* @import url(./../../computer-modern-web-font/font/Serif/cmun-serif.css); */
-@import url(katex.css);
+@import "tailwindcss";
+@import url(./katex.css);
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@font-face {
+  font-family: "EB Garamond";
+  src: url("/fonts/EBGaramond.woff2") format("woff2");
+  font-display: swap;
+  size-adjust: 108%;
+}
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-tp-black: rgba(0, 0, 0, 0.8);
+  --color-dark: #1d1f21;
+  --line-height-loose: 1.8;
+  --font-sans: "EB Garamond";
+  --grid-cols-nav: repeat(auto-fill, minmax(80px, 1fr));
+  --grid-cols-minimal-list-item: 15% 85%;
+  --grid-cols-list-item: 0.6fr 3fr auto 1fr;
+}
+
+@layer utilities {
+  .container {
+    max-width: 40rem;
+    margin-inline: auto;
+  }
+}
 
 @layer base {
   blockquote,
@@ -47,7 +69,7 @@
     --pagefind-ui-border-radius: 8px;
     --pagefind-ui-image-border-radius: 8px;
     --pagefind-ui-image-box-ratio: 3 / 2;
-    --pagefind-ui-font: KaTeX;
+    --pagefind-ui-font: "EB Garamond";
   }
 
   .search-bar {
