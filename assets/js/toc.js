@@ -1,10 +1,14 @@
 // ToC-related Functionality
+var tocManuallyOpen = false;
+
 function toggleToc() {
   var toc = document.getElementById("TableOfContents");
   if (window.getComputedStyle(toc, null).display == "none") {
     toc.style.display = "block";
+    tocManuallyOpen = true;
   } else {
     toc.style.display = "none";
+    tocManuallyOpen = false;
   }
 }
 
@@ -13,13 +17,16 @@ function handleTocVisibility() {
   if (!toc) return;
 
   if (window.innerWidth < 1280) {
-    toc.style.display = "none";
+    if (!tocManuallyOpen) {
+      toc.style.display = "none";
+    }
     var toc_btn = document.getElementById("toc-btn");
     if (toc_btn && !toc.childNodes.length) {
       toc_btn.style.display = "none";
     }
   } else {
     toc.style.display = "block";
+    tocManuallyOpen = false;
   }
 }
 
