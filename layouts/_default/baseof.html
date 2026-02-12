@@ -4,18 +4,18 @@
     {{ partial "head.html" . }}
   </head>
 
-  <body class="flex flex-col h-screen justify-between px-2">
+  <body class="flex flex-col min-h-dvh justify-between px-2">
     {{ partial "nav.html" . }}
     <main class="container content mt-0 m-auto z-0" role="main">
-      <div class="flex flex-wrap">
-        <div id="search" class="search-bar basis-10/12 grow"></div>
+      <div class="flex items-center">
+        <div id="search" class="search-bar grow min-w-0"></div>
         <script>
           window.addEventListener("DOMContentLoaded", (event) => {
             new PagefindUI({ element: "#search" });
           });
         </script>
         {{ if and .IsPage (not .Params.notoc) (findRE "<li" .TableOfContents) }}
-        <button type="button" class="mx-1.5" id="toc-btn" onclick="toggleToc()">
+        <button type="button" class="shrink-0 ml-1.5" id="toc-btn" onclick="toggleToc()" aria-label="Toggle Table of Contents">
           <i class="fa-solid fa-table"></i>
         </button>
         {{ end }}
