@@ -6,6 +6,9 @@ function toggleToc() {
   if (window.getComputedStyle(toc, null).display == "none") {
     toc.style.display = "block";
     tocManuallyOpen = true;
+    // Show all nested sections on mobile
+    $(toc).find("li > ul").show();
+    $(toc).find("a.current").removeClass("current");
   } else {
     toc.style.display = "none";
     tocManuallyOpen = false;
