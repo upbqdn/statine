@@ -20,14 +20,12 @@
   --color-accent: #78a9ff;
   --color-accent-hover: #a6c8ff;
   --font-sans: "EB Garamond";
-  --grid-cols-nav: repeat(auto-fill, minmax(80px, 1fr));
-  --grid-cols-minimal-list-item: 15% 85%;
   --grid-cols-list-item: 0.6fr 3fr auto 1fr;
 }
 
 @layer utilities {
   .container {
-    max-width: 40rem;
+    max-width: 34rem;
     margin-inline: auto;
   }
 }
@@ -47,7 +45,7 @@
     --pagefind-ui-primary: #0f62fe;
     --pagefind-ui-text: #161616;
     --pagefind-ui-background: #ffffff;
-    --pagefind-ui-border: #e0e0e0;
+    --pagefind-ui-border: #d4d4d8;
     --pagefind-ui-tag: #eeeeee;
     --pagefind-ui-border-width: 2px;
     --pagefind-ui-border-radius: 8px;
@@ -60,7 +58,7 @@
     body {
       --pagefind-ui-text: #f4f4f4;
       --pagefind-ui-background: #161616;
-      --pagefind-ui-border: #525252;
+      --pagefind-ui-border: rgba(198, 198, 198, 0.3);
       --pagefind-ui-primary: #78a9ff;
     }
   }
@@ -110,8 +108,16 @@
   }
 
   #toc-btn {
-    width: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
     font-size: 15px;
+    @apply text-fg-secondary dark:text-fg-muted rounded-sm
+           bg-zinc-100 dark:bg-surface
+           border border-zinc-300 dark:border-fg-muted/30
+           active:bg-zinc-200 dark:active:bg-fg-muted/20;
   }
 
   @media screen and (min-width: 1280px) {
@@ -124,8 +130,8 @@
       left: 50%;
       top: 120px;
       width: 260px;
-      margin-left: calc(20rem + 30px);
-      overflow-y: hidden;
+      margin-left: calc(17rem + 30px);
+      overflow-y: auto;
       max-height: 85%;
       padding: 0;
       @apply my-10;
@@ -135,20 +141,38 @@
   /* Typography */
   html {
     font-size: 15pt;
+    overflow-x: hidden;
   }
   body {
-    line-height: 1.6;
+    line-height: 1.5;
     @apply dark:bg-dark dark:text-fg text-black;
   }
-  h1 { @apply text-3xl; }
+  h1 { @apply text-3xl my-5; }
   h2 { @apply text-2xl my-4; }
   h3 { @apply text-xl my-2; }
   h4 { @apply font-bold text-lg my-1; }
+
+  .list-title {
+    @apply mb-1;
+  }
+  .list-title + hr {
+    @apply mt-0 mb-5 border-zinc-300 dark:border-fg-muted/30;
+  }
 
   .headline-hash,
   .page-title a,
   h1 a, h2 a, h3 a, h4 a {
     @apply text-dark dark:text-fg border-none;
+  }
+  .headline-hash:hover, .headline-hash:active,
+  .page-title a:hover, .page-title a:active,
+  h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover,
+  h1 a:active, h2 a:active, h3 a:active, h4 a:active {
+    @apply text-dark dark:text-fg border-none;
+  }
+
+  .footer a:hover, .footer a:active {
+    @apply border-none;
   }
   p strong a {
     @apply text-dark dark:text-fg;
@@ -158,6 +182,7 @@
   .article-content li {
     text-align: justify;
     text-justify: auto;
+    overflow-wrap: break-word;
     hyphens: auto;
   }
 
@@ -171,17 +196,20 @@
   a:hover svg path {
     @apply fill-link-hover dark:fill-accent-hover;
   }
+  a:focus-visible {
+    @apply outline-2 outline-offset-2 outline-link dark:outline-accent rounded-sm;
+  }
 
   /* Code */
   pre { @apply text-sm; }
   code {
     font-family: "Iosevka Web" !important;
     font-stretch: expanded;
-    @apply text-sm;
+    @apply text-xs;
   }
 
   /* Elements */
-  hr { @apply border-t-2 dark:border-fg-muted/30; }
+  hr { @apply border-t-2 border-zinc-300 dark:border-fg-muted/30; }
   dt { font-variant-caps: all-small-caps; @apply font-bold; }
   dd { @apply mb-4 ml-8; }
   img { @apply mx-auto dark:brightness-[.8] dark:contrast-125; }
@@ -189,19 +217,9 @@
   figcaption { @apply text-center; }
 
   blockquote {
-    @apply bg-slate-200 dark:bg-surface;
-    @apply my-8 sm:mx-0 md:mx-4 lg:mx-8 py-2 pl-4 pr-2;
-    @apply border-l-4 border-slate-400 dark:border-fg-muted/30;
-    @apply italic font-serif text-lg;
-    @apply before:content-[open-quote] after:content-[close-quote];
-    @apply before:text-5xl after:text-5xl;
-    @apply before:text-slate-400 dark:before:text-fg-muted/40;
-    @apply after:text-slate-400 dark:after:text-fg-muted/40;
-    @apply before:leading-[.1em] after:leading-[.1em];
-    @apply before:mr-1 after:mr-1;
-    @apply before:align-[-.4em] after:align-[-.4em];
+    @apply my-8 pl-4;
+    @apply border-l-2 border-zinc-300 dark:border-fg-muted/40;
   }
-  blockquote p { @apply inline; }
 
   #vid { width: 100%; aspect-ratio: 16 / 9; }
   .plot { width: 100%; aspect-ratio: 1 / 1; }

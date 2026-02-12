@@ -1,9 +1,10 @@
 <div class="sm:mx-8">
-    <a href="{{ .Permalink }}" itemprop="url" class="grid grid-cols-list-item items-center border-b-2
-             text-dark dark:text-fg-muted hover:text-fg-secondary
-             border-zinc-200 dark:border-surface
-             hover:border-zinc-400 hover:dark:border-fg-muted
-             hover:dark:text-fg">
+    <a href="{{ .Permalink }}" itemprop="url" class="grid grid-cols-list-item items-center border-b
+             text-dark dark:text-fg-muted
+             border-zinc-300 dark:border-fg-muted/30
+             hover:bg-zinc-100 dark:hover:bg-surface
+             active:bg-zinc-200 dark:active:bg-fg-muted/10
+             px-3 -mx-3 rounded-sm transition-colors duration-100">
         {{ if .Params.Caption }}
         <img itemprop="image" alt="{{ .Params.Caption.Alt }}" src="{{ .Params.Caption.Name }}"
             class="flex-initial max-w-[90%] max-h-20 w-auto">
@@ -12,7 +13,7 @@
         {{ with .Params.Imgsources }}
         <picture>
             {{ if .dark }}
-            <source srcset="{{ .dark }}" alt="{{ .Alt }}" media="(prefers-color-scheme: dark)">
+            <source srcset="{{ .dark }}" media="(prefers-color-scheme: dark)">
             {{ end }}
             {{ if .light }}
             <img src="{{ .light }}" alt="{{ .Alt }}" class="flex-initial max-w-[90%] max-h-20 w-auto" />

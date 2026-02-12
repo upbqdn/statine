@@ -16,12 +16,14 @@
             <a class="inline-block mt-2 mr-2 border-none text-dark dark:text-fg"
                 href='{{ urlize $name | absURL }}'>
                 <span class="bg-zinc-100 dark:bg-surface
-                             hover:bg-zinc-200 dark:hover:bg-fg-muted/20
-                             border-zinc-300 dark:border-fg-muted/30
-                             hover:border-zinc-500 dark:hover:border-fg-muted/50
-                             px-1 rounded-sm"
-                    style="font-size: 1.4rem;">
-                    {{ $name }}<sup style="font-size: 0.9rem;">{{ $count }}</sup>
+                             hover:bg-zinc-200 active:bg-zinc-200
+                             dark:hover:bg-fg-muted/20 dark:active:bg-fg-muted/20
+                             border border-zinc-300 dark:border-fg-muted/30
+                             hover:border-zinc-500 active:border-zinc-500
+                             dark:hover:border-fg-muted/50 dark:active:border-fg-muted/50
+                             px-1 rounded-sm transition-colors duration-100"
+                    style="font-size: 1.1rem;">
+                    {{ $name }}<sup style="font-size: 0.75rem;">{{ $count }}</sup>
                 </span>
             </a>
         </li>
