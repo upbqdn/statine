@@ -68,8 +68,9 @@ function handleTocVisibility() {
 
       if (!isVisible(document.getElementById("article-content"))) {
         current.each(function (i, e) {
-          $(e).removeClass("current").siblings("ul").hide();
+          $(e).removeClass("current");
         });
+        $toc.find("li > ul").hide();
         return true;
       }
 
@@ -77,8 +78,9 @@ function handleTocVisibility() {
         return true;
 
       current.each(function (i, e) {
-        $(e).removeClass("current").siblings("ul").hide();
+        $(e).removeClass("current");
       });
+      $toc.find("li > ul").hide();
 
       $toc
         .find('a[href="#' + id + '"]')
@@ -91,14 +93,8 @@ function handleTocVisibility() {
     function adjustToc() {
       handleTocVisibility();
 
-      if (window.innerWidth < 1400) {
-        $toc.find("a.current").each(function (i, e) {
-          $(e).removeClass("current");
-        });
-        $toc.find("a").parent("li").find("ul").show();
-      } else {
-        $toc.find("a").parent("li").find("ul").hide();
-      }
+      $toc.find("a.current").removeClass("current");
+      $toc.find("li > ul").hide();
 
       onScroll();
     }
