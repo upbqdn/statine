@@ -900,7 +900,7 @@
   }
 }
 @layer base {
-  blockquote, dl, dd, h2, h3, h4, h5, h6, hr, figure, p, pre {
+  blockquote, dl, dd, h2, h3, h4, h5, h6, hr, figure, p, pre, table {
     margin: revert;
   }
   ul, ol, menu {
@@ -1053,17 +1053,20 @@
     line-height: var(--tw-leading, var(--text-3xl--line-height));
   }
   h2 {
-    margin-block: calc(var(--spacing) * 4);
+    margin-top: calc(var(--spacing) * 8);
+    margin-bottom: calc(var(--spacing) * 3);
     font-size: var(--text-2xl);
     line-height: var(--tw-leading, var(--text-2xl--line-height));
   }
   h3 {
-    margin-block: calc(var(--spacing) * 2);
+    margin-top: calc(var(--spacing) * 6);
+    margin-bottom: calc(var(--spacing) * 2);
     font-size: var(--text-xl);
     line-height: var(--tw-leading, var(--text-xl--line-height));
   }
   h4 {
-    margin-block: calc(var(--spacing) * 1);
+    margin-top: calc(var(--spacing) * 4);
+    margin-bottom: calc(var(--spacing) * 1);
     font-size: var(--text-lg);
     line-height: var(--tw-leading, var(--text-lg--line-height));
     --tw-font-weight: var(--font-weight-bold);

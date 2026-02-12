@@ -31,7 +31,7 @@
 }
 
 @layer base {
-  blockquote, dl, dd, h2, h3, h4, h5, h6, hr, figure, p, pre {
+  blockquote, dl, dd, h2, h3, h4, h5, h6, hr, figure, p, pre, table {
     margin: revert;
   }
 
@@ -148,9 +148,9 @@
     @apply dark:bg-dark dark:text-fg text-black;
   }
   h1 { @apply text-3xl my-5; }
-  h2 { @apply text-2xl my-4; }
-  h3 { @apply text-xl my-2; }
-  h4 { @apply font-bold text-lg my-1; }
+  h2 { @apply text-2xl mt-8 mb-3; }
+  h3 { @apply text-xl mt-6 mb-2; }
+  h4 { @apply font-bold text-lg mt-4 mb-1; }
 
   .list-title {
     @apply mb-1;
