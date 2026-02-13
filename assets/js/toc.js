@@ -30,6 +30,10 @@ function handleTocVisibility() {
   } else {
     toc.style.display = "block";
     tocManuallyOpen = false;
+    var title = document.querySelector(".page-title");
+    if (title) {
+      toc.style.top = title.getBoundingClientRect().top + window.scrollY + "px";
+    }
   }
 }
 
@@ -96,8 +100,10 @@ function handleTocVisibility() {
     function adjustToc() {
       handleTocVisibility();
 
-      $toc.find("a.current").removeClass("current");
-      $toc.find("li > ul").hide();
+      if (!tocManuallyOpen) {
+        $toc.find("a.current").removeClass("current");
+        $toc.find("li > ul").hide();
+      }
 
       onScroll();
     }
