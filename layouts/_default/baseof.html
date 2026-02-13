@@ -5,8 +5,8 @@
   </head>
 
   <body class="flex flex-col min-h-dvh justify-between px-2">
-    {{ partial "nav.html" . }}
-    <main class="container content mt-0 m-auto z-0" role="main">
+    <header class="container m-auto flex flex-col pt-3 gap-3">
+      {{ partial "nav.html" . }}
       <div class="flex items-center">
         <div id="search" class="search-bar grow min-w-0"></div>
         <script>
@@ -24,6 +24,8 @@
         </button>
         {{ end }}
       </div>
+    </header>
+    <main class="container content mt-0 m-auto z-0 grow" role="main">
       {{ block "main" . }} {{ end }}
     </main>
     {{ partial "footer.html" . }} {{ partial "extra_js.html" . }}
