@@ -4,10 +4,11 @@
   itemprop="mainEntity"
   itemscope
   itemtype="http://schema.org/BlogPosting"
+  data-pagefind-body
 >
   <div class="title-container">
     {{ if .Title}}
-    <h1 class="page-title mt-5" itemprop="name">
+    <h1 class="page-title mt-12 mb-4" itemprop="name">
       <a href="{{ .Page.Permalink }}">{{ .Title }}</a>
     </h1>
     {{ end }} {{ if not .Params.notoc }} {{ with .TableOfContents }} {{ . }}
@@ -28,7 +29,23 @@
     itemprop="articleBody"
     id="article-content"
   >
-    {{ partial "headline-hash.html" .Content }}
+    {{ $c := .Content }}
+    {{/* Wrap math in pagefind-ignore (for MathJax), add hidden searchable copy */}}
+    {{ $c = replaceRE `\\\((.+?)\\\)` `<span data-pagefind-ignore>\($1\)</span><b hidden>$1</b>` $c }}
+    {{ $c = replaceRE `(?s)\$\$(.+?)\$\$` `<span data-pagefind-ignore>$$$$${1}$$$$</span><b hidden>${1}</b>` $c }}
+    {{/* Strip \commands from hidden spans (3 passes for nested commands) */}}
+    {{ $c = replaceRE `(<b hidden>[^<\\]*)\\[a-zA-Z]+([^<]*</b>)` `$1$2` $c }}
+    {{ $c = replaceRE `(<b hidden>[^<\\]*)\\[a-zA-Z]+([^<]*</b>)` `$1$2` $c }}
+    {{ $c = replaceRE `(<b hidden>[^<\\]*)\\[a-zA-Z]+([^<]*</b>)` `$1$2` $c }}
+    {{/* Strip braces from hidden spans (4 passes) */}}
+    {{ $c = replaceRE `(<b hidden>[^<{}]*)[{}]([^<]*</b>)` `$1$2` $c }}
+    {{ $c = replaceRE `(<b hidden>[^<{}]*)[{}]([^<]*</b>)` `$1$2` $c }}
+    {{ $c = replaceRE `(<b hidden>[^<{}]*)[{}]([^<]*</b>)` `$1$2` $c }}
+    {{ $c = replaceRE `(<b hidden>[^<{}]*)[{}]([^<]*</b>)` `$1$2` $c }}
+    {{/* Strip sub/superscript markers */}}
+    {{ $c = replaceRE `(<b hidden>[^<_^]*)[_^]([^<]*</b>)` `$1 $2` $c }}
+    {{ $c = replaceRE `(<b hidden>[^<_^]*)[_^]([^<]*</b>)` `$1 $2` $c }}
+    {{ partial "headline-hash.html" $c }}
   </div>
   <hr class="my-5 w-full border-t border-zinc-300 dark:border-fg-muted/30" />
   {{ if or .Params.tags .Params.Date }}{{ partial "taxonomy.html" . }}{{ end }}
