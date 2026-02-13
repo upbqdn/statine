@@ -10,8 +10,12 @@
       <div class="flex items-center">
         <div id="search" class="search-bar grow min-w-0"></div>
         <script>
-          window.addEventListener("DOMContentLoaded", (event) => {
-            new PagefindUI({ element: "#search" });
+          new PagefindUI({
+            element: "#search",
+            showSubResults: true,
+            pageSize: 3,
+            excerptLength: 16,
+            showImages: false,
           });
         </script>
         {{ if and .IsPage (not .Params.notoc) (findRE "<li" .TableOfContents) }}
