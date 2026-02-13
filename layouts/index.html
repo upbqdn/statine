@@ -1,7 +1,5 @@
 {{ define "main" }}
-<br>
-<br>
-<div>
+<div class="mt-12">
     {{ if not (eq (len $.Site.Taxonomies.tags) 0) }}
     {{ $largestFontSize := 2.5 }}
     {{ $smallestFontSize := .8 }}
