@@ -7,7 +7,7 @@
   <body class="flex flex-col min-h-dvh justify-between px-2">
     <header class="container m-auto flex flex-col pt-3 gap-3">
       {{ partial "nav.html" . }}
-      <div class="flex items-center">
+      <div class="search-row">
         <div id="search" class="search-bar grow min-w-0"></div>
         <script>
           new PagefindUI({
@@ -20,7 +20,7 @@
         </script>
         {{ if and .IsPage (not .Params.notoc) (findRE "<li" .TableOfContents) }}
         <button type="button" class="shrink-0 ml-1.5" id="toc-btn" onclick="toggleToc()" aria-label="Toggle Table of Contents">
-          <i class="fa-solid fa-table"></i>
+          <i class="fa-solid fa-bars-staggered fa-lg"></i>
         </button>
         {{ end }}
       </div>
