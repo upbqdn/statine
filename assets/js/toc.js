@@ -52,7 +52,7 @@ function handleTocVisibility() {
       var id = "";
       h.each(function (i, e) {
         e = $(e);
-        if (e.offset().top - 10 <= currentScroll) {
+        if (e.offset().top - 100 <= currentScroll) {
           id = e.attr("id");
         }
       });
