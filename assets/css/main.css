@@ -149,6 +149,7 @@
   figure { @apply sm:mx-6 md:mx-12; }
   figcaption { @apply text-center; }
   table { display: block; overflow-x: auto; margin-inline: auto; width: fit-content; max-width: 100%; }
+  th, td { padding: 0.4em 0.8em; }
   blockquote {
     @apply my-8 pl-4;
     @apply border-l-2 border-zinc-300 dark:border-fg-muted/40;
@@ -216,13 +217,11 @@
       display: block;
       position: fixed;
       left: 50%;
-      top: 0;
       width: 260px;
       margin-left: calc(17rem + 30px);
       overflow-y: auto;
       max-height: 85%;
       padding: 0;
-      @apply my-10;
     }
   }
 }
@@ -257,6 +256,11 @@
   height: var(--search-bar-height);
   display: flex;
   align-items: center;
+}
+@media screen and (min-width: 1280px) {
+  #toc-btn {
+    display: none;
+  }
 }
 #search .pagefind-ui__result-excerpt {
   font-size: 0.9rem;
