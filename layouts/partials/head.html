@@ -57,7 +57,7 @@
 <!-- Style configuration -->
 <style>#TableOfContents li>ul{display:none}@media(max-width:1279px){#TableOfContents{display:none}}</style>
 {{ $style := resources.Get "css/style.css" | resources.Minify }}
-<link rel="stylesheet" href="{{ $style.Permalink }}">
+<link rel="stylesheet" href="{{ $style.RelPermalink }}">
 <link rel="stylesheet" id="code-syntax-theme" href="/css/syntax-dark.css">
 
 <meta name="theme-color" content="#161616">
