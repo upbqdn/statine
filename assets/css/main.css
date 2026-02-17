@@ -116,6 +116,9 @@
   .article-content li:has(mjx-container) {
     width: max-content;
   }
+  .article-content p:has(mjx-container[display="true"]) {
+    overflow-x: auto;
+  }
 
   /* Paragraph indentation (LaTeX-like) */
   .article-content p {
@@ -123,6 +126,7 @@
   }
   .article-content > p:first-child,
   .article-content > blockquote:first-child + p,
+  .article-content > style:first-child + blockquote + p,
   .article-content h1 + p,
   .article-content h2 + p,
   .article-content h3 + p,
@@ -132,7 +136,8 @@
   .article-content .rem > p:first-child,
   .article-content .ex > p:first-child,
   .article-content .pr > p:first-child,
-  .article-content .org-center p {
+  .article-content .org-center p,
+  .article-content blockquote p {
     text-indent: 0;
   }
   mjx-container[display="true"] {
@@ -171,7 +176,7 @@
 
   /* Elements */
   .org-target { scroll-margin-top: 1rem; }
-  mjx-container[display="true"] { overflow-x: auto; }
+  mjx-container[display="true"] { overflow-x: auto; max-width: 100%; }
   hr { @apply border-t-2 border-zinc-300 dark:border-fg-muted/30; }
   dt { font-variant-caps: all-small-caps; @apply font-bold; }
   dd { @apply mb-4 ml-8; }
