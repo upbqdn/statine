@@ -1197,7 +1197,7 @@
   .article-content p {
     text-indent: 1.5em;
   }
-  .article-content > p:first-child, .article-content > blockquote:first-child + p, .article-content > style:first-child + blockquote + p, .article-content h1 + p, .article-content h2 + p, .article-content h3 + p, .article-content h4 + p, .article-content .org-center + p, .article-content .def > p:first-child, .article-content .rem > p:first-child, .article-content .ex > p:first-child, .article-content .pr > p:first-child, .article-content .org-center p {
+  .article-content > p:first-child, .article-content > blockquote:first-child + p, .article-content > style:first-child + blockquote + p, .article-content h1 + p, .article-content h2 + p, .article-content h3 + p, .article-content h4 + p, .article-content .org-center + p, .article-content .def > p:first-child, .article-content .rem > p:first-child, .article-content .ex > p:first-child, .article-content .pr > p:first-child, .article-content .org-center p, .article-content blockquote p {
     text-indent: 0;
   }
   mjx-container[display="true"] {
