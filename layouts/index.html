@@ -5,13 +5,13 @@
     {{ $smallestFontSize := .8 }}
     {{ $max := add (len (index $.Site.Taxonomies.tags.ByCount 0).Pages) 1 }}
     {{ $min := len (index $.Site.Taxonomies.tags.ByCount.Reverse 0).Pages }}
-    <ul class="text-center pl-0">
+    <ul class="flex flex-wrap justify-center gap-2 pl-0">
         {{ range $name, $taxonomy := $.Site.Taxonomies.tags }}
         {{ $count := len $taxonomy.Pages }}
         {{ $weight := div (sub (math.Log $count) (math.Log $min)) (sub (math.Log $max) (math.Log $min)) }}
         {{ $fontSize := (add $smallestFontSize (mul (sub $largestFontSize $smallestFontSize) $weight)) }}
         <li class="list-none inline-block">
-            <a class="inline-block mt-2 mr-2 border-none text-dark dark:text-fg"
+            <a class="inline-block border-none text-dark dark:text-fg"
                 href='{{ urlize $name | absURL }}'>
                 <span class="bg-zinc-100 dark:bg-surface
                              hover:bg-zinc-200 active:bg-zinc-200
