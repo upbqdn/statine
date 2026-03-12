@@ -157,6 +157,11 @@
     list-style-position: inside;
   }
 
+  /* Bibliography */
+  .csl-entry {
+    margin-bottom: 1em;
+  }
+
   /* Links */
   a {
     @apply text-link dark:text-accent border-b border-transparent;

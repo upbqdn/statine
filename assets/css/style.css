@@ -1214,6 +1214,9 @@
     margin-left: 0;
     list-style-position: inside;
   }
+  .csl-entry {
+    margin-bottom: 1em;
+  }
   a {
     border-bottom-style: var(--tw-border-style);
     border-bottom-width: 1px;
