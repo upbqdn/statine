@@ -1209,6 +1209,11 @@
   mjx-container[display="true"] {
     text-indent: 0;
   }
+  .article-content .alg > ol {
+    padding-left: 1.5em;
+    margin-left: 0;
+    list-style-position: inside;
+  }
   a {
     border-bottom-style: var(--tw-border-style);
     border-bottom-width: 1px;

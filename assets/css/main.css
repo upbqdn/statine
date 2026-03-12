@@ -150,6 +150,13 @@
     text-indent: 0;
   }
 
+  /* Algorithm body: align with paragraph text-indent */
+  .article-content .alg > ol {
+    padding-left: 1.5em;
+    margin-left: 0;
+    list-style-position: inside;
+  }
+
   /* Links */
   a {
     @apply text-link dark:text-accent border-b border-transparent;
