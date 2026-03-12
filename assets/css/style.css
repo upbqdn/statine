@@ -1264,6 +1264,10 @@
     }
   }
 }
+li mjx-container[display="true"] {
+  width: calc(100% + 2.5em) !important;
+  margin-left: -2.5em !important;
+}
 #search .pagefind-ui__search-input {
   height: var(--search-bar-height);
   padding: 0 calc(var(--search-bar-height)) 0 calc(var(--search-bar-height));
