@@ -109,11 +109,10 @@
     overflow-wrap: break-word;
     hyphens: auto;
   }
-  .article-content ol,
-  .article-content ul {
+  .article-content .alg ol {
     overflow-x: auto;
   }
-  .article-content li:has(mjx-container) {
+  .article-content .alg li:has(mjx-container) {
     width: max-content;
   }
   .article-content p:has(mjx-container[display="true"]) {
@@ -142,6 +141,7 @@
   .article-content .fig > p:first-child,
   .article-content .tab > p:first-child,
   .article-content .lst > p:first-child,
+  .article-content .prf > p:first-child,
   .article-content .org-center p,
   .article-content blockquote p {
     text-indent: 0;
@@ -150,11 +150,11 @@
     text-indent: 0;
   }
 
-  /* Algorithm body: align with paragraph text-indent */
-  .article-content .alg > ol {
-    padding-left: 1.5em;
+  /* Lists: align with paragraph text-indent */
+  .article-content ol,
+  .article-content ul {
+    padding-left: 2.5em;
     margin-left: 0;
-    list-style-position: inside;
   }
 
   /* Bibliography */
