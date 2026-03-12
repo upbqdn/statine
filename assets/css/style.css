@@ -797,6 +797,9 @@
   .uppercase {
     text-transform: uppercase;
   }
+  .italic {
+    font-style: italic;
+  }
   .outline-2 {
     outline-style: var(--tw-outline-style);
     outline-width: 2px;
@@ -1200,7 +1203,7 @@
   .article-content p {
     text-indent: 1.5em;
   }
-  .article-content > p:first-child, .article-content > blockquote:first-child + p, .article-content > style:first-child + blockquote + p, .article-content h1 + p, .article-content h2 + p, .article-content h3 + p, .article-content h4 + p, .article-content .org-center + p, .article-content .def > p:first-child, .article-content .rem > p:first-child, .article-content .ex > p:first-child, .article-content .pr > p:first-child, .article-content .org-center p, .article-content blockquote p {
+  .article-content > p:first-child, .article-content > blockquote:first-child + p, .article-content > style:first-child + blockquote + p, .article-content h1 + p, .article-content h2 + p, .article-content h3 + p, .article-content h4 + p, .article-content .org-center + p, .article-content .def > p:first-child, .article-content .rem > p:first-child, .article-content .exp > p:first-child, .article-content .prp > p:first-child, .article-content .thm > p:first-child, .article-content .alg p, .article-content .eqn > p:first-child, .article-content .fig > p:first-child, .article-content .tab > p:first-child, .article-content .lst > p:first-child, .article-content .org-center p, .article-content blockquote p {
     text-indent: 0;
   }
   mjx-container[display="true"] {

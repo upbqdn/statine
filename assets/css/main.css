@@ -134,8 +134,14 @@
   .article-content .org-center + p,
   .article-content .def > p:first-child,
   .article-content .rem > p:first-child,
-  .article-content .ex > p:first-child,
-  .article-content .pr > p:first-child,
+  .article-content .exp > p:first-child,
+  .article-content .prp > p:first-child,
+  .article-content .thm > p:first-child,
+  .article-content .alg p,
+  .article-content .eqn > p:first-child,
+  .article-content .fig > p:first-child,
+  .article-content .tab > p:first-child,
+  .article-content .lst > p:first-child,
   .article-content .org-center p,
   .article-content blockquote p {
     text-indent: 0;
