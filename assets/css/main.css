@@ -204,7 +204,9 @@
   table { display: block; overflow-x: auto; margin-inline: auto; width: fit-content; max-width: 100%; }
   th, td { padding: 0.4em 0.8em; }
   blockquote {
-    @apply my-8 pl-4;
+    @apply my-8;
+    margin-left: calc(1.5em - 2px);
+    padding-left: 1em;
     @apply border-l-2 border-zinc-300 dark:border-fg-muted/40;
   }
   #vid { width: 100%; aspect-ratio: 16 / 9; }
