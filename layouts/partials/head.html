@@ -7,24 +7,26 @@
 </style>
 
 <!-- Title -->
-{{- if eq .RelPermalink "/" -}}
+{{- if .IsHome -}}
 <title>{{ .Site.Title }}</title>
 {{- else if .Title -}}
-<title>{{ .Title }}</title>
+<title>{{ .Title }} – {{ .Site.Title }}</title>
 {{- else -}}
-<title>{{ .Section | humanize }} - {{ .Site.Title }}</title>
+<title>{{ .Section | humanize }} – {{ .Site.Title }}</title>
 {{- end -}}
 
 <!-- Description -->
 {{- if .Description -}}
-<meta name="Description" property="description" content="{{ .Description }}">
+<meta name="description" content="{{ .Description }}">
 {{- else if .Summary -}}
-<meta name="Description" property="description" content="{{ .Summary }}">
+<meta name="description" content="{{ .Summary | plainify | htmlUnescape | strings.TrimSpace | truncate 160 }}">
 {{- else if .Title -}}
-<meta name="Description" property="description" content="{{ .Title }}">
+<meta name="description" content="{{ .Title }}">
 {{- else -}}
-<meta name="Description" property="description" content="{{ .Site.Title }}">
+<meta name="description" content="{{ .Site.Title }}">
 {{- end -}}
+
+<link rel="canonical" href="{{ .Permalink }}">
 
 <!-- Favicons -->
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -35,17 +37,13 @@
 <!-- Open Graph -->
 {{ template "_internal/opengraph.html" . }}
 
-<!-- Twitter -->
-{{ if .Site.Params.Twitter.Name }}
-{{ template "_internal/twitter_cards.html" . }}
-{{ end }}
-
 <!-- Keywords -->
-{{- if .Keywords -}}
-<meta property="keywords" content='{{ delimit .Keywords ", " }}'>
+{{- with .Keywords -}}
+<meta name="keywords" content='{{ delimit . ", " }}'>
+{{- else -}}
+{{- with .Params.Tags -}}
+<meta name="keywords" content='{{ delimit (apply . "lower" ".") ", " }}'>
 {{- end -}}
-{{- if .Params.Tags -}}
-<meta property="keywords" content='{{ delimit (apply .Params.Tags "lower" ".") ", " }}'>
 {{- end -}}
 
 <!-- Webmention -->
@@ -60,7 +58,8 @@
 <link rel="stylesheet" href="{{ $style.RelPermalink }}">
 <link rel="stylesheet" id="code-syntax-theme" href="/css/syntax-dark.css">
 
-<meta name="theme-color" content="#161616">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#161616">
 
 <!-- JQuery -->
 <script src='{{ "js/libs/jquery/3.3.1/jquery.slim.min.js" | absURL }}'></script>
@@ -84,7 +83,10 @@
 <!-- Iosevka -->
 <link href="https://iosevka-webfonts.github.io/iosevka/iosevka.css" rel="stylesheet" />
 
-<!-- RSS -->
-{{ range .AlternativeOutputFormats -}}
+<!-- RSS: the site feed on every page, plus the page's own feed where one exists -->
+{{ with .Site.Home.OutputFormats.Get "rss" -}}
     {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
 {{ end -}}
+{{ if not .IsHome }}{{ with .OutputFormats.Get "rss" -}}
+    {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
+{{ end -}}{{ end -}}
