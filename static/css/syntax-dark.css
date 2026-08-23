@@ -8,15 +8,9 @@
   color: #ffffff;
   background-color: #1d1f21;
 }
-/* Other */
-.chroma .x {
-}
 /* Error */
 .chroma .err {
   color: #960050;
-}
-/* CodeLine */
-.chroma .cl {
 }
 /* LineLink */
 .chroma .lnlinks {
@@ -40,7 +34,7 @@
 }
 /* LineHighlight */
 .chroma .hl {
-  background-color: #ffffcc;
+  background-color: rgba(255, 255, 128, 0.12);
 }
 /* LineNumbersTable */
 .chroma .lnt {
@@ -92,12 +86,6 @@
 .chroma .kt {
   color: #fc5fa3;
 }
-/* Name */
-.chroma .n {
-}
-/* NameAttribute */
-.chroma .na {
-}
 /* NameBuiltin */
 .chroma .nb {
   color: #d0a8ff;
@@ -110,61 +98,13 @@
 .chroma .nc {
   color: #5dd8ff;
 }
-/* NameConstant */
-.chroma .no {
-}
-/* NameDecorator */
-.chroma .nd {
-}
-/* NameEntity */
-.chroma .ni {
-}
-/* NameException */
-.chroma .ne {
-}
 /* NameFunction */
 .chroma .nf {
   color: #41a1c0;
 }
-/* NameFunctionMagic */
-.chroma .fm {
-}
-/* NameLabel */
-.chroma .nl {
-}
-/* NameNamespace */
-.chroma .nn {
-}
-/* NameOther */
-.chroma .nx {
-}
-/* NameProperty */
-.chroma .py {
-}
-/* NameTag */
-.chroma .nt {
-}
 /* NameVariable */
 .chroma .nv {
   color: #41a1c0;
-}
-/* NameVariableClass */
-.chroma .vc {
-}
-/* NameVariableGlobal */
-.chroma .vg {
-}
-/* NameVariableInstance */
-.chroma .vi {
-}
-/* NameVariableMagic */
-.chroma .vm {
-}
-/* Literal */
-.chroma .l {
-}
-/* LiteralDate */
-.chroma .ld {
 }
 /* LiteralString */
 .chroma .s {
@@ -201,9 +141,6 @@
 /* LiteralStringHeredoc */
 .chroma .sh {
   color: #fc6a5d;
-}
-/* LiteralStringInterpol */
-.chroma .si {
 }
 /* LiteralStringOther */
 .chroma .sx {
@@ -249,15 +186,6 @@
 .chroma .mo {
   color: #d0bf69;
 }
-/* Operator */
-.chroma .o {
-}
-/* OperatorWord */
-.chroma .ow {
-}
-/* Punctuation */
-.chroma .p {
-}
 /* Comment */
 .chroma .c {
   color: #6c7986;
@@ -286,43 +214,4 @@
 /* CommentPreprocFile */
 .chroma .cpf {
   color: #fd8f3f;
-}
-/* Generic */
-.chroma .g {
-}
-/* GenericDeleted */
-.chroma .gd {
-}
-/* GenericEmph */
-.chroma .ge {
-}
-/* GenericError */
-.chroma .gr {
-}
-/* GenericHeading */
-.chroma .gh {
-}
-/* GenericInserted */
-.chroma .gi {
-}
-/* GenericOutput */
-.chroma .go {
-}
-/* GenericPrompt */
-.chroma .gp {
-}
-/* GenericStrong */
-.chroma .gs {
-}
-/* GenericSubheading */
-.chroma .gu {
-}
-/* GenericTraceback */
-.chroma .gt {
-}
-/* GenericUnderline */
-.chroma .gl {
-}
-/* TextWhitespace */
-.chroma .w {
 }

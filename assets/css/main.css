@@ -9,8 +9,9 @@
   src: url('/fonts/EBGaramond.woff2') format('woff2');
 }
 
+/* Core palette. The anti-FOUC inline style in partials/head.html duplicates
+   --color-dark and --color-fg as literals; keep them in sync. */
 @theme {
-  --color-tp-black: rgba(0, 0, 0, 0.8);
   --color-dark: #161616;
   --color-surface: #262626;
   --color-fg: #f4f4f4;
@@ -20,8 +21,7 @@
   --color-link-hover: #0043ce;
   --color-accent: #78a9ff;
   --color-accent-hover: #a6c8ff;
-  --font-sans: "EB Garamond";
-  --grid-cols-list-item: 0.6fr 3fr auto 1fr;
+  --font-sans: "EB Garamond", Garamond, Georgia, "Times New Roman", serif;
 }
 
 @layer utilities {
@@ -44,14 +44,14 @@
 
   /* Typography */
   html {
-    font-size: 15pt;
+    font-size: 125%; /* 20px default, scales with the user's font-size preference */
     overflow-x: hidden;
   }
   body {
     line-height: 1.5;
     @apply dark:bg-dark dark:text-fg text-black;
-    --pagefind-ui-primary: #0f62fe;
-    --pagefind-ui-text: #161616;
+    --pagefind-ui-primary: var(--color-link);
+    --pagefind-ui-text: var(--color-dark);
     --pagefind-ui-background: #ffffff;
     --pagefind-ui-border: #d4d4d8;
     --pagefind-ui-tag: #eeeeee;
@@ -60,18 +60,9 @@
     --pagefind-ui-border-radius: 9999px;
     --pagefind-ui-image-border-radius: 4px;
     --pagefind-ui-image-box-ratio: 3 / 2;
-    --pagefind-ui-font: "EB Garamond";
+    --pagefind-ui-font: var(--font-sans);
     --search-bar-height: 2.25rem;
     --search-icon-size: 1rem;
-  }
-  @media (prefers-color-scheme: dark) {
-    body {
-      --pagefind-ui-text: #f4f4f4;
-      --pagefind-ui-background: #161616;
-      --pagefind-ui-border: rgba(198, 198, 198, 0.3);
-      --pagefind-ui-primary: #78a9ff;
-      --pagefind-ui-tag: #333;
-    }
   }
 
   h1 { @apply text-3xl my-5; }
@@ -173,7 +164,8 @@
   a:hover svg path {
     @apply fill-link-hover dark:fill-accent-hover;
   }
-  a:focus-visible {
+  a:focus-visible,
+  button:focus-visible {
     @apply outline-2 outline-offset-2 outline-link dark:outline-accent rounded-sm;
   }
 
@@ -262,7 +254,7 @@
     align-items: center;
     justify-content: center;
     width: 44px;
-    height: 44px;
+    height: var(--search-bar-height);
     font-size: 15px;
     @apply text-fg-secondary dark:text-fg-muted rounded-sm
            bg-zinc-100 dark:bg-surface
@@ -316,16 +308,6 @@ li mjx-container[display="true"] { width: calc(100% + 2.5em) !important; margin-
   display: flex;
   align-items: start;
 }
-#toc-btn {
-  height: var(--search-bar-height);
-  display: flex;
-  align-items: center;
-}
-@media screen and (min-width: 1280px) {
-  #toc-btn {
-    display: none;
-  }
-}
 #search .pagefind-ui__result-excerpt {
   font-size: 0.9rem;
 }
@@ -336,6 +318,13 @@ li mjx-container[display="true"] { width: calc(100% + 2.5em) !important; margin-
   color: var(--color-link-hover);
 }
 @media (prefers-color-scheme: dark) {
+  body {
+    --pagefind-ui-text: var(--color-fg);
+    --pagefind-ui-background: var(--color-dark);
+    --pagefind-ui-border: color-mix(in srgb, var(--color-fg-muted) 30%, transparent);
+    --pagefind-ui-primary: var(--color-accent);
+    --pagefind-ui-tag: #333;
+  }
   #search .pagefind-ui__result-link {
     color: var(--color-accent);
   }
