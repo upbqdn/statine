@@ -191,6 +191,17 @@
   }
 }
 @layer utilities {
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border-width: 0;
+  }
   .z-0 {
     z-index: 0;
   }
@@ -220,6 +231,9 @@
   }
   .mx-1\.5 {
     margin-inline: calc(var(--spacing) * 1.5);
+  }
+  .my-0 {
+    margin-block: calc(var(--spacing) * 0);
   }
   .my-5 {
     margin-block: calc(var(--spacing) * 5);
@@ -398,6 +412,10 @@
     font-size: var(--text-sm);
     line-height: var(--tw-leading, var(--text-sm--line-height));
   }
+  .text-xl {
+    font-size: var(--text-xl);
+    line-height: var(--tw-leading, var(--text-xl--line-height));
+  }
   .leading-6 {
     --tw-leading: calc(var(--spacing) * 6);
     line-height: calc(var(--spacing) * 6);
@@ -421,6 +439,12 @@
   }
   .text-fg-secondary {
     color: var(--color-fg-secondary);
+  }
+  .italic {
+    font-style: italic;
+  }
+  .filter {
+    filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
   }
   .transition-colors {
     transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
@@ -450,6 +474,58 @@
       @media (hover: hover) {
         background-color: var(--color-zinc-200);
       }
+    }
+  }
+  .focus\:not-sr-only {
+    &:focus {
+      position: static;
+      width: auto;
+      height: auto;
+      padding: 0;
+      margin: 0;
+      overflow: visible;
+      clip-path: none;
+      white-space: normal;
+    }
+  }
+  .focus\:absolute {
+    &:focus {
+      position: absolute;
+    }
+  }
+  .focus\:top-2 {
+    &:focus {
+      top: calc(var(--spacing) * 2);
+    }
+  }
+  .focus\:left-2 {
+    &:focus {
+      left: calc(var(--spacing) * 2);
+    }
+  }
+  .focus\:z-50 {
+    &:focus {
+      z-index: 50;
+    }
+  }
+  .focus\:rounded-sm {
+    &:focus {
+      border-radius: var(--radius-sm);
+    }
+  }
+  .focus\:bg-zinc-100 {
+    &:focus {
+      background-color: var(--color-zinc-100);
+    }
+  }
+  .focus\:px-2 {
+    &:focus {
+      padding-inline: calc(var(--spacing) * 2);
+    }
+  }
+  .focus\:py-1 {
+    &:focus {
+      padding-block: calc(var(--spacing) * 1);
     }
   }
   .active\:border-zinc-500 {
@@ -520,6 +596,13 @@
         @media (hover: hover) {
           background-color: var(--color-surface);
         }
+      }
+    }
+  }
+  .dark\:focus\:bg-surface {
+    @media (prefers-color-scheme: dark) {
+      &:focus {
+        background-color: var(--color-surface);
       }
     }
   }
@@ -1016,15 +1099,6 @@ li mjx-container[display="true"] {
   syntax: "*";
   inherits: false;
 }
-@property --tw-duration {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-outline-style {
-  syntax: "*";
-  inherits: false;
-  initial-value: solid;
-}
 @property --tw-blur {
   syntax: "*";
   inherits: false;
@@ -1078,14 +1152,21 @@ li mjx-container[display="true"] {
   syntax: "*";
   inherits: false;
 }
+@property --tw-duration {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-outline-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
+}
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
       --tw-border-style: solid;
       --tw-leading: initial;
       --tw-font-weight: initial;
-      --tw-duration: initial;
-      --tw-outline-style: solid;
       --tw-blur: initial;
       --tw-brightness: initial;
       --tw-contrast: initial;
@@ -1099,6 +1180,8 @@ li mjx-container[display="true"] {
       --tw-drop-shadow-color: initial;
       --tw-drop-shadow-alpha: 100%;
       --tw-drop-shadow-size: initial;
+      --tw-duration: initial;
+      --tw-outline-style: solid;
     }
   }
 }

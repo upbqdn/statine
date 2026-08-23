@@ -5,10 +5,15 @@
   </head>
 
   <body class="flex flex-col min-h-dvh justify-between px-2">
+    <a href="#main-content"
+       class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50
+              focus:bg-zinc-100 dark:focus:bg-surface focus:px-2 focus:py-1 focus:rounded-sm">
+      Skip to content
+    </a>
     <header class="container m-auto flex flex-col pt-3 gap-3">
       {{ partial "nav.html" . }}
       <div class="search-row">
-        <div id="search" class="search-bar grow min-w-0"></div>
+        <div id="search" class="search-bar grow min-w-0" role="search" aria-label="Site search"></div>
         <script>
           new PagefindUI({
             element: "#search",
@@ -25,7 +30,7 @@
         {{ end }}
       </div>
     </header>
-    <main class="container content mt-0 m-auto z-0 grow" role="main">
+    <main id="main-content" class="container content mt-0 m-auto z-0 grow">
       {{ block "main" . }} {{ end }}
     </main>
     {{ partial "footer.html" . }} {{ partial "extra_js.html" . }}

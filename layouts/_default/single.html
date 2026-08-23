@@ -19,11 +19,9 @@
     {{ replace .TableOfContents `<nav id="TableOfContents">` `<nav id="TableOfContents" data-pagefind-ignore>` | safeHTML }}
     {{ end }}
     {{ if .Params.Headline }}
-    <b
-      ><i itemprop="headline" class="article-headline text-lg p-summary">
-        {{ .Params.Headline }}
-      </i></b
-    >
+    <p itemprop="headline" class="font-bold italic article-headline text-lg p-summary my-0">
+      {{ .Params.Headline }}
+    </p>
     {{ end }}
   </div>
   <div

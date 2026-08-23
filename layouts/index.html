@@ -1,23 +1,17 @@
 {{ define "main" }}
+<h1 class="sr-only">{{ .Site.Title }}</h1>
 <div class="mt-12">
     {{ if not (eq (len $.Site.Taxonomies.tags) 0) }}
     <ul class="flex flex-wrap justify-center gap-2 pl-0">
         {{ range $name, $taxonomy := $.Site.Taxonomies.tags }}
-        {{ $count := len $taxonomy.Pages }}
         <li class="list-none inline-block">
-            <a class="inline-block border-none text-dark dark:text-fg"
-                href='{{ (site.GetPage (printf "/tags/%s" (urlize $name))).Permalink }}'>
-                <span class="bg-zinc-100 dark:bg-surface
-                             hover:bg-zinc-200 active:bg-zinc-200
-                             dark:hover:bg-fg-muted/20 dark:active:bg-fg-muted/20
-                             border border-zinc-300 dark:border-fg-muted/30
-                             hover:border-zinc-500 active:border-zinc-500
-                             dark:hover:border-fg-muted/50 dark:active:border-fg-muted/50
-                             px-1 rounded-sm transition-colors duration-100"
-                    style="font-size: 1.1rem;">
-                    {{ $name }}<sup style="font-size: 0.75rem;">{{ $count }}</sup>
-                </span>
-            </a>
+            {{ partial "tag-chip.html" (dict
+                "url" (site.GetPage (printf "/tags/%s" (urlize $name))).Permalink
+                "name" $name
+                "count" (len $taxonomy.Pages)
+                "link_class" "inline-block"
+                "span_class" "px-1"
+                "style" "font-size: 1.1rem;") }}
         </li>
         {{ end }}
     </ul>

@@ -1,4 +1,5 @@
 {{ define "main" }}
+<h1 class="sr-only">{{ .Title }}</h1>
 <br>
 <div>
     {{ if not (eq (len $.Site.Taxonomies.tags) 0) }}
