@@ -55,6 +55,7 @@
 {{ end }}
 
 <!-- Style configuration -->
+<link rel="preload" href="/fonts/EBGaramond.woff2" as="font" type="font/woff2" crossorigin>
 <style>#TableOfContents li>ul{display:none}@media(max-width:1279px){#TableOfContents{display:none}}</style>
 {{ $style := resources.Get "css/style.css" | resources.Minify }}
 <link rel="stylesheet" href="{{ $style.RelPermalink }}">
@@ -77,11 +78,6 @@
 
 <!-- MathJax -->
 {{ partial "mathjax.html" . }}
-
-<!-- Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <!-- Iosevka -->
 <link href="https://iosevka-webfonts.github.io/iosevka/iosevka.css" rel="stylesheet" />

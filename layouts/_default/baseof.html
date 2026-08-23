@@ -29,7 +29,10 @@
         </script>
         {{ if and .IsPage (not .Params.notoc) (findRE "<li" .TableOfContents) }}
         <button type="button" class="shrink-0 ml-1.5" id="toc-btn" onclick="toggleToc()" aria-label="Toggle Table of Contents">
-          <i class="fa-solid fa-bars-staggered fa-lg"></i>
+          <svg class="icon icon-lg" viewBox="0 0 512 512" aria-hidden="true" focusable="false">
+            <!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. -->
+            <path fill="currentColor" d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM64 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L96 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z"/>
+          </svg>
         </button>
         {{ end }}
       </div>

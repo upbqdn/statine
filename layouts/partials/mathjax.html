@@ -1,10 +1,21 @@
+{{- /* Load MathJax only where math exists. Override per page with `math = true/false`
+     in front matter. The sniff covers this site's delimiters: \( \), \[ \], $$. */ -}}
+{{- $sniff := and .IsPage (or (in .RawContent "\\(") (in .RawContent "\\[") (in .RawContent "$$")) -}}
+{{- $math := $sniff -}}
+{{- if isset .Params "math" }}{{ $math = .Params.math }}{{ end -}}
+{{- if $math }}
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <!-- https://github.com/mathjax/MathJax/issues/1988#issuecomment-384978927
      Use plain Javascript to prevent the use of window.eval(). Then
      'unsafe-eval' won't be needed to be added to script-src CSP.
      Also move the mathjax config to a separate file from the inline script so
      that 'unsafe-inline can also be removed from script-src CSP.
--->
+     The config script stays synchronous so it always runs before the async
+     MathJax script below. -->
 <script src="{{ "js/mathjax-config.js" | absURL }}"></script>
 
-<!-- Use MathJax 3 for faster loading -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"
+        id="MathJax-script" async
+        integrity="sha384-AHAnt9ZhGeHIrydA1Kp1L7FN+2UosbF7RQg6C+9Is/a7kDpQ1684C2iH2VWil6r4"
+        crossorigin="anonymous"></script>
+{{- end }}

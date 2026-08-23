@@ -169,6 +169,17 @@
     @apply outline-2 outline-offset-2 outline-link dark:outline-accent rounded-sm;
   }
 
+  /* Inline SVG icons; sized like the Font Awesome webfont glyphs they replaced. */
+  .icon {
+    display: inline-block;
+    height: 1em;
+    width: auto;
+    vertical-align: -0.125em;
+  }
+  .icon-lg {
+    height: 1.25em;
+  }
+
   /* Code */
   pre { @apply text-sm; }
   code {

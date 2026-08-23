@@ -812,6 +812,15 @@
       outline-color: var(--color-accent);
     }
   }
+  .icon {
+    display: inline-block;
+    height: 1em;
+    width: auto;
+    vertical-align: -0.125em;
+  }
+  .icon-lg {
+    height: 1.25em;
+  }
   pre {
     font-size: var(--text-sm);
     line-height: var(--tw-leading, var(--text-sm--line-height));
