@@ -1,2 +1,3 @@
 .agent-shell
 .playwright-mcp
+node_modules/

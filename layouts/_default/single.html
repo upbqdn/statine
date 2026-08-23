@@ -18,10 +18,6 @@
         {{ .Params.Headline }}
       </i></b
     >
-    {{ end }} {{ if .Params.Readingtime }}
-    <div>
-      Reading time: {{ math.Round (div (countwords .Content) 220.0) }} minutes.
-    </div>
     {{ end }}
   </div>
   <div
@@ -49,21 +45,6 @@
   </div>
   <hr class="my-5 w-full border-t border-zinc-300 dark:border-fg-muted/30" />
   {{ if or .Params.tags .Params.Date }}{{ partial "taxonomy.html" . }}{{ end }}
-  {{ if .Params.references }}
-  <hr />
-  <div class="mb-8">
-    <h3>References</h3>
-    <div class="references-list">
-      <ol>
-        {{ range $elem_index, $elem_val := .Params.references }}
-        <li id="{{ $elem_val.id }}">
-          <b>{{$elem_val.authors}}</b>. {{$elem_val.text}}
-        </li>
-        {{ end }}
-      </ol>
-    </div>
-  </div>
-  {{ end }}
   <div>
     <script>
       var remark_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";

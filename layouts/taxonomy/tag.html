@@ -4,12 +4,8 @@
         <a href="{{ .Page.Permalink }}">{{ .Title }}</a>
     </h1>
     <hr>
-    {{ range .RegularPages.GroupBy "Section" }}
-    <!-- <h2>{{ .Key |humanize }}</h2> -->
-    {{ range .Pages }}
+    {{ range .RegularPages }}
     {{ partial "list-item.html" . }}
-    {{ end }}
-    <!-- <hr> -->
     {{ end }}
 </div>
 {{ end }}

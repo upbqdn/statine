@@ -9,7 +9,7 @@ demosite = "https://marek.onl/"
 
 tags = ["blog", "minimal", "personal", "responsive", "dark"]
 features = ["blog", "taxonomies", "privacy", "dark"]
-min_version = 0.25
+min_version = "0.146.0"
 
 [author]
   name = "Marek"

@@ -1,15 +1,13 @@
 {
-  "name": "Tailwind build",
-  "description": "description",
+  "name": "statine",
+  "description": "Tailwind CSS build for the Statine Hugo theme",
   "version": "1.0.0",
-  "author": "Hugo Cisneros <hmj.cisneros@gmail.com>",
+  "author": "Marek",
   "license": "MIT",
-  "main": "",
   "scripts": {
-    "build-tw": "npx @tailwindcss/cli -i ./assets/css/main.css -o ./assets/css/style.css"
+    "build-tw": "tailwindcss -i ./assets/css/main.css -o ./assets/css/style.css"
   },
   "devDependencies": {
-    "@tailwindcss/cli": "^4.1.18",
-    "tailwindcss": "^4.1.18"
+    "@tailwindcss/cli": "^4.1.18"
   }
 }

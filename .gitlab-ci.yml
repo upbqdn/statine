@@ -11,3 +11,10 @@ sast:
   stage: test
 include:
 - template: Security/SAST.gitlab-ci.yml
+style-css-fresh:
+  stage: test
+  image: node:22
+  script:
+  - npm ci
+  - npm run build-tw
+  - git diff --exit-code assets/css/style.css
