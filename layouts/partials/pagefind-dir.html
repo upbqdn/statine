@@ -1,0 +1,12 @@
+{{- /* Directory holding the pagefind bundle, relative to the site root.
+
+Deploys set HUGO_PAGEFIND_VERSION so the bundle URL changes with the pagefind
+release: the client and the index it reads are a matched pair, and a versioned
+URL keeps a cached client from ever meeting an index from another release.
+Unset (a bare `hugo` or `hugo server`) means the plain directory a bare
+`pagefind --site public` writes. */ -}}
+{{- with getenv "HUGO_PAGEFIND_VERSION" -}}
+pagefind-{{ . }}
+{{- else -}}
+pagefind
+{{- end -}}

@@ -69,8 +69,9 @@
 <script>{{ $initialJS.Content | safeJS }}</script>
 
 <!-- Pagefind -->
-<link href="/pagefind/pagefind-ui.css" rel="stylesheet">
-<script src="/pagefind/pagefind-ui.js" defer></script>
+{{ $pagefind := partialCached "pagefind-dir.html" . }}
+<link href="/{{ $pagefind }}/pagefind-ui.css" rel="stylesheet">
+<script src="/{{ $pagefind }}/pagefind-ui.js" defer></script>
 
 <!-- MathJax -->
 {{ partial "mathjax.html" . }}
