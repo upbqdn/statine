@@ -317,6 +317,11 @@
   .gap-y-2 {
     row-gap: calc(var(--spacing) * 2);
   }
+  .truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
   .rounded-sm {
     border-radius: var(--radius-sm);
   }

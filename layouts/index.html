@@ -6,7 +6,7 @@
         {{ $count := len $taxonomy.Pages }}
         <li class="list-none inline-block">
             <a class="inline-block border-none text-dark dark:text-fg"
-                href='{{ urlize $name | absURL }}'>
+                href='{{ (site.GetPage (printf "/tags/%s" (urlize $name))).Permalink }}'>
                 <span class="bg-zinc-100 dark:bg-surface
                              hover:bg-zinc-200 active:bg-zinc-200
                              dark:hover:bg-fg-muted/20 dark:active:bg-fg-muted/20

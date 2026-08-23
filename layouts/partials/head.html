@@ -20,6 +20,8 @@
 <meta name="description" content="{{ .Description }}">
 {{- else if .Summary -}}
 <meta name="description" content="{{ .Summary | plainify | htmlUnescape | strings.TrimSpace | truncate 160 }}">
+{{- else if .Site.Params.description -}}
+<meta name="description" content="{{ .Site.Params.description }}">
 {{- else if .Title -}}
 <meta name="description" content="{{ .Title }}">
 {{- else -}}

@@ -2,7 +2,7 @@
     {{ if .Params.tags }}
     {{ range $index, $tag := .Params.tags }}
     <a class="mr-2 border-none text-dark dark:text-fg"
-       href='{{ urlize $tag | absURL }}'>
+       href='{{ (site.GetPage (printf "/tags/%s" (urlize $tag))).Permalink }}'>
         <span class="bg-zinc-100 dark:bg-surface
                      hover:bg-zinc-200 active:bg-zinc-200
                      dark:hover:bg-fg-muted/20 dark:active:bg-fg-muted/20
@@ -18,7 +18,7 @@
     {{ end }}
     {{ if .Params.Date }}
     <div class="ml-auto text-fg-secondary dark:text-fg-muted">
-        {{ .Date.Format "Jan 2, 2006" }}
+        <time datetime="{{ .Date.Format "2006-01-02" }}" itemprop="datePublished">{{ .Date.Format "Jan 2, 2006" }}</time>
     </div>
     {{ end }}
 </div>

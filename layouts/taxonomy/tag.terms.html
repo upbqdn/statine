@@ -12,7 +12,7 @@
         {{ $weight := div (sub (math.Log $count) (math.Log $min)) (sub (math.Log $max) (math.Log $min)) }}
         {{ $fontSize := (add $smallestFontSize (mul (sub $largestFontSize $smallestFontSize) $weight)) }}
         <li class="list-none inline-block pr-2 pb-2">
-            <a href="{{ urlize $name | absURL }}"
+            <a href="{{ (site.GetPage (printf "/tags/%s" (urlize $name))).Permalink }}"
                class="font-bold text-dark dark:text-fg"
                style="font-size:{{ $fontSize }}rem">
                 {{ $name }}

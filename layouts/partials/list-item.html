@@ -1,4 +1,4 @@
-<div class="sm:mx-8">
+<div class="sm:mx-8" itemscope itemtype="https://schema.org/BlogPosting">
     <a href="{{ .Permalink }}" itemprop="url" class="block border-b
              text-dark dark:text-fg
              border-zinc-300 dark:border-fg-muted/30
@@ -8,9 +8,9 @@
         <h3 itemprop="name" class="border-none pb-0 m-0">{{ .Title }}</h3>
         {{ if .Params.Date }}
         <div class="list-item-date text-right text-sm leading-[1.75rem] text-fg-secondary dark:text-fg-muted">
-            {{ .Date.Format "Jan 2, 2006" }}
+            <time datetime="{{ .Date.Format "2006-01-02" }}" itemprop="datePublished">{{ .Date.Format "Jan 2, 2006" }}</time>
         </div>
         {{ end }}
     </a>
-    <meta itemprop="author" content="{{ .Site.Params.authorName }}">
+    <meta itemprop="author" content="{{ site.Params.author.name }}">
 </div>

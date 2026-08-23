@@ -1,1 +1,1 @@
-{{ . | replaceRE "(<h[2-9] id=\"([^\"]+)\"+>)(.+)(</h[2-9]+>)" `${1}<a class="headline-hash" href="#${2}">${3}</a> ${4}` | safeHTML }}
+{{ . | replaceRE `(<h[2-6][^>]*\bid="([^"]+)"[^>]*>)(.+)(</h[2-6]>)` `${1}<a class="headline-hash" href="#${2}">${3}</a> ${4}` | safeHTML }}
