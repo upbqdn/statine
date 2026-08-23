@@ -1,6 +1,7 @@
 {{ define "main" }}
 <article
   class="article h-entry body"
+  data-toc-scope
   itemscope
   itemtype="https://schema.org/BlogPosting"
   data-pagefind-body
@@ -11,7 +12,7 @@
   {{ if not .Lastmod.IsZero }}<meta itemprop="dateModified" content="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}">{{ end }}
   <div class="title-container">
     {{ if .Title}}
-    <h1 class="page-title mt-7 mb-4" itemprop="name">
+    <h1 class="page-title mt-7 mb-4" itemprop="name" data-toc-anchor>
       <a href="{{ .Page.Permalink }}">{{ .Title }}</a>
     </h1>
     {{ end }}

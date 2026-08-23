@@ -644,9 +644,14 @@
   font-display: swap;
   src: url('/fonts/EBGaramond.woff2') format('woff2');
 }
+:root {
+  --page-max-width: 34rem;
+  --toc-width: 260px;
+  --toc-gap: 30px;
+}
 @layer utilities {
   .container {
-    max-width: 34rem;
+    max-width: var(--page-max-width);
     margin-inline: auto;
   }
 }
@@ -939,7 +944,17 @@
     }
   }
   #TableOfContents {
+    display: none;
     margin-block: calc(var(--spacing) * 5);
+  }
+  #TableOfContents.toc-open {
+    display: block;
+  }
+  #TableOfContents li > ul {
+    display: none;
+  }
+  #TableOfContents li > ul.expanded, #TableOfContents.toc-open li > ul {
+    display: block;
   }
   #TableOfContents ul {
     padding-left: 1rem;
@@ -1022,8 +1037,8 @@
       display: block;
       position: fixed;
       left: 50%;
-      width: 260px;
-      margin-left: calc(17rem + 30px);
+      width: var(--toc-width);
+      margin-left: calc(var(--page-max-width) / 2 + var(--toc-gap));
       overflow-y: auto;
       max-height: 85%;
       padding: 0;

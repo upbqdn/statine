@@ -24,9 +24,16 @@
   --font-sans: "EB Garamond", Garamond, Georgia, "Times New Roman", serif;
 }
 
+:root {
+  /* Single source for the content column width; the ToC offset derives from it. */
+  --page-max-width: 34rem;
+  --toc-width: 260px;
+  --toc-gap: 30px;
+}
+
 @layer utilities {
   .container {
-    max-width: 34rem;
+    max-width: var(--page-max-width);
     margin-inline: auto;
   }
 }
@@ -227,9 +234,22 @@
     @apply dark:bg-dark;
   }
 
-  /* Table of Contents */
+  /* Table of Contents. Hidden below the desktop breakpoint unless opened via
+     the button (.toc-open); fixed beside the content column on desktop.
+     Scroll-spy expands the branch of the current section (.expanded). */
   #TableOfContents {
+    display: none;
     @apply my-5;
+  }
+  #TableOfContents.toc-open {
+    display: block;
+  }
+  #TableOfContents li > ul {
+    display: none;
+  }
+  #TableOfContents li > ul.expanded,
+  #TableOfContents.toc-open li > ul {
+    display: block;
   }
   #TableOfContents ul {
     padding-left: 1rem;
@@ -273,6 +293,7 @@
            active:bg-zinc-200 dark:active:bg-fg-muted/20;
   }
 
+  /* THE desktop breakpoint — keep in sync with DESKTOP in assets/js/toc.js. */
   @media screen and (min-width: 1280px) {
     #toc-btn {
       display: none;
@@ -281,8 +302,8 @@
       display: block;
       position: fixed;
       left: 50%;
-      width: 260px;
-      margin-left: calc(17rem + 30px);
+      width: var(--toc-width);
+      margin-left: calc(var(--page-max-width) / 2 + var(--toc-gap));
       overflow-y: auto;
       max-height: 85%;
       padding: 0;

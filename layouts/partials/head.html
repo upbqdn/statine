@@ -56,7 +56,6 @@
 
 <!-- Style configuration -->
 <link rel="preload" href="/fonts/EBGaramond.woff2" as="font" type="font/woff2" crossorigin>
-<style>#TableOfContents li>ul{display:none}@media(max-width:1279px){#TableOfContents{display:none}}</style>
 {{ $style := resources.Get "css/style.css" | resources.Minify }}
 <link rel="stylesheet" href="{{ $style.RelPermalink }}">
 <link rel="stylesheet" href="/css/syntax-light.css" media="(prefers-color-scheme: light)">
@@ -64,9 +63,6 @@
 
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#161616">
-
-<!-- JQuery -->
-<script src='{{ "js/libs/jquery/3.3.1/jquery.slim.min.js" | absURL }}'></script>
 
 <!--Initial JS -->
 {{ $initialJS := resources.Get "js/initial.js" | resources.Minify }}
