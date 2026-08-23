@@ -300,9 +300,6 @@
   .my-5 {
     margin-block: calc(var(--spacing) * 5);
   }
-  .-mt-\[1\.75rem\] {
-    margin-top: calc(1.75rem * -1);
-  }
   .mt-0 {
     margin-top: calc(var(--spacing) * 0);
   }
@@ -380,9 +377,6 @@
   }
   .h-5 {
     height: calc(var(--spacing) * 5);
-  }
-  .min-h-\[3\.5rem\] {
-    min-height: 3.5rem;
   }
   .min-h-dvh {
     min-height: 100dvh;

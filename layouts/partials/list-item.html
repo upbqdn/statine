@@ -5,9 +5,9 @@
              hover:bg-zinc-100 dark:hover:bg-surface
              active:bg-zinc-200 dark:active:bg-fg-muted/10
              rounded-sm transition-colors duration-100 py-2">
-        <h3 itemprop="name" class="border-none pb-0 m-0 min-h-[3.5rem]">{{ .Title }}</h3>
+        <h3 itemprop="name" class="border-none pb-0 m-0">{{ .Title }}</h3>
         {{ if .Params.Date }}
-        <div class="list-item-date text-right text-sm -mt-[1.75rem] leading-[1.75rem] text-fg-secondary dark:text-fg-muted">
+        <div class="list-item-date text-right text-sm leading-[1.75rem] text-fg-secondary dark:text-fg-muted">
             {{ .Date.Format "Jan 2, 2006" }}
         </div>
         {{ end }}
