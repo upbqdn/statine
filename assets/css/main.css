@@ -9,6 +9,25 @@
   src: url('/fonts/EBGaramond.woff2') format('woff2');
 }
 
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: italic;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url('/fonts/EBGaramond-Italic.woff2') format('woff2');
+}
+
+/* Iosevka (SIL OFL 1.1), self-hosted; the extended (125%-wide) face, subsetted
+   to Latin plus punctuation, arrows, and box drawing. */
+@font-face {
+  font-family: 'Iosevka Web';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: expanded;
+  font-display: swap;
+  src: url('/fonts/IosevkaExtended.woff2') format('woff2');
+}
+
 /* Core palette. The anti-FOUC inline style in partials/head.html duplicates
    --color-dark and --color-fg as literals; keep them in sync. */
 @theme {
@@ -190,7 +209,7 @@
   /* Code */
   pre { @apply text-sm; }
   code {
-    font-family: "Iosevka Web" !important;
+    font-family: "Iosevka Web", ui-monospace, "Cascadia Code", Consolas, monospace !important;
     font-stretch: expanded;
     @apply text-xs;
   }

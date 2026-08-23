@@ -75,9 +75,6 @@
 <!-- MathJax -->
 {{ partial "mathjax.html" . }}
 
-<!-- Iosevka -->
-<link href="https://iosevka-webfonts.github.io/iosevka/iosevka.css" rel="stylesheet" />
-
 <!-- RSS: the site feed on every page, plus the page's own feed where one exists -->
 {{ with .Site.Home.OutputFormats.Get "rss" -}}
     {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}

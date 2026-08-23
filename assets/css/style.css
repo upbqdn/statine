@@ -644,6 +644,21 @@
   font-display: swap;
   src: url('/fonts/EBGaramond.woff2') format('woff2');
 }
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: italic;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url('/fonts/EBGaramond-Italic.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Iosevka Web';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: expanded;
+  font-display: swap;
+  src: url('/fonts/IosevkaExtended.woff2') format('woff2');
+}
 :root {
   --page-max-width: 34rem;
   --toc-width: 260px;
@@ -831,7 +846,7 @@
     line-height: var(--tw-leading, var(--text-sm--line-height));
   }
   code {
-    font-family: "Iosevka Web" !important;
+    font-family: "Iosevka Web", ui-monospace, "Cascadia Code", Consolas, monospace !important;
     font-stretch: expanded;
     font-size: var(--text-xs);
     line-height: var(--tw-leading, var(--text-xs--line-height));
