@@ -15,12 +15,16 @@
       <div class="search-row">
         <div id="search" class="search-bar grow min-w-0" role="search" aria-label="Site search"></div>
         <script>
-          new PagefindUI({
-            element: "#search",
-            showSubResults: true,
-            pageSize: 3,
-            excerptLength: 16,
-            showImages: false,
+          document.addEventListener("DOMContentLoaded", function () {
+            // The index only exists after a `pagefind` run; dev servers lack it.
+            if (typeof PagefindUI === "undefined") return;
+            new PagefindUI({
+              element: "#search",
+              showSubResults: true,
+              pageSize: 3,
+              excerptLength: 16,
+              showImages: false,
+            });
           });
         </script>
         {{ if and .IsPage (not .Params.notoc) (findRE "<li" .TableOfContents) }}

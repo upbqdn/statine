@@ -31,8 +31,9 @@
   >
     {{ $c := .Content }}
     {{/* Wrap math in pagefind-ignore (for MathJax), add hidden searchable copy */}}
-    {{ $c = replaceRE `\\\((.+?)\\\)` `<span data-pagefind-ignore>\($1\)</span><b hidden>$1</b>` $c }}
+    {{ $c = replaceRE `(?s)\\\((.+?)\\\)` `<span data-pagefind-ignore>\($1\)</span><b hidden>$1</b>` $c }}
     {{ $c = replaceRE `(?s)\$\$(.+?)\$\$` `<span data-pagefind-ignore>$$$$${1}$$$$</span><b hidden>${1}</b>` $c }}
+    {{ $c = replaceRE `(?s)\\\[(.+?)\\\]` `<span data-pagefind-ignore>\[${1}\]</span><b hidden>${1}</b>` $c }}
     {{/* Strip \commands from hidden spans (3 passes for nested commands) */}}
     {{ $c = replaceRE `(<b hidden>[^<\\]*)\\[a-zA-Z]+([^<]*</b>)` `$1$2` $c }}
     {{ $c = replaceRE `(<b hidden>[^<\\]*)\\[a-zA-Z]+([^<]*</b>)` `$1$2` $c }}
@@ -49,14 +50,12 @@
   </div>
   <hr class="my-5 w-full border-t border-zinc-300 dark:border-fg-muted/30" />
   {{ if or .Params.tags .Params.Date }}{{ partial "taxonomy.html" . }}{{ end }}
-  <div>
+  <div data-pagefind-ignore>
     <script>
-      var remark_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-      localStorage.remark42_theme = remark_theme;
       var remark_config = {
-        host: "https://remark42.marek.onl",
-        site_id: "marek.onl",
-        theme: remark_theme,
+        host: "{{ site.Params.remark42.host | default `https://remark42.marek.onl` }}",
+        site_id: "{{ site.Params.remark42.site_id | default `marek.onl` }}",
+        theme: siteTheme(),
         show_email_subscription: true,
         simple_view: false,
         no_footer: true,

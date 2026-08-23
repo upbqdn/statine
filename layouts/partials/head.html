@@ -58,7 +58,8 @@
 <style>#TableOfContents li>ul{display:none}@media(max-width:1279px){#TableOfContents{display:none}}</style>
 {{ $style := resources.Get "css/style.css" | resources.Minify }}
 <link rel="stylesheet" href="{{ $style.RelPermalink }}">
-<link rel="stylesheet" id="code-syntax-theme" href="/css/syntax-dark.css">
+<link rel="stylesheet" href="/css/syntax-light.css" media="(prefers-color-scheme: light)">
+<link rel="stylesheet" href="/css/syntax-dark.css" media="(prefers-color-scheme: dark)">
 
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#161616">
@@ -72,7 +73,7 @@
 
 <!-- Pagefind -->
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
-<script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+<script src="/pagefind/pagefind-ui.js" defer></script>
 
 <!-- MathJax -->
 {{ partial "mathjax.html" . }}
