@@ -15,7 +15,7 @@ npm run build-tw
 
 This theme is used inside a Hugo site. Hugo commands are run from the parent site directory (`/home/m/marek.onl/`), not from the theme directory.
 
-**Always run `npm run build-tw` after editing `main.css` or changing classes in `layouts/`.** The compiled `style.css` is checked into git; CI fails if it is out of sync. Tailwind scans only `layouts/` (via `@source` in `main.css`).
+**Always run `npm run build-tw` after editing `main.css` or changing classes in `layouts/`.** The compiled `style.css` is generated and untracked (gitignored); Hugo needs it on disk, so run `build-tw` once after cloning and after every relevant edit. Deploys regenerate it. Tailwind scans only `layouts/` (via `@source` in `main.css`).
 
 ## Architecture
 
@@ -68,4 +68,4 @@ System-only via `prefers-color-scheme` — no manual toggle. Syntax-highlight CS
 
 ### CI
 
-`.gitlab-ci.yml` runs GitLab SAST plus `style-css-fresh`, which rebuilds Tailwind and fails on any `style.css` drift.
+`.gitlab-ci.yml` runs GitLab SAST plus `build-tw`, which fails if `main.css` no longer compiles.
