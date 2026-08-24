@@ -47,6 +47,10 @@
     {{/* Strip sub/superscript markers */}}
     {{ $c = replaceRE `(<b hidden>[^<_^]*)[_^]([^<]*</b>)` `$1 $2` $c }}
     {{ $c = replaceRE `(<b hidden>[^<_^]*)[_^]([^<]*</b>)` `$1 $2` $c }}
+    {{/* Glue punctuation to preceding inline math: browsers break lines between
+         the atomic mjx-container and a following comma/period, orphaning the
+         punctuation at the start of the next line. */}}
+    {{ $c = replaceRE `(<span data-pagefind-ignore>\\\([^<]*\\\)</span><b hidden>[^<]*</b>)([,.;:!?)\]%]+)` `<span class="math-punct">${1}${2}</span>` $c }}
     {{ partial "headline-hash.html" $c }}
   </div>
   <hr class="my-5 w-full border-t border-zinc-300 dark:border-fg-muted/30" />

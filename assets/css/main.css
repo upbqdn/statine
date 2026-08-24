@@ -225,6 +225,9 @@
   /* Elements */
   .org-target { scroll-margin-top: 1rem; }
   mjx-container[display="true"] { overflow-x: auto; max-width: 100%; }
+  /* Inline math plus its trailing punctuation (wrapped by single.html) must
+     stay on one line. */
+  .math-punct { white-space: nowrap; }
 
   hr { @apply border-t-2 border-zinc-300 dark:border-fg-muted/30; }
   dt { font-variant-caps: all-small-caps; @apply font-bold; }
