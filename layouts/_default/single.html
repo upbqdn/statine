@@ -47,10 +47,15 @@
     {{/* Strip sub/superscript markers */}}
     {{ $c = replaceRE `(<b hidden>[^<_^]*)[_^]([^<]*</b>)` `$1 $2` $c }}
     {{ $c = replaceRE `(<b hidden>[^<_^]*)[_^]([^<]*</b>)` `$1 $2` $c }}
-    {{/* Glue punctuation to preceding inline math: browsers break lines between
-         the atomic mjx-container and a following comma/period, orphaning the
-         punctuation at the start of the next line. */}}
-    {{ $c = replaceRE `(<span data-pagefind-ignore>\\\([^<]*\\\)</span><b hidden>[^<]*</b>)([,.;:!?)\]%]+)` `<span class="math-punct">${1}${2}</span>` $c }}
+    {{/* Glue punctuation (or a hyphen-joined word like "-tuples") to preceding
+         inline math: browsers break lines between the atomic mjx-container and
+         whatever follows it, orphaning the punctuation or word fragment at the
+         start of the next line. */}}
+    {{ $c = replaceRE `(<span data-pagefind-ignore>\\\([^<]*\\\)</span><b hidden>[^<]*</b>)([,.;:!?)\]%‑-][^\s<]*)` `<span class="math-punct">${1}${2}</span>` $c }}
+    {{/* Never break before a spaced em dash; the break belongs after it.
+         Goldmark emits the dash as an entity; handle the literal too. */}}
+    {{ $c = replaceRE `(\s)&mdash;(\s)` `&nbsp;&mdash;${2}` $c }}
+    {{ $c = replaceRE `(\s)—(\s)` `&nbsp;—${2}` $c }}
     {{ partial "headline-hash.html" $c }}
   </div>
   <hr class="my-5 w-full border-t border-zinc-300 dark:border-fg-muted/30" />

@@ -18,7 +18,31 @@ window.MathJax = {
           while (td.firstChild) link.appendChild(td.firstChild);
           td.appendChild(link);
         });
+        clampWideInlineMath();
+        window.addEventListener("resize", clampWideInlineMath, { passive: true });
       });
     }
   }
 };
+
+// Inline math cannot line-break, so a formula wider than the text column gets
+// clipped by the page (html is overflow-x: hidden). Make just the too-wide
+// containers scrollable; every other container is left untouched to avoid
+// clipping glyph overhang.
+function clampWideInlineMath() {
+  document.querySelectorAll('mjx-container:not([display="true"])').forEach(function (c) {
+    var block = c.parentElement;
+    while (block && getComputedStyle(block).display.indexOf("inline") !== -1) {
+      block = block.parentElement;
+    }
+    if (!block) return;
+    var r = c.getBoundingClientRect();
+    if (r.width > block.clientWidth + 1 ||
+        r.right > document.documentElement.clientWidth + 1) {
+      c.style.display = "inline-block";
+      c.style.maxWidth = "100%";
+      c.style.overflowX = "auto";
+      c.style.overflowY = "hidden";
+    }
+  });
+}

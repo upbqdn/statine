@@ -119,6 +119,9 @@
 
   .article-content {
     @apply mt-6;
+    /* Over-long tokens (URLs in the bibliography, hashes in inline code) break
+       instead of being clipped by the page's overflow-x: hidden. */
+    overflow-wrap: break-word;
   }
   .article-content p:not(.org-center p),
   .article-content li {
@@ -234,7 +237,9 @@
   dd { @apply mb-4 ml-8; }
   .prf dl { display: grid; grid-template-columns: auto 1fr; gap: 0 0.5em; }
   .prf dt { font-variant-caps: normal; font-weight: normal; }
-  .prf dd { @apply ml-0; }
+  /* min-width: 0 lets the grid column shrink below its content's min size, so
+     wide inline math scrolls instead of blowing the grid past the viewport. */
+  .prf dd { @apply ml-0; min-width: 0; }
   img { @apply mx-auto dark:brightness-[.8] dark:contrast-125; }
   figure { @apply sm:mx-6 md:mx-12; }
   figcaption { @apply text-center; }
