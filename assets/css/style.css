@@ -202,6 +202,9 @@
     white-space: nowrap;
     border-width: 0;
   }
+  .relative {
+    position: relative;
+  }
   .z-0 {
     z-index: 0;
   }
