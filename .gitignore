@@ -2,3 +2,4 @@
 .playwright-mcp
 node_modules/
 /assets/css/style.css
+typography-check/

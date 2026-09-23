@@ -1,10 +1,25 @@
 window.MathJax = {
+  loader: {
+    paths: { fonts: "[mathjax]/../@mathjax" }
+  },
   tex: {
     tags: "ams"
   },
+  output: {
+    font: "mathjax-pagella",
+    displayOverflow: "linebreak",
+    // Keep inline math and its punctuation together, as in the source text.
+    // Leave room for equation tags and the renderer's display padding.
+    linebreaks: { inline: false, width: "95%" }
+  },
+  chtml: {
+    matchFontHeight: false
+  },
   startup: {
     pageReady: function () {
-      return MathJax.startup.defaultPageReady().then(function () {
+      return document.fonts.ready.then(function () {
+        return MathJax.startup.defaultPageReady();
+      }).then(function () {
         document.querySelectorAll('mjx-mtd[id]').forEach(function (td) {
           var id = td.id;
           if (!id.startsWith('mjx-eqn:')) return;

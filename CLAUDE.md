@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Statine is a Hugo theme for [marek.onl](https://marek.onl), forked from [hugo-astatine-theme](https://github.com/hugcis/hugo-astatine-theme). It's a minimal, dark-mode-capable blog theme with Tailwind CSS v4, MathJax, Pagefind search, and Remark42 comments. No third-party origins are in the critical render path: fonts are self-hosted and icons are inline SVG; only MathJax (pinned, SRI, async, math pages only) and the Remark42 embed load cross-origin.
+Statine is a Hugo theme for [marek.onl](https://marek.onl), forked from [hugo-astatine-theme](https://github.com/hugcis/hugo-astatine-theme). It's a minimal, dark-mode-capable blog theme with Tailwind CSS v4, MathJax, Pagefind search, and Remark42 comments. No third-party origins are in the critical render path: fonts and MathJax are self-hosted and icons are inline SVG; only the Remark42 embed loads cross-origin.
 
 ## Commands
 
@@ -12,6 +12,14 @@ Build Tailwind CSS (compiles `assets/css/main.css` → `assets/css/style.css`):
 ```
 npm run build-tw
 ```
+
+After a Hugo build and Pagefind indexing, serve the output and run the browser
+regression (including responsive mathematics and equation anchors):
+```
+uv run --with playwright python tools/check_typography.py http://127.0.0.1:8875/
+```
+It uses Chromium at `/usr/bin/chromium` and writes ignored screenshots to
+`typography-check/`.
 
 This theme is used inside a Hugo site. Hugo commands are run from the parent site directory (`/home/m/marek.onl/`), not from the theme directory.
 
@@ -26,7 +34,7 @@ This theme is used inside a Hugo site. Hugo commands are run from the parent sit
 - **baseof.html** — HTML skeleton, skip link, Pagefind search UI (guarded init; the index only exists after a `pagefind` run), ToC toggle button (inline SVG, aria-expanded)
   - **partials/head.html** — Meta (canonical, description, theme-color per scheme), favicons, Open Graph, font preload, CSS/JS loading, MathJax, RSS links
   - **partials/pagefind-dir.html** — Pagefind bundle directory; `HUGO_PAGEFIND_VERSION` versions the URL so a cached client never meets a mismatched index
-  - **partials/mathjax.html** — Pinned MathJax 3.2.2 with SRI, async, loaded only on pages whose raw content has math delimiters (`math` front-matter param overrides)
+  - **partials/mathjax.html** — Self-hosted MathJax 4.1.3 with Pagella Math, async, loaded only on pages whose raw content has math delimiters (`math` front-matter param overrides)
   - **partials/nav.html** — Site title
   - **partials/footer.html** — About link + GitHub/Bluesky icons (inline Font Awesome SVG paths, CC BY 4.0 attribution in each)
   - **partials/tag-chip.html**, **partials/post-date.html** — shared chip and date markup
@@ -40,7 +48,7 @@ This theme is used inside a Hugo site. Hugo commands are run from the parent sit
 
 Source: `assets/css/main.css` (Tailwind v4 directives + custom `@layer base` styles)
 → `@tailwindcss/cli` compiles to `assets/css/style.css`
-→ Hugo minifies at build time via `resources.Minify`
+→ Hugo minifies and fingerprints at build time via `resources.Minify` and `resources.Fingerprint`
 
 All theme customization is in `main.css` using Tailwind's `@theme` directive for design tokens (colors, fonts). Dark mode uses `prefers-color-scheme` media queries (no class toggle). The anti-FOUC inline style in `head.html` duplicates `--color-dark`/`--color-fg` as literals — keep them in sync with `@theme`.
 
@@ -52,15 +60,18 @@ CSS owns ToC appearance through three class hooks: `.toc-open` (mobile manual op
 
 ### JavaScript
 
-No jQuery. Two Hugo-processed scripts (inlined via `safeJS`):
+No jQuery. Three Hugo-processed scripts:
 - `assets/js/initial.js` (in `<head>`) — `siteTheme()` global, Remark42 theme sync, plot iframe light/dark swap (a parse-time MutationObserver corrects `iframe.plot` srcs before the wrong-theme file is fetched), non-breaking-hyphen pass (TreeWalker over `<main>`; never touches `code`/`kbd`/`samp`/`pre`, raw-TeX spans, or MathJax output — MathJax silently drops U+2011)
 - `assets/js/toc.js` (end of body) — ToC scroll-spy, mobile toggle, desktop positioning
+- `assets/js/mathjax-config.js` (fingerprinted external script, math pages only) — Pagella Math, AMS tags, clickable equation anchors and wide-inline-math scrolling; runs before MathJax
 
 ### Fonts
 
-All self-hosted in `static/fonts/`, SIL OFL 1.1:
-- **EB Garamond** — body text; `EBGaramond.woff2` (regular, preloaded in head) + `EBGaramond-Italic.woff2` (true italics)
-- **Iosevka Web** — code; `IosevkaExtended.woff2`, the extended (125%-wide) face subsetted to Latin + punctuation + arrows + box drawing (~26 KB). Regenerate with `pyftsubset` (woff2 → ttf → subset → woff2) if wider glyph coverage is ever needed.
+All self-hosted in `static/fonts/`:
+- **TeX Gyre Pagella** — body text; regular (preloaded in head), italic, bold and bold italic WOFF2 faces, losslessly converted from the upstream OpenType fonts; GUST Font License
+- **Iosevka Web** — code; `IosevkaExtended.woff2`, SIL OFL 1.1, the extended (125%-wide) face subsetted to Latin + punctuation + arrows + box drawing (~26 KB). Regenerate with `pyftsubset` (woff2 → ttf → subset → woff2) if wider glyph coverage is ever needed.
+
+MathJax and its Pagella Math font are pinned to 4.1.3 in `static/vendor/`, with their upstream licences. Keep the renderer and font package at matching versions when upgrading.
 
 ### Dark Mode
 
