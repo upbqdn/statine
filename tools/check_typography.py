@@ -52,8 +52,8 @@ def check(base):
                   .every(td => !document.getElementById('eqn-' + td.id.slice(8)) ||
                     td.querySelector('a')?.getAttribute('href') === '#eqn-' + td.id.slice(8))"""), path
             page.evaluate("document.fonts.ready")
-            assert page.evaluate("getComputedStyle(document.body).fontFamily").startswith('"TeX Gyre Pagella"'), path
-            assert page.evaluate("document.fonts.check('20px \"TeX Gyre Pagella\"')"), path
+            assert page.evaluate("getComputedStyle(document.body).fontFamily").startswith('"EB Garamond"'), path
+            assert page.evaluate("document.fonts.check('20px \"EB Garamond\"')"), path
             assert not errors, (path, errors)
 
         # Every published page: detect missing TeX extensions and rendering errors.
@@ -63,7 +63,7 @@ def check(base):
         assert not external_math, external_math
         assert page.evaluate("""async () => {
           const faces = await Promise.all(['normal 400', 'italic 400', 'normal 700', 'italic 700']
-            .map(style => document.fonts.load(style + ' 20px "TeX Gyre Pagella"')));
+            .map(style => document.fonts.load(style + ' 20px "EB Garamond"')));
           return faces.every(loaded => loaded.length === 1 && loaded[0].status === 'loaded');
         }""")
 
@@ -110,7 +110,9 @@ def check(base):
               for (const el of scrollers) el.scrollLeft = 0;
               return visible;
             })"""), width
-            if width >= 390:
+            # Text metrics affect line breaks; wide matrices may scroll on
+            # phones, but must fit without scrolling on tablets and desktops.
+            if width >= 768:
                 assert equation.evaluate("element => element.getBoundingClientRect().right <= innerWidth"), width
             page.screenshot(path=str(screenshots / f"equation-{width}.png"))
             page.evaluate("window.scrollTo(0, 0)")

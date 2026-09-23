@@ -55,7 +55,7 @@
 {{ end }}
 
 <!-- Style configuration -->
-<link rel="preload" href="/fonts/texgyrepagella-regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/EBGaramond.woff2" as="font" type="font/woff2" crossorigin>
 {{ $style := resources.Get "css/style.css" | resources.Minify | resources.Fingerprint }}
 <link rel="stylesheet" href="{{ $style.RelPermalink }}">
 <link rel="stylesheet" href="/css/syntax-light.css" media="(prefers-color-scheme: light)">

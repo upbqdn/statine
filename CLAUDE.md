@@ -68,8 +68,10 @@ No jQuery. Three Hugo-processed scripts:
 ### Fonts
 
 All self-hosted in `static/fonts/`:
-- **TeX Gyre Pagella** — body text; regular (preloaded in head), italic, bold and bold italic WOFF2 faces, losslessly converted from the upstream OpenType fonts; GUST Font License
+- **EB Garamond** — body text; regular (preloaded in head) and italic variable WOFF2 faces, weights 400–800; SIL OFL 1.1
 - **Iosevka Web** — code; `IosevkaExtended.woff2`, SIL OFL 1.1, the extended (125%-wide) face subsetted to Latin + punctuation + arrows + box drawing (~26 KB). Regenerate with `pyftsubset` (woff2 → ttf → subset → woff2) if wider glyph coverage is ever needed.
+
+The previous Pagella text files remain available for cached stylesheets.
 
 MathJax and its Pagella Math font are pinned to 4.1.3 in `static/vendor/`, with their upstream licences. Keep the renderer and font package at matching versions when upgrading.
 

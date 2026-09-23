@@ -2,35 +2,19 @@
 @source "../../layouts";
 
 @font-face {
-  font-family: 'TeX Gyre Pagella';
+  font-family: 'EB Garamond';
   font-style: normal;
-  font-weight: 400;
+  font-weight: 400 800;
   font-display: swap;
-  src: url('/fonts/texgyrepagella-regular.woff2') format('woff2');
+  src: url('/fonts/EBGaramond.woff2') format('woff2');
 }
 
 @font-face {
-  font-family: 'TeX Gyre Pagella';
+  font-family: 'EB Garamond';
   font-style: italic;
-  font-weight: 400;
+  font-weight: 400 800;
   font-display: swap;
-  src: url('/fonts/texgyrepagella-italic.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'TeX Gyre Pagella';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('/fonts/texgyrepagella-bold.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'TeX Gyre Pagella';
-  font-style: italic;
-  font-weight: 700;
-  font-display: swap;
-  src: url('/fonts/texgyrepagella-bolditalic.woff2') format('woff2');
+  src: url('/fonts/EBGaramond-Italic.woff2') format('woff2');
 }
 
 /* Iosevka (SIL OFL 1.1), self-hosted; the extended (125%-wide) face, subsetted
@@ -56,7 +40,7 @@
   --color-link-hover: #0043ce;
   --color-accent: #78a9ff;
   --color-accent-hover: #a6c8ff;
-  --font-sans: "TeX Gyre Pagella", Palatino, "Palatino Linotype", Georgia, serif;
+  --font-sans: "EB Garamond", Garamond, Georgia, "Times New Roman", serif;
 }
 
 :root {
