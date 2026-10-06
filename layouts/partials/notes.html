@@ -1,6 +1,0 @@
-{{- /* Notes, as given (newest first): each a title, then its date line. Takes the pages. */ -}}
-<ol class="notes">
-    {{ range . }}
-    <li><a href="{{ .RelPermalink }}">{{ .Title }}</a>{{ if not .Date.IsZero }}<p class="post-meta">{{ partial "post-date.html" .Date }}</p>{{ end }}</li>
-    {{ end }}
-</ol>

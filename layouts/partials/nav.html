@@ -1,6 +1,6 @@
-<a href="{{ "/" | relLangURL }}" class="wordmark">{{ site.Params.author.name }}</a>
-<nav class="site-nav" aria-label="Site">
-    <a href="{{ "/" | relLangURL }}">{{ site.Title }}</a>
-    <a href="https://upbqdn.github.io/zcash-arboretum/">Arboretum</a>
-    <a href="{{ "/about/" | relLangURL }}">About</a>
+<nav>
+    <a href="{{ "/" | relLangURL }}"
+       class="text-2xl ml-0.5 text-dark dark:text-fg border-none">
+        {{ .Site.Title }}
+    </a>
 </nav>

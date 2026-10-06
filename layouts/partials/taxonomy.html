@@ -9,4 +9,7 @@
         "span_class" "py-0.5 px-1") }}
     {{ end }}
     {{ end }}
+    {{ if .Params.Date }}
+    {{ partial "post-date.html" (dict "page" . "class" "ml-auto") }}
+    {{ end }}
 </div>

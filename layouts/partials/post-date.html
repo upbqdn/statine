@@ -1,2 +1,4 @@
-<time datetime="{{ .Format "2006-01-02" }}">{{ replace (.Format "2 January 2006") " " "\u00a0" }}</time>
-{{- /* A date as "2 January 2026", never broken; takes a time.Time. */ -}}
+{{- /* Post date. Dict params: page; optional: class (extra wrapper classes). */ -}}
+<div class="text-fg-secondary dark:text-fg-muted {{ .class }}">
+    <time datetime="{{ .page.Date.Format "2006-01-02" }}" itemprop="datePublished">{{ .page.Date.Format "Jan 2, 2006" }}</time>
+</div>

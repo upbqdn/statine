@@ -1,0 +1,13 @@
+{{- /* Load MathJax only where math exists. Override per page with `math = true/false`
+     in front matter. The sniff covers this site's delimiters: \( \), \[ \], $$. */ -}}
+{{- $sniff := and .IsPage (or (in .RawContent "\\(") (in .RawContent "\\[") (in .RawContent "$$")) -}}
+{{- $math := $sniff -}}
+{{- if isset .Params "math" }}{{ $math = .Params.math }}{{ end -}}
+{{- if $math }}
+{{- /* The configuration must run before the asynchronous renderer. Fingerprint
+     it so a cached MathJax 3 configuration cannot survive the upgrade. */ -}}
+{{ $config := resources.Get "js/mathjax-config.js" | resources.Minify | resources.Fingerprint }}
+<script src="{{ $config.RelPermalink }}"></script>
+<script src="/vendor/mathjax-4.1.3/tex-chtml-nofont.js"
+        id="MathJax-script" async></script>
+{{- end }}
