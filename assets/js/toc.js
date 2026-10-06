@@ -7,7 +7,8 @@
   var toc = document.getElementById("TableOfContents");
   if (!toc) return;
 
-  // Must match the single @media (min-width: 1280px) block in main.css.
+  // Must match the @media (min-width: 1280px) block and the header's max-width: 1279px rule in
+  // main.css.
   var DESKTOP = window.matchMedia("(min-width: 1280px)");
   var tocManuallyOpen = false;
   var ticking = false;

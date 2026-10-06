@@ -1,11 +1,4 @@
 {{ define "main" }}
-<div class="list">
-    <h1 class="list-title page-title mt-7">
-        <a href="{{ .Page.Permalink }}">{{ .Title }}</a>
-    </h1>
-    <hr>
-    {{ range .RegularPages }}
-    {{ partial "list-item.html" . }}
-    {{ end }}
-</div>
+<h1 class="page-title"><a href="{{ .Page.Permalink }}">{{ .Title }}</a></h1>
+{{ partial "notes.html" .RegularPages.ByDate.Reverse }}
 {{ end }}

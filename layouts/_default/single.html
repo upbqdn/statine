@@ -16,6 +16,7 @@
       <a href="{{ .Page.Permalink }}">{{ .Title }}</a>
     </h1>
     {{ end }}
+    {{ if not .Date.IsZero }}<p class="post-meta">{{ partial "post-date.html" .Date }}{{ if ne (.Lastmod.Format "2006-01-02") (.Date.Format "2006-01-02") }}, revised {{ partial "post-date.html" .Lastmod }}{{ end }}</p>{{ end }}
     {{ if and (not .Params.notoc) (findRE "<li" .TableOfContents) }}
     {{ replace .TableOfContents `<nav id="TableOfContents">` `<nav id="TableOfContents" data-pagefind-ignore>` | safeHTML }}
     {{ end }}
@@ -31,26 +32,50 @@
     id="article-content"
   >
     {{ $c := .Content }}
-    {{/* Wrap math in pagefind-ignore (for MathJax), add hidden searchable copy */}}
-    {{ $c = replaceRE `(?s)\\\((.+?)\\\)` `<span data-pagefind-ignore>\($1\)</span><b hidden>$1</b>` $c }}
-    {{ $c = replaceRE `(?s)\$\$(.+?)\$\$` `<span data-pagefind-ignore>$$$$${1}$$$$</span><b hidden>${1}</b>` $c }}
-    {{ $c = replaceRE `(?s)\\\[(.+?)\\\]` `<span data-pagefind-ignore>\[${1}\]</span><b hidden>${1}</b>` $c }}
-    {{/* Strip \commands from hidden spans (3 passes for nested commands) */}}
-    {{ $c = replaceRE `(<b hidden>[^<\\]*)\\[a-zA-Z]+([^<]*</b>)` `$1$2` $c }}
-    {{ $c = replaceRE `(<b hidden>[^<\\]*)\\[a-zA-Z]+([^<]*</b>)` `$1$2` $c }}
-    {{ $c = replaceRE `(<b hidden>[^<\\]*)\\[a-zA-Z]+([^<]*</b>)` `$1$2` $c }}
-    {{/* Strip braces from hidden spans (4 passes) */}}
-    {{ $c = replaceRE `(<b hidden>[^<{}]*)[{}]([^<]*</b>)` `$1$2` $c }}
-    {{ $c = replaceRE `(<b hidden>[^<{}]*)[{}]([^<]*</b>)` `$1$2` $c }}
-    {{ $c = replaceRE `(<b hidden>[^<{}]*)[{}]([^<]*</b>)` `$1$2` $c }}
-    {{ $c = replaceRE `(<b hidden>[^<{}]*)[{}]([^<]*</b>)` `$1$2` $c }}
-    {{/* Strip sub/superscript markers */}}
-    {{ $c = replaceRE `(<b hidden>[^<_^]*)[_^]([^<]*</b>)` `$1 $2` $c }}
-    {{ $c = replaceRE `(<b hidden>[^<_^]*)[_^]([^<]*</b>)` `$1 $2` $c }}
+    {{/* The micro sign of a unit (20 µs, 10 µF), typed as math. */}}
+    {{ $c = replaceRE `\\\(\\mu\\\)([sF])\b` `µ${1}` $c }}
+    {{/* Wrap math in pagefind-ignore (tools/mathml.py turns it into MathML), add a hidden
+         searchable copy */}}
+    {{ $c = replaceRE `(?s)\\\((.+?)\\\)` `<span data-pagefind-ignore>\($1\)</span><b hidden class="tex">$1</b>` $c }}
+    {{ $c = replaceRE `(?s)\$\$(.+?)\$\$` `<span data-pagefind-ignore>$$$$${1}$$$$</span><b hidden class="tex">${1}</b>` $c }}
+    {{ $c = replaceRE `(?s)\\\[(.+?)\\\]` `<span data-pagefind-ignore>\[${1}\]</span><b hidden class="tex">${1}</b>` $c }}
+    {{/* Hidden search copy, TeX to plain text: one copy at a time, trimmed so the
+         minifier cannot merge the real space after the formula into it. */}}
+    {{ $sym := dict "Delta" "Δ" "Gamma" "Γ" "Lambda" "Λ" "Omega" "Ω" "Phi" "Φ" "Pi" "Π" "Psi" "Ψ" "Sigma" "Σ" "Theta" "Θ" "Xi" "Ξ" "alpha" "α" "approx" "≈" "beta" "β" "bigcap" "⋂" "bigcup" "⋃" "cap" "∩" "cdot" "·" "cdots" "…" "chi" "χ" "circ" "∘" "cong" "≅" "cup" "∪" "delta" "δ" "dots" "…" "emptyset" "∅" "epsilon" "ε" "equiv" "≡" "eta" "η" "exists" "∃" "forall" "∀" "gamma" "γ" "ge" "≥" "geq" "≥" "gets" "←" "gg" "≫" "iff" "⟺" "impliedby" "⟸" "implies" "⟹" "in" "∈" "infty" "∞" "kappa" "κ" "lambda" "λ" "land" "∧" "langle" "⟨" "lceil" "⌈" "ldots" "…" "le" "≤" "leq" "≤" "lfloor" "⌊" "ll" "≪" "lor" "∨" "lvert" "|" "mapsto" "↦" "mid" "|" "mu" "μ" "ne" "≠" "neg" "¬" "neq" "≠" "notin" "∉" "nu" "ν" "omega" "ω" "oplus" "⊕" "otimes" "⊗" "partial" "∂" "phi" "ϕ" "pi" "π" "pm" "±" "prec" "≺" "preceq" "⪯" "prod" "∏" "propto" "∝" "psi" "ψ" "rangle" "⟩" "rceil" "⌉" "rfloor" "⌋" "rho" "ρ" "rvert" "|" "setminus" "∖" "sigma" "σ" "sim" "∼" "subset" "⊂" "subseteq" "⊆" "succ" "≻" "succeq" "⪰" "sum" "∑" "supset" "⊃" "supseteq" "⊇" "tau" "τ" "theta" "θ" "times" "×" "to" "→" "varepsilon" "ε" "varphi" "φ" "vee" "∨" "vert" "|" "wedge" "∧" "xi" "ξ" "zeta" "ζ" }}
+    {{ range findRESubmatch `<b hidden class="tex">([^<]*)</b>` $c }}
+      {{ $t := index . 1 }}
+      {{ $t = replaceRE `\\(?:begin|end)\{[^}]*\}|\\tag\*?\{[^}]*\}` ` ` $t }}
+      {{ $t = replaceRE `\\\\|&amp;|\\[,;:! ]|~` ` ` $t }}
+      {{ $t = replaceRE `\\\{` `⦃` $t }}
+      {{ $t = replaceRE `\\\}` `⦄` $t }}
+      {{ $t = replaceRE `\\\|` `‖` $t }}
+      {{ $t = replaceRE `\\([%$#])` `${1}` $t }}
+      {{ $t = replaceRE `\\(deg|log|ln|exp|max|min|sin|cos|gcd|ker|dim|det|lim)([^A-Za-z]|$)` `${1}${2}` $t }}
+      {{ $t = replaceRE `\\[bp]mod([^A-Za-z]|$)` `mod${1}` $t }}
+      {{ range $k, $v := $sym }}{{ $t = replaceRE (printf `\\%s([^A-Za-z]|$)` $k) (printf "%s${1}" $v) $t }}{{ end }}
+      {{ $t = replaceRE `\\(?:math[a-z]*|text[a-z]*|operatorname|boldsymbol|vec|overline|underline|bar|hat|tilde|widehat|widetilde)\{([^{}]*)\}` `${1}` $t }}
+      {{ $t = replaceRE `_\{([^{}]*)\}` `${1}` $t }}
+      {{ $t = replaceRE `\^\{([^{}])\}` `^${1}` $t }}
+      {{ $t = replaceRE `\^\{([^{}]*)\}` `^(${1})` $t }}
+      {{ $t = replaceRE `\\sqrt\{([^{}]*)\}` `√(${1})` $t }}
+      {{ $t = replaceRE `\\sqrt\{([^{}]*)\}` `√(${1})` $t }}
+      {{ $t = replaceRE `\\[dt]?frac\{([^{}]*)\}\{([^{}]*)\}` `${1}/${2}` $t }}
+      {{ $t = replaceRE `\\[A-Za-z]+\*?|\\.` `` $t }}
+      {{ $t = replaceRE `[{}_]` `` $t }}
+      {{ $t = replaceRE `⦃` `{` $t }}
+      {{ $t = replaceRE `⦄` `}` $t }}
+      {{ $t = replaceRE `\s+` ` ` $t }}
+      {{ $t = replaceRE `([(\[⟨{]) ` `${1}` $t }}
+      {{ $t = replaceRE ` ([)\]⟩},.;:])` `${1}` $t }}
+      {{ $c = replace $c (index . 0) (printf "<b hidden>%s</b>" (trim $t " ")) 1 }}
+    {{ end }}
+    {{/* Statement heads: "Theorem 3.1 (Name)."; proofs: an italic "Proof." */}}
+    {{ $c = replaceRE `</a></strong>\. \(<em>([^<]*)</em>\.\)` `</a></strong> (${1}).` $c }}
+    {{ $c = replaceRE `<strong><a href="#(prf-[^"]+)">Proof [^<]*</a></strong>\.` `<em><a href="#${1}">Proof</a>.</em>` $c }}
     {{/* Glue punctuation (or a hyphen-joined word like "-tuples") to preceding
-         inline math: browsers break lines between the atomic mjx-container and
-         whatever follows it, orphaning the punctuation or word fragment at the
-         start of the next line. */}}
+         inline math: browsers break lines between a formula and whatever follows
+         it, orphaning the punctuation or word fragment at the start of the next
+         line. */}}
     {{ $c = replaceRE `(<span data-pagefind-ignore>\\\([^<]*\\\)</span><b hidden>[^<]*</b>)([,.;:!?)\]%‑-][^\s<]*)` `<span class="math-punct">${1}${2}</span>` $c }}
     {{/* Never break before a spaced em dash; the break belongs after it.
          Goldmark emits the dash as an entity; handle the literal too. */}}
@@ -59,7 +84,7 @@
     {{ partial "headline-hash.html" $c }}
   </div>
   <hr class="my-5 w-full border-t border-zinc-300 dark:border-fg-muted/30" />
-  {{ if or .Params.tags .Params.Date }}{{ partial "taxonomy.html" . }}{{ end }}
+  {{ if .Params.tags }}{{ partial "taxonomy.html" . }}{{ end }}
   <div data-pagefind-ignore>
     <script>
       var remark_config = {

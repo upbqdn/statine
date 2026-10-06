@@ -1,53 +1,86 @@
 @import "tailwindcss" source(none);
 @source "../../layouts";
+/* Temml's MathML stylesheet (MIT), before the rules below that adjust it. */
+@import "temml/dist/Temml-Local.css";
 
-@font-face {
-  font-family: 'EB Garamond';
-  font-style: normal;
-  font-weight: 400 800;
-  font-display: swap;
-  src: url('/fonts/EBGaramond.woff2') format('woff2');
+/* EB Garamond (text; lining numerals, real small caps), Garamond-Math (mathematics), Iosevka
+   (code); SIL OFL 1.1, licences beside the files. */
+@font-face { font-family: "EB Garamond";
+  src: url("/fonts/eb-garamond-regular.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "EB Garamond";
+  src: url("/fonts/eb-garamond-italic.woff2") format("woff2");
+  font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "EB Garamond";
+  src: url("/fonts/eb-garamond-semibold.woff2") format("woff2");
+  font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "EB Garamond";
+  src: url("/fonts/eb-garamond-semibolditalic.woff2") format("woff2");
+  font-weight: 600; font-style: italic; font-display: swap; }
+@font-face { font-family: "Garamond-Math";
+  src: url("/fonts/garamond-math.woff2") format("woff2");
+  font-display: swap; }
+/* The \mathsf alphabet: Garamond-Math's own sans (x-height 431.5) scaled to the text's (405). */
+@font-face { font-family: "Garamond-Math Sans";
+  src: url("/fonts/garamond-math.woff2") format("woff2");
+  unicode-range: U+1D5A0-1D66F, U+1D7E2-1D7F5; size-adjust: 93.9%; font-display: swap; }
+/* Text characters EB Garamond lacks: arrows (the footnote ↩) from Garamond-Math, ♡ from
+   Libertinus Math, not the system's DejaVu Sans. */
+@font-face { font-family: "Text Symbols";
+  src: url("/fonts/garamond-math.woff2") format("woff2");
+  unicode-range: U+2190-21FF; font-display: swap; }
+@font-face { font-family: "Text Symbols";
+  src: url("/fonts/libertinus-heart.woff2") format("woff2");
+  unicode-range: U+2661; font-display: swap; }
+@font-face { font-family: "Iosevka Web";
+  src: url("/fonts/iosevka.woff2") format("woff2");
+  font-weight: 400; font-display: swap; }
+
+/* Colour: ink on paper; the accent means "link". Light by default, dark by system preference
+   or the theme choice (data-theme). The anti-FOUC inline style in partials/head.html duplicates
+   --paper and --ink as literals; keep them in sync. Tailwind's palette maps onto the tokens,
+   so every utility class in the templates follows. */
+:root {
+  --paper: #FFFFFF; --ink: #1A1A1A; --muted: #5E5E5E; --hairline: #D6D6D6; --accent: #1C5A3A;
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  --paper: #141414; --ink: #E8E6E3; --muted: #A6A29C; --hairline: #383838; --accent: #8CC7A4;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #141414; --ink: #E8E6E3; --muted: #A6A29C; --hairline: #383838; --accent: #8CC7A4;
+    color-scheme: dark;
+  }
 }
 
-@font-face {
-  font-family: 'EB Garamond';
-  font-style: italic;
-  font-weight: 400 800;
-  font-display: swap;
-  src: url('/fonts/EBGaramond-Italic.woff2') format('woff2');
-}
-
-/* Iosevka (SIL OFL 1.1), self-hosted; the extended (125%-wide) face, subsetted
-   to Latin plus punctuation, arrows, and box drawing. */
-@font-face {
-  font-family: 'Iosevka Web';
-  font-style: normal;
-  font-weight: 400;
-  font-stretch: expanded;
-  font-display: swap;
-  src: url('/fonts/IosevkaExtended.woff2') format('woff2');
-}
-
-/* Core palette. The anti-FOUC inline style in partials/head.html duplicates
-   --color-dark and --color-fg as literals; keep them in sync. */
 @theme {
-  --color-dark: #161616;
-  --color-surface: #262626;
-  --color-fg: #f4f4f4;
-  --color-fg-muted: #c6c6c6;
-  --color-fg-secondary: #525252;
-  --color-link: #0f62fe;
-  --color-link-hover: #0043ce;
-  --color-accent: #78a9ff;
-  --color-accent-hover: #a6c8ff;
-  --font-sans: "EB Garamond", Garamond, Georgia, "Times New Roman", serif;
+  --color-black: var(--ink);
+  --color-dark: var(--ink);
+  --color-fg: var(--ink);
+  --color-fg-secondary: var(--muted);
+  --color-fg-muted: var(--muted);
+  --color-surface: var(--paper);
+  --color-link: var(--accent);
+  --color-link-hover: var(--accent);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent);
+  --color-zinc-100: var(--paper);
+  --color-zinc-200: var(--paper);
+  --color-zinc-300: var(--hairline);
+  --color-zinc-500: var(--muted);
+  --font-sans: "EB Garamond", "Text Symbols", serif;
 }
 
 :root {
-  /* Single source for the content column width; the ToC offset derives from it. */
-  --page-max-width: 34rem;
+  /* Single source for the content column width (~70 characters of the text face); the ToC
+     offset derives from it. */
+  --page-max-width: 32rem;  /* 640 px, as the Arboretum's column */
   --toc-width: 260px;
   --toc-gap: 30px;
+  --semibold: 600;
+  --gap: .75em;
 }
 
 @layer utilities {
@@ -57,6 +90,7 @@
   }
 }
 
+/* Defaults the templates' utility classes may override. */
 @layer base {
   blockquote, dl, dd, h2, h3, h4, h5, h6, hr, figure, p, pre, table {
     margin: revert;
@@ -68,27 +102,13 @@
     padding: revert;
   }
 
-  /* Typography */
   html {
-    font-size: 125%; /* 20px default, scales with the user's font-size preference */
     overflow-x: hidden;
   }
+  /* Clips where html already does, at the viewport edge, so a formula's ink padding past the
+     column (math, below) cannot widen the page by body's end padding and let it scroll. */
   body {
-    line-height: 1.5;
-    @apply dark:bg-dark dark:text-fg text-black;
-    --pagefind-ui-primary: var(--color-link);
-    --pagefind-ui-text: var(--color-dark);
-    --pagefind-ui-background: #ffffff;
-    --pagefind-ui-border: #d4d4d8;
-    --pagefind-ui-tag: #eeeeee;
-    --pagefind-ui-scale: 1;
-    --pagefind-ui-border-width: 2px;
-    --pagefind-ui-border-radius: 9999px;
-    --pagefind-ui-image-border-radius: 4px;
-    --pagefind-ui-image-box-ratio: 3 / 2;
-    --pagefind-ui-font: var(--font-sans);
-    --search-bar-height: 2.25rem;
-    --search-icon-size: 1rem;
+    overflow-x: clip;
   }
 
   h1 { @apply text-3xl my-5; }
@@ -96,85 +116,10 @@
   h3 { @apply text-xl mt-6 mb-2; }
   h4 { @apply font-bold text-lg mt-4 mb-1; }
 
-  .list-title {
-    @apply mb-1;
-  }
-  .list-title + hr {
-    @apply mt-0 mb-5 border-zinc-300 dark:border-fg-muted/30;
-  }
-
-  .headline-hash, .headline-hash:hover, .headline-hash:active,
-  .page-title a, .page-title a:hover, .page-title a:active,
-  h1 a, h2 a, h3 a, h4 a,
-  h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover,
-  h1 a:active, h2 a:active, h3 a:active, h4 a:active {
-    @apply text-dark dark:text-fg border-none;
-  }
-  .footer a:hover, .footer a:active {
-    @apply border-none;
-  }
-  p strong a {
-    @apply text-dark dark:text-fg;
-  }
-
   .article-content {
-    @apply mt-6;
-    /* Over-long tokens (URLs in the bibliography, hashes in inline code) break
-       instead of being clipped by the page's overflow-x: hidden. */
+    /* Over-long tokens (hashes in inline code) break instead of being clipped by the page's
+       overflow-x: hidden. */
     overflow-wrap: break-word;
-  }
-  .article-content p:not(.org-center p),
-  .article-content li {
-    text-align: justify;
-    text-justify: auto;
-    overflow-wrap: break-word;
-    hyphens: auto;
-  }
-  @media (max-width: 640px) {
-    .article-content p:not(.org-center p),
-    .article-content li {
-      text-align: start;
-    }
-  }
-  .article-content .alg ol {
-    overflow-x: auto;
-  }
-  .article-content .alg li:has(mjx-container) {
-    width: max-content;
-  }
-  .article-content p:has(mjx-container[display="true"]) {
-    overflow-x: auto;
-  }
-
-  /* Paragraph indentation (LaTeX-like) */
-  .article-content p {
-    text-indent: 1.5em;
-  }
-  .article-content > p:first-child,
-  .article-content > blockquote:first-child + p,
-  .article-content > style:first-child + blockquote + p,
-  .article-content h1 + p,
-  .article-content h2 + p,
-  .article-content h3 + p,
-  .article-content h4 + p,
-  .article-content .org-center + p,
-  .article-content .def > p:first-child,
-  .article-content .rem > p:first-child,
-  .article-content .exp > p:first-child,
-  .article-content .prp > p:first-child,
-  .article-content .thm > p:first-child,
-  .article-content .alg p,
-  .article-content .eqn > p:first-child,
-  .article-content .fig > p:first-child,
-  .article-content .tab > p:first-child,
-  .article-content .lst > p:first-child,
-  .article-content .prf > p:first-child,
-  .article-content .org-center p,
-  .article-content blockquote p {
-    text-indent: 0;
-  }
-  mjx-container[display="true"] {
-    text-indent: 0;
   }
 
   /* Lists: align with paragraph text-indent */
@@ -184,92 +129,44 @@
     margin-left: 0;
   }
 
-  /* Bibliography */
-  .csl-entry {
-    margin-bottom: 1em;
-  }
-
-  /* Links */
-  a {
-    @apply text-link dark:text-accent border-b border-transparent;
-  }
-  a:hover {
-    @apply text-link-hover dark:text-accent-hover border-link-hover dark:border-accent-hover;
-  }
-  a:hover svg path {
-    @apply fill-link-hover dark:fill-accent-hover;
-  }
   a:focus-visible,
   button:focus-visible {
-    @apply outline-2 outline-offset-2 outline-link dark:outline-accent rounded-sm;
+    @apply outline-2 outline-offset-2 outline-link rounded-sm;
   }
 
-  /* Inline SVG icons; sized like the Font Awesome webfont glyphs they replaced. */
-  .icon {
-    display: inline-block;
-    height: 1em;
-    width: auto;
-    vertical-align: -0.125em;
-  }
-  .icon-lg {
-    height: 1.25em;
-  }
-
-  /* Code */
-  pre { @apply text-sm; }
-  code {
-    font-family: "Iosevka Web", ui-monospace, "Cascadia Code", Consolas, monospace !important;
-    font-stretch: expanded;
-    @apply text-xs;
-  }
   .highlight {
     max-width: 100%;
     overflow-x: auto;
   }
   .highlight .chroma,
   .org-center {
-    overflow: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
   }
 
-  /* Elements */
   .org-target { scroll-margin-top: 1rem; }
-  mjx-container[display="true"] { overflow-x: auto; max-width: 100%; }
-  /* Inline math plus its trailing punctuation (wrapped by single.html) must
-     stay on one line. */
+  /* Inline math plus its trailing punctuation (wrapped by single.html) must stay on one
+     line. */
   .math-punct { white-space: nowrap; }
 
-  hr { @apply border-t-2 border-zinc-300 dark:border-fg-muted/30; }
-  dt { font-variant-caps: all-small-caps; @apply font-bold; }
   dd { @apply mb-4 ml-8; }
   .prf dl { display: grid; grid-template-columns: auto 1fr; gap: 0 0.5em; }
-  .prf dt { font-variant-caps: normal; font-weight: normal; }
-  /* min-width: 0 lets the grid column shrink below its content's min size, so
-     wide inline math scrolls instead of blowing the grid past the viewport. */
+  /* min-width: 0 lets the grid column shrink below its content's min size, so wide inline
+     math scrolls instead of blowing the grid past the viewport. */
   .prf dd { @apply ml-0; min-width: 0; }
-  img { @apply mx-auto dark:brightness-[.8] dark:contrast-125; }
+  img { @apply mx-auto; }
   figure { @apply sm:mx-6 md:mx-12; }
   figcaption { @apply text-center; }
-  table { display: block; overflow-x: auto; margin-inline: auto; width: fit-content; max-width: 100%; }
-  th, td { padding: 0.4em 0.8em; }
-  blockquote {
-    @apply my-8;
-    margin-left: calc(0.75em - 1px);
-    margin-right: 1.5em;
-    padding-left: calc(0.75em - 1px);
-    @apply border-l-2 border-zinc-300 dark:border-fg-muted/40;
+  table {
+    display: block; overflow-x: auto; overflow-y: hidden; margin-inline: auto; width: fit-content;
+    max-width: 100%;
   }
   #vid { width: 100%; aspect-ratio: 16 / 9; }
   .plot { width: 100%; aspect-ratio: 1 / 1; }
 
-  /* Search */
-  .search-bar {
-    background-color: white;
-    @apply dark:bg-dark;
-  }
-
-  /* Table of Contents. Hidden below the desktop breakpoint unless opened via
-     the button (.toc-open); fixed beside the content column on desktop.
-     Scroll-spy expands the branch of the current section (.expanded). */
+  /* Table of Contents. Hidden below the desktop breakpoint unless opened via the button
+     (.toc-open); fixed beside the content column on desktop. Scroll-spy expands the branch of
+     the current section (.expanded). */
   #TableOfContents {
     display: none;
     @apply my-5;
@@ -295,38 +192,15 @@
   #TableOfContents ul > li {
     margin-bottom: 0.4rem;
   }
-  #TableOfContents ul > li > ul > li {
-    font-size: 0.9rem;
-  }
   #TableOfContents ul > li > ul > li > ul > li {
-    font-size: 0.8rem;
     margin-bottom: 0.3rem;
   }
   #TableOfContents li:before {
     content: "";
   }
-  #TableOfContents a {
-    text-decoration: none;
-    @apply text-fg-secondary dark:text-fg-muted;
-  }
-  #TableOfContents a.current {
-    @apply font-extrabold text-dark dark:text-fg;
-  }
 
-  #toc-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: var(--search-bar-height);
-    font-size: 15px;
-    @apply text-fg-secondary dark:text-fg-muted rounded-sm
-           bg-zinc-100 dark:bg-surface
-           border border-zinc-300 dark:border-fg-muted/30
-           active:bg-zinc-200 dark:active:bg-fg-muted/20;
-  }
-
-  /* THE desktop breakpoint — keep in sync with DESKTOP in assets/js/toc.js. */
+  /* The desktop breakpoint, in three places: here, the header's max-width: 1279px rule below,
+     and DESKTOP in assets/js/toc.js. */
   @media screen and (min-width: 1280px) {
     #toc-btn {
       display: none;
@@ -344,56 +218,297 @@
   }
 }
 
-/* MathJax overrides (outside @layer to beat unlayered MathJax styles) */
-li mjx-container[display="true"] { width: calc(100% + 2.5em) !important; margin-left: -2.5em !important; }
+/* The design (DESIGN.md, direction D). Unlayered, so it wins over the utility classes in the
+   templates and over Pagefind's and Temml's stylesheets. */
 
-/* Pagefind overrides (outside @layer to beat unlayered pagefind styles) */
-#search .pagefind-ui__search-input {
-  height: var(--search-bar-height);
-  padding: 0 calc(var(--search-bar-height)) 0 calc(var(--search-bar-height));
-  font-size: 0.95rem;
-  font-weight: normal;
-  text-decoration: none !important;
+html { font-size: 125%; } /* 20 px */
+@media (max-width: 640px) { html { font-size: 112.5%; } } /* 18 px */
+body {
+  background: var(--paper); color: var(--ink);
+  font-family: var(--font-sans); line-height: 1.5;
+  font-variant-numeric: lining-nums;
+  padding-inline: 1rem; /* phone gutter >= 16 px */
+  --pagefind-ui-scale: 1;
+  --pagefind-ui-primary: var(--accent); --pagefind-ui-text: var(--ink);
+  --pagefind-ui-background: var(--paper); --pagefind-ui-border: var(--hairline);
+  --pagefind-ui-tag: var(--paper); --pagefind-ui-border-width: 1px;
+  --pagefind-ui-border-radius: 0; --pagefind-ui-font: var(--font-sans);
 }
-#search .pagefind-ui__form::before {
-  top: calc((var(--search-bar-height) - var(--search-icon-size)) / 2) !important;
-  left: calc((var(--search-bar-height) - var(--search-icon-size)) / 2) !important;
-  width: var(--search-icon-size) !important;
-  height: var(--search-icon-size) !important;
+
+/* ---- Links: accent, always underlined (WCAG 1.4.1). Chrome and self-links stay ink. */
+a, a:hover { color: var(--accent); border-bottom: 0; text-decoration: underline;
+  text-decoration-thickness: 1px; text-underline-offset: .18em; }
+.wordmark, .site-nav a, .headline-hash, .page-title a, .org-target + :is(strong, em) > a,
+.org-center .org-target ~ strong:first-of-type > a, #TableOfContents a, .notes a {
+  color: var(--ink); text-decoration: none;
+}
+:is(.wordmark, .site-nav a, .notes a, .footer a, #theme label):hover { text-decoration: underline; }
+a.url { hyphens: manual; } /* a URL breaks only where the page sets <wbr>, never with a hyphen */
+/* In references, where URLs are many and long, anywhere (as biblatex with its URL penalties set),
+   so a line ends less than a character short; inter-character spreads that remainder, as TeX
+   stretches \biburl*skip, so a line made only of URL is flush too. */
+.csl-entry a.url { line-break: anywhere; text-justify: inter-character; }
+
+/* ---- Header: one bar. Wordmark in small caps, nav, search field, theme icon; below 1280 px a
+   post's Contents disclosure joins the search on a second line. */
+header.container { position: relative; z-index: 20; padding-top: 1rem; }
+.bar { display: flex; flex-wrap: wrap; align-items: baseline; gap: .5em 1em; }
+.wordmark { margin-right: auto; font-size: 1.2em; font-weight: 400;
+  font-variant-caps: small-caps; letter-spacing: .04em; }
+.site-nav { display: flex; gap: 1em; }
+#search { flex: 0 1 9em; min-width: 6em; }
+#toc-btn {
+  width: auto; height: auto; margin: 0; padding: 0; border: 0; border-radius: 0;
+  background: none; color: var(--ink); font: inherit; cursor: pointer;
+  text-underline-offset: .18em; text-decoration-thickness: 1px;
+}
+/* The theme: the current choice's icon opens Light, System and Dark beneath the bar's right end,
+   the chosen one in ink (as the Contents rail, no reflow). */
+#theme > summary { list-style: none; cursor: pointer; color: var(--muted); padding: .3em; margin: -.3em; }
+#theme > summary::-webkit-details-marker { display: none; }
+#theme > summary:hover, #theme[open] > summary { color: var(--ink); }
+#theme svg {
+  display: none; width: 1em; height: 1em; vertical-align: -.14em;
+  fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
+}
+#theme .fill { fill: currentColor; stroke: none; }
+:root:not([data-theme]) #theme .mark-system, :root[data-theme="light"] #theme .mark-light,
+:root[data-theme="dark"] #theme .mark-dark { display: inline; }
+#theme .themes {
+  position: absolute; z-index: 30; top: calc(100% + .3em); right: 0;
+  display: flex; flex-direction: column; min-width: 6em; padding: .45em 1.1em .55em;
+  background: var(--paper); border: 1px solid var(--hairline); color: var(--muted); white-space: nowrap;
+}
+#theme label { position: relative; padding: .2em 0; cursor: pointer;
+  text-underline-offset: .18em; text-decoration-thickness: 1px; }
+#theme label:has(:checked) { color: var(--ink); }
+#theme label:has(:focus-visible) { outline: 2px solid var(--accent); outline-offset: 1px; }
+#theme input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; }
+@media (pointer: coarse) { #theme label { padding: .5em 0; } }
+#toc-btn { order: 2; text-decoration-line: underline; text-decoration-color: var(--hairline); }
+#toc-btn[aria-expanded="true"] { text-decoration-color: var(--ink); }
+/* Below the desktop breakpoint (with the min-width: 1280px block above and DESKTOP in toc.js). */
+@media (max-width: 1279px) { .bar:has(#toc-btn) #search { order: 1; flex: 1 1 60%; } }
+@media (max-width: 640px) {
+  .bar { gap: .4em .75em; } .site-nav { gap: .75em; }
+  #search { order: 1; flex: 1 1 45%; } /* line 2: search, Contents */
+}
+/* The field and its Clear button sit in one underlined row; nothing inside the form is
+   positioned, so the results can take the header as their containing block. */
+#search .pagefind-ui, #search .pagefind-ui__form { position: static; }
+#search .pagefind-ui__form { display: flex; align-items: center;
+  border-bottom: 1px solid var(--hairline); }
+#search .pagefind-ui__form:focus-within { border-bottom-color: var(--ink); }
+#search .pagefind-ui__form::before { display: none; }
+#search .pagefind-ui__search-input {
+  flex: 1; min-width: 0; height: 1.9em; padding: 0; border: 0; border-radius: 0; outline: none;
+  background: transparent; color: var(--ink); font: inherit; font-size: 1rem; font-weight: 400;
+}
+#search .pagefind-ui__search-input::placeholder {
+  color: var(--muted); opacity: 1; font-style: italic;
 }
 #search .pagefind-ui__search-clear {
-  top: var(--pagefind-ui-border-width) !important;
-  right: var(--pagefind-ui-border-width) !important;
-  height: calc(var(--search-bar-height) - 2 * var(--pagefind-ui-border-width)) !important;
-  padding: 0 0.5rem;
-  display: flex;
-  align-items: center;
+  position: static; height: auto; padding: 0 0 0 .5em;
+  background: transparent; color: var(--muted); font: inherit; font-size: .875rem;
 }
-.search-row {
-  display: flex;
-  align-items: start;
+/* Pagefind only fades it out while the field is empty; hidden, it is out of the tab order. */
+#search .pagefind-ui__search-clear.pagefind-ui__suppressed { visibility: hidden; }
+/* Pagefind's reset reverts outlines to the browser's ring; the accent outline, as elsewhere. */
+#search :is(a, button):focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* Results drop over the page at the column's full width, not the field's. */
+#search .pagefind-ui__drawer {
+  position: absolute; left: 0; right: 0; top: 100%; max-height: 80vh; overflow-y: auto;
+  padding: 0 0 1em; background: var(--paper); border-bottom: 1px solid var(--hairline);
 }
-#search .pagefind-ui__result-excerpt {
-  font-size: 0.9rem;
+#search .pagefind-ui__filter-panel { display: none; }
+#search .pagefind-ui__message { font-size: .875rem; font-weight: 400; font-style: italic;
+  color: var(--muted); height: auto; padding: .6em 0; }
+#search .pagefind-ui__result-title { font-size: 1rem; font-weight: var(--semibold); }
+#search .pagefind-ui__result-link { color: var(--accent); text-decoration: underline; }
+#search .pagefind-ui__result-nested .pagefind-ui__result-link::before { content: none; }
+#search .pagefind-ui__result-excerpt { font-size: .875rem; }
+#search mark { background: none; color: inherit; font-weight: var(--semibold); }
+#search .pagefind-ui__button {
+  display: block; width: auto; height: auto; margin: .6em 0 0; padding: 0; border: 0;
+  background: none; color: var(--accent); font: inherit; font-size: .875rem; text-align: left;
+  text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .18em;
 }
-#search .pagefind-ui__result-link {
-  color: var(--color-link);
+
+/* ---- Post head: title, then one muted italic date line. */
+.page-title { font-size: 2.07em; font-weight: 400; line-height: 1.15; margin: 1.5em 0 .3em; }
+.post-meta { margin: 0; color: var(--muted); font-style: italic; }
+.article-content { margin-top: 1.8em; }
+
+/* ---- Home: the notes, newest first; each a title and its date. */
+.notes { list-style: none; padding: 0; margin: 1.6em 0 0; }
+.notes li { margin: 0 0 .7em; }
+
+/* ---- Headings: section 1.44, subsection 1.2, semibold; \paragraph is a run-in. */
+.article-content :is(h2, h3, h4) { font-weight: var(--semibold); line-height: 1.25; }
+.article-content h2 { font-size: 1.44em; margin: 1.5em 0 .45em; }
+.article-content h3 { font-size: 1.2em; margin: 1.3em 0 .35em; }
+.article-content h4 { font-size: 1em; margin: var(--gap) 0 0; }
+.article-content h4:has(+ p) { float: left; margin: var(--gap) .6em 0 0; line-height: inherit; }
+.article-content h4 + p { margin-top: var(--gap); }
+.article-content :is(strong, b) { font-weight: var(--semibold); } /* one bold weight per family */
+
+/* ---- Paragraphs: 1.2 em indent, no gap. Running text (paragraphs, list items, algorithm steps,
+   definitions, references) is justified and hyphenated at every width: inline formulas arrive cut
+   at TeX's break points, joined by stretchable math glue (tools/mathml.py). No text-wrap: pretty:
+   the lines it rebalances to lengthen the last one come out loose. */
+.article-content :is(p, li, dd, .csl-entry) { text-align: justify; hyphens: auto; }
+.article-content p { margin: 0; text-indent: 1.2em; }
+/* On a phone a run-in head stands alone: beside it a line keeps a word or two, which
+   justification cannot fill. */
+@media (max-width: 640px) {
+  .article-content h4:has(+ p) { float: none; margin-right: 0; }
 }
-#search .pagefind-ui__result-link:hover {
-  color: var(--color-link-hover);
+.article-content > p:first-child, .article-content > blockquote:first-child + p,
+.article-content :is(h1, h2, h3, h4) + p, .article-content div > p:first-child,
+.article-content :is(li, blockquote, td, th, dd) p, .article-content .org-center p,
+.article-content .alg p {
+  text-indent: 0;
 }
-@media (prefers-color-scheme: dark) {
-  body {
-    --pagefind-ui-text: var(--color-fg);
-    --pagefind-ui-background: var(--color-dark);
-    --pagefind-ui-border: color-mix(in srgb, var(--color-fg-muted) 30%, transparent);
-    --pagefind-ui-primary: var(--color-accent);
-    --pagefind-ui-tag: #333;
+.article-content :where(.thm, .prp, .def, .rem, .exp, .prf, .alg, .eqn, .fig, .tab, .lst,
+  blockquote, ul, ol, dl) { margin-block: var(--gap); }
+.article-content li > :is(ul, ol) { margin-block: 0; }
+
+/* ---- Statement kinds, coded by rule weight: proved 3 px, defined 1 px, remark/example none.
+   Heads (rewritten in single.html): "Theorem n4 (Name).", italic "Remark …", italic "Proof." */
+.article-content :is(.thm, .prp, .def, .alg) {
+  border-left: 1px solid var(--ink); padding-left: calc(.9em + 2px);
+}
+/* text aligns across kinds */
+.article-content :is(.thm, .prp) { border-left-width: 3px; padding-left: .9em; }
+.article-content :is(.rem, .exp) > p:first-child > .org-target + strong {
+  font-weight: 400; font-style: italic;
+}
+.article-content .prf { display: flow-root; }
+.article-content .prf > :last-child::after { /* amsthm's \openbox, drawn, so no glyph is needed */
+  content: ""; float: right; width: .6em; height: .6em; margin: .42em 0 0 1em;
+  border: 1px solid currentColor; box-sizing: border-box;
+}
+.article-content .alg ul { list-style: none; padding-left: 1.2em; }
+.article-content .alg ol ol { list-style-type: lower-alpha; }
+
+/* ---- MathML (tools/mathml.py). Garamond-Math; ss03 draws the script capitals calligraphic, as
+   \mathcal is meant (its default script is a roundhand; Temml's own .mathcal rule asks for
+   ss01); \mathsf takes the scaled face above. An inline formula arrives split at its break
+   points (one math per piece), so Temml's flex-wrap layout, whose piece padding loosens every
+   line holding math, is undone. Displays get 1em margins; one with break points (tml-wrap: one
+   mrow per piece, grouped per equation in tml-eq) breaks there, between equations first, each
+   line centred; a piece still wider than the column scrolls like any wide box. */
+math { font-family: "Garamond-Math Sans", "Garamond-Math", math; font-feature-settings: "ss03";
+  display: inline math; }
+math .mathcal { font-feature-settings: "ss03"; }
+math > mrow { padding: 0; }
+/* Between pieces, spaces carry TeX's math glue around the operator ending a piece (--w, set by
+   tools/mathml.py; .2em is the text face's space), which justification stretches as TeX does:
+   mk before it, unbreakable; mg after it, the formula's only break, flush (the space hangs). The
+   formula is nowrap (Chromium breaks beside any <math>), as is the math-punct span that keeps
+   punctuation with its formula (a word joiner cannot: Chromium breaks before one that follows a
+   formula). */
+.mg, .mk { word-spacing: calc(var(--w) - .2em); }
+span:has(> .mg) { white-space: nowrap; }
+.mg { white-space: normal; }
+/* A piece wider than the column scrolls on its own; the padding, cancelled by the margin, keeps
+   overhanging ink (a descender, an italic f) inside the scroll box, which clips. The max-width
+   bounds the margin box, which is what sizes a table cell around a formula. */
+math:not(.tml-display) { max-width: calc(100% + .4em); overflow-x: auto; overflow-y: hidden;
+  padding: .4em .2em; margin: -.4em -.2em; }
+/* A piece before an operator keeps 2em of its line for the operator, which mk binds to it.
+   ponytail: an operator wider than that (≻ with a long subscript) after an overwide piece still
+   overflows; widen the room if one appears. */
+math.ml { max-width: calc(100% - 1.6em); }
+math.tml-display { margin-block: 1em; overflow-x: auto; overflow-y: hidden; }
+math.tml-wrap, math.tml-wrap > .tml-eq { display: flex; flex-wrap: wrap; align-items: baseline;
+  justify-content: safe center; } /* safe: an overwide piece scrolls from its start */
+math mtd { padding: .5ex .4em; } /* MathML Core's default, which the preflight zeroes */
+.tml-tag a { color: inherit; text-decoration: none; } /* (d9) links to its equation */
+/* A closing display ends the rule where a closing line of text would. */
+.article-content :is(.thm, .prp, .def, .alg) > p:last-child
+  > span:has(> math.tml-display):nth-last-child(2) > math { margin-bottom: 0; }
+li math.tml-display { width: calc(100% + 2.5em); margin-left: -2.5em; }
+
+/* ---- Code: the mono at the text face's x-height, body size; no fill, no syntax colour. */
+code, kbd, samp {
+  font-family: "Iosevka Web", ui-monospace, monospace;
+  font-size: 1em; font-size-adjust: ex-height 0.405; line-height: calc(4 / 3);
+}
+.article-content pre { font-size: 1em; line-height: calc(4 / 3); margin: 0; padding: 0 0 0 1.2em; }
+.article-content .highlight { margin-block: var(--gap); }
+
+/* ---- Tables: booktabs rules, small size, tabular lining figures, flush left; numeric columns
+   (class num, set by tools/mathml.py) right-aligned; values never wrap, long text cells (prose)
+   do. */
+.article-content table {
+  border-collapse: collapse; font-size: .875em; line-height: 1.4;
+  font-variant-numeric: lining-nums tabular-nums; margin: var(--gap) 0 !important;
+}
+.article-content table :is(th, td) {
+  border: 0; padding: .15em .75em; text-align: left; vertical-align: baseline;
+}
+.article-content td { white-space: nowrap; }
+.article-content td.prose { white-space: normal; min-width: 12em; }
+.article-content :is(td, th).num { text-align: right; }
+.article-content table :is(th, td):first-child { padding-left: 0; }
+.article-content table :is(th, td):last-child { padding-right: 0; }
+.article-content table thead > tr:last-child > *, .article-content table tbody > tr:first-child > * { padding-top: .3em; }
+.article-content table > :last-child > tr:last-child > * { padding-bottom: .3em; }
+.article-content table th { font-weight: 400; white-space: normal; }
+.article-content table > :first-child > tr:first-child > * { border-top: 2px solid var(--hairline); }
+.article-content table thead > tr:last-child > * { border-bottom: 1px solid var(--hairline); }
+.article-content table thead > tr:not(:last-child) > [colspan] { /* \cmidrule(lr) */
+  background: linear-gradient(var(--hairline), var(--hairline)) left .75em bottom / calc(100% - 1.5em) 1px no-repeat;
+}
+.article-content table thead > tr:not(:last-child) > [colspan]:last-child { background-size: calc(100% - .75em) 1px; }
+.article-content table > :last-child > tr:last-child > * { border-bottom: 2px solid var(--hairline); }
+
+/* ---- Captions and figures. Captions small, flush left; label ink, continuation muted. */
+.article-content .org-center { text-align: left; }
+.article-content :is(.fig, .tab, .lst) .org-center p {
+  font-size: .875em; line-height: 1.45; color: var(--muted);
+}
+.article-content .org-center .org-target ~ strong:first-of-type { color: var(--ink); font-weight: var(--semibold); }
+.article-content img { margin-bottom: .5em; }
+:root[data-theme="dark"] .article-content img { background: #FFFFFF; padding: .5em; }
+@media (prefers-color-scheme: dark) { /* figures keep a paper plate */
+  :root:not([data-theme="light"]) .article-content img { background: #FFFFFF; padding: .5em; }
+}
+
+/* ---- Quotations, rules, references, definition lists. No left rule: rules mean kinds. */
+.article-content blockquote { margin: var(--gap) 1.2em; font-size: .875em; }
+@media (max-width: 640px) { .article-content blockquote { margin-inline: 1.2em 0; } }
+hr { border: 0; border-top: 1px solid var(--hairline); }
+.csl-bib-body { font-size: .875em; }
+.csl-entry { padding-left: 1.5em; text-indent: -1.5em; margin: 0 0 .35em; }
+dt { font-weight: var(--semibold); }
+
+/* ---- Contents rail: muted, current entry in ink (no weight change, so no reflow). */
+#TableOfContents { font-size: .875rem; line-height: 1.4; }
+#TableOfContents a { color: var(--muted); }
+#TableOfContents a.current { color: var(--ink); }
+
+/* ---- Tags as plain text links; on the home page, one muted line. */
+[data-pagefind-filter=tags], main .mt-12 li span {
+  background: none; border: 0; padding: 0; border-radius: 0; font-size: 1em !important;
+}
+main a:has(> [data-pagefind-filter=tags]) { color: var(--accent); text-decoration: underline; }
+main .mt-12 { margin-top: .4em; }
+main .mt-12 ul { justify-content: flex-start; gap: 0 1em; }
+main .mt-12 li a { color: var(--muted); text-decoration: underline; font-style: italic; }
+main .mt-12 sup { color: var(--muted); display: inline-block; } /* keeps the count out of the underline */
+article > div.flex[data-pagefind-ignore] { margin-inline: 0; }
+
+/* ---- Footer: flush left, small, in words. */
+.footer { margin-top: 3em; padding: 0 0 1.5em; font-size: .875rem; color: var(--muted); }
+.footer a { color: var(--muted); text-decoration: none; }
+
+@media print {
+  #search, #toc-btn, #theme, #TableOfContents, #remark42, .footer { display: none !important; }
+  :root, :root[data-theme], :root:not([data-theme="light"]) {
+    --paper: #FFFFFF; --ink: #000000; --muted: #444444; --accent: #000000; color-scheme: light;
   }
-  #search .pagefind-ui__result-link {
-    color: var(--color-accent);
-  }
-  #search .pagefind-ui__result-link:hover {
-    color: var(--color-accent-hover);
-  }
+  .article-content img { background: none !important; padding: 0 !important; }
+  .article-content :is(.thm, .prp, .def, .alg, .prf, table) { break-inside: avoid; }
 }

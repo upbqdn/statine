@@ -1,5 +1,5 @@
 {{ define "main" }}
-<h1 class="sr-only">{{ .Site.Title }}</h1>
+<h1 class="page-title">{{ .Site.Title }}</h1>
 <div class="mt-12">
     {{ if not (eq (len $.Site.Taxonomies.tags) 0) }}
     <ul class="flex flex-wrap justify-center gap-2 pl-0">
@@ -17,4 +17,5 @@
     </ul>
     {{ end }}
 </div>
+{{ partial "notes.html" (where site.RegularPages.ByDate.Reverse "Params.tags" "!=" nil) }}
 {{ end }}
