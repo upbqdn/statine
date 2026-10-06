@@ -45,7 +45,7 @@
 
 :root {
   /* Single source for the content column width; the ToC offset derives from it. */
-  --page-max-width: 34rem;
+  --page-max-width: 32rem;  /* 640 px, as the Arboretum's column */
   --toc-width: 260px;
   --toc-gap: 30px;
 }
