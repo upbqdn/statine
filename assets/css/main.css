@@ -1,6 +1,15 @@
 @import "tailwindcss" source(none);
 @source "../../layouts";
 
+/* dark: follows the reader's choice (data-theme on <html>, which head.html sets before first
+   paint), else the system's */
+@custom-variant dark {
+  &:where([data-theme=dark], [data-theme=dark] *) { @slot; }
+  @media (prefers-color-scheme: dark) {
+    &:where(:root:not([data-theme=light]), :root:not([data-theme=light]) *) { @slot; }
+  }
+}
+
 @font-face {
   font-family: 'EB Garamond';
   font-style: normal;
@@ -28,18 +37,19 @@
   src: url('/fonts/IosevkaExtended.woff2') format('woff2');
 }
 
-/* Core palette. The anti-FOUC inline style in partials/head.html duplicates
-   --color-dark and --color-fg as literals; keep them in sync. */
+/* Core palette, the Arboretum's: ink on paper, conifer links. The anti-FOUC inline style in
+   partials/head.html duplicates --color-dark and --color-fg as literals; keep them in sync. */
 @theme {
-  --color-dark: #161616;
+  --color-ink: #1a1a1a;
+  --color-dark: #141414;
   --color-surface: #262626;
-  --color-fg: #f4f4f4;
-  --color-fg-muted: #c6c6c6;
-  --color-fg-secondary: #525252;
-  --color-link: #0f62fe;
-  --color-link-hover: #0043ce;
-  --color-accent: #78a9ff;
-  --color-accent-hover: #a6c8ff;
+  --color-fg: #e8e6e3;
+  --color-fg-muted: #a6a29c;
+  --color-fg-secondary: #5e5e5e;
+  --color-link: #1c5a3a;
+  --color-link-hover: #12432a;
+  --color-accent: #8cc7a4;
+  --color-accent-hover: #b3dcc3;
   --font-sans: "EB Garamond", Garamond, Georgia, "Times New Roman", serif;
 }
 
@@ -75,7 +85,7 @@
   }
   body {
     line-height: 1.5;
-    @apply dark:bg-dark dark:text-fg text-black;
+    @apply dark:bg-dark dark:text-fg text-ink;
     --pagefind-ui-primary: var(--color-link);
     --pagefind-ui-text: var(--color-dark);
     --pagefind-ui-background: #ffffff;
@@ -335,6 +345,38 @@
            active:bg-zinc-200 dark:active:bg-fg-muted/20;
   }
 
+  /* The theme: the current choice's icon (a sun, a half circle for System, a moon) at the right
+     of the title row opens Light, System and Dark beneath it. */
+  .title-row { display: flex; align-items: center; justify-content: space-between; }
+  #theme { position: relative; }
+  #theme > summary {
+    list-style: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    min-width: 44px; min-height: 44px; margin: -10px -10px -10px 0;   /* a 44 px touch target */
+    @apply text-fg-secondary dark:text-fg-muted hover:text-dark dark:hover:text-fg rounded-sm;
+  }
+  #theme > summary::-webkit-details-marker { display: none; }
+  #theme > summary:focus-visible { @apply outline-2 outline-offset-2 outline-link dark:outline-accent; }
+  #theme svg {
+    display: none; width: 1.25em; height: 1.25em;
+    fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
+  }
+  #theme .fill { fill: currentColor; stroke: none; }
+  :root:not([data-theme]) #theme .mark-system, :root[data-theme="light"] #theme .mark-light,
+  :root[data-theme="dark"] #theme .mark-dark { display: block; }
+  #theme .themes {
+    position: absolute; z-index: 30; top: calc(100% + 0.3rem); right: 0;
+    display: flex; flex-direction: column; min-width: 7em; padding: 0.4em 1em 0.5em;
+    @apply bg-white dark:bg-dark rounded-sm border border-zinc-300 dark:border-fg-muted/30
+           text-fg-secondary dark:text-fg-muted;
+  }
+  #theme label { position: relative; padding: 0.2em 0; cursor: pointer; }
+  #theme label:hover { @apply text-dark dark:text-fg underline; }
+  #theme label:has(:checked) { @apply font-extrabold text-dark dark:text-fg; }
+  #theme label:has(:focus-visible) { @apply outline-2 outline-offset-1 outline-link dark:outline-accent; }
+  #theme input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; }
+  @media (pointer: coarse) { #theme label { padding: 0.5em 0; } }
+
   /* THE desktop breakpoint — keep in sync with DESKTOP in assets/js/toc.js. */
   @media screen and (min-width: 1280px) {
     #toc-btn {
@@ -391,18 +433,19 @@ li mjx-container[display="true"] { width: calc(100% + 2.5em) !important; margin-
 #search .pagefind-ui__result-link:hover {
   color: var(--color-link-hover);
 }
-@media (prefers-color-scheme: dark) {
-  body {
+/* the search's dark colours follow the theme choice, as every dark: utility does */
+body {
+  @variant dark {
     --pagefind-ui-text: var(--color-fg);
     --pagefind-ui-background: var(--color-dark);
     --pagefind-ui-border: color-mix(in srgb, var(--color-fg-muted) 30%, transparent);
     --pagefind-ui-primary: var(--color-accent);
     --pagefind-ui-tag: #333;
   }
-  #search .pagefind-ui__result-link {
-    color: var(--color-accent);
-  }
-  #search .pagefind-ui__result-link:hover {
-    color: var(--color-accent-hover);
-  }
+}
+#search .pagefind-ui__result-link {
+  @variant dark { color: var(--color-accent); }
+}
+#search .pagefind-ui__result-link:hover {
+  @variant dark { color: var(--color-accent-hover); }
 }

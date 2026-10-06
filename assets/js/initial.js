@@ -2,10 +2,21 @@
   "use strict";
   var darkMQ = window.matchMedia("(prefers-color-scheme: dark)");
 
-  // Single source of truth for the color scheme; single.html reads it for Remark42.
+  // Single source of truth for the color scheme: the reader's choice (the theme control in
+  // baseof.html), else the system's. single.html reads it for Remark42.
   window.siteTheme = function () {
-    return darkMQ.matches ? "dark" : "light";
+    return document.documentElement.dataset.theme || (darkMQ.matches ? "dark" : "light");
   };
+
+  // The syntax colours and theme-color, chosen by media query, follow a stored choice too.
+  function applyMedia() {
+    var chosen = document.documentElement.dataset.theme;
+    document.querySelectorAll("[data-scheme]").forEach(function (e) {
+      var s = e.getAttribute("data-scheme");
+      e.media = chosen ? (s === chosen ? "all" : "not all") : "(prefers-color-scheme: " + s + ")";
+    });
+  }
+  applyMedia();
 
   // Remark42 must see the theme before its deferred embed boots — write at parse time.
   try {
@@ -23,7 +34,7 @@
   }
 
   function fixAllPlots() {
-    var dark = darkMQ.matches;
+    var dark = siteTheme() === "dark";
     document.querySelectorAll("iframe.plot").forEach(function (f) {
       fixPlot(f, dark);
     });
@@ -32,7 +43,7 @@
   // Correct plot srcs as soon as the parser inserts them, so the wrong-theme
   // file is neither fetched nor flashed (some plot files are megabytes).
   var plotObserver = new MutationObserver(function (records) {
-    var dark = darkMQ.matches;
+    var dark = siteTheme() === "dark";
     records.forEach(function (r) {
       r.addedNodes.forEach(function (n) {
         if (n.nodeType !== Node.ELEMENT_NODE) return;
@@ -47,6 +58,7 @@
   plotObserver.observe(document.documentElement, { childList: true, subtree: true });
 
   function applyColorScheme() {
+    applyMedia();
     fixAllPlots();
     var theme = siteTheme();
     try {
@@ -87,4 +99,5 @@
   if (document.readyState !== "loading") init();
   else document.addEventListener("DOMContentLoaded", init);
   darkMQ.addEventListener("change", applyColorScheme);
+  window.siteThemeChanged = applyColorScheme;
 })();
