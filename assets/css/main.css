@@ -138,12 +138,15 @@
   }
   .article-content .alg ol {
     overflow-x: auto;
+    overflow-y: hidden;
+    padding-block: .2em;
   }
   .article-content .alg li:has(mjx-container) {
     width: max-content;
   }
   .article-content p:has(mjx-container[display="true"]) {
     overflow-x: auto;
+    overflow-y: hidden;
   }
 
   /* Paragraph indentation (LaTeX-like) */
@@ -228,12 +231,18 @@
   }
   .highlight .chroma,
   .org-center {
-    overflow: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
   }
 
   /* Elements */
   .org-target { scroll-margin-top: 1rem; }
-  mjx-container[display="true"] { overflow-x: auto; max-width: 100%; }
+  /* A horizontal scroll box would also scroll vertically: glyphs overhang the box by a few
+     pixels. Clip vertically, with padding (taken from the margin) to keep the overhang. */
+  mjx-container[display="true"] {
+    overflow-x: auto; overflow-y: hidden; max-width: 100%;
+    padding-block: .25em; margin-block: .75em !important;
+  }
   /* Inline math plus its trailing punctuation (wrapped by single.html) must
      stay on one line. */
   .math-punct { white-space: nowrap; }
@@ -249,7 +258,7 @@
   img { @apply mx-auto dark:brightness-[.8] dark:contrast-125; }
   figure { @apply sm:mx-6 md:mx-12; }
   figcaption { @apply text-center; }
-  table { display: block; overflow-x: auto; margin-inline: auto; width: fit-content; max-width: 100%; }
+  table { display: block; overflow-x: auto; overflow-y: hidden; margin-inline: auto; width: fit-content; max-width: 100%; }
   th, td { padding: 0.4em 0.8em; }
   blockquote {
     @apply my-8;
